@@ -15,6 +15,7 @@ import { Task, List } from '../util/types'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../util/db'
 import { LIST_BOARD } from '../util/mysql'
+import DropZone from './util/DropZone'
 
 const checkEpicFilter = (epicIds: number[], taskEpicId: number) => {
     if (epicIds.length == 0) {
@@ -159,6 +160,7 @@ const Board = () => {
                         <Filters epicFilterIds={epicFilterIds} />
                     )}
                     <TitleFilters />
+                    <DropZone />
                 </div>
                 <div
                     className={
