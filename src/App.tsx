@@ -1,4 +1,4 @@
-import { HashRouter, Link, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import Board from './components/Board'
 
 function App() {

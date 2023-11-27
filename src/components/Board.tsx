@@ -47,14 +47,17 @@ const getQueryArray = (param: string | string[] | undefined | null) => {
 }
 
 function useBoard(id: UniqueIdentifier) {
-    // TODO replace with fetch from local index
-    // const { data, error, isLoading } = useSWR(`/api/board/${id}`, fetcher);
-    const data = useLiveQuery(() => {
-        return db.lists.where(LIST_BOARD).equals(id).toArray()
+    const data = useLiveQuery(async () => {
+        const lists = await db.lists.where(LIST_BOARD).equals(id).toArray()
+        return Promise.all(
+            lists.map((list) => {
+                return list.loadTasks()
+            })
+        )
     })
 
     return {
-        data: null as any,
+        data: { list: data ?? [] },
         isLoading: false,
         isError: {} as any,
     }
@@ -111,10 +114,11 @@ const Board = () => {
                 return task
             })
         })
-        ?.flat()
+        ?.flat() as Task[]
 
-    const filteredItems = allItems?.filter((task: Task) => {
+    const filteredItems = allItems?.filter((task?: Task) => {
         return (
+            !!task &&
             checkEpicFilter(epicFilterIds ?? [], task.epic_id) &&
             checkTitleFilter(task, title)
         )
@@ -125,7 +129,7 @@ const Board = () => {
     const modalItem = modalItemId
         ? filteredItems?.find((item: Task) => {
               return item.id == modalItemId
-          })
+          }) ?? null
         : null
 
     const onConfirmDelete = async () => {

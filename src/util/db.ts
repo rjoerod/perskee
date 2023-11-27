@@ -5,7 +5,7 @@ import { Board, List, Task } from './types'
 export class PerskeeDB extends Dexie {
     boards!: Dexie.Table<Board, number>
     lists: Dexie.Table<List, number>
-    tasks!: Dexie.Table<Task, number>
+    tasks: Dexie.Table<Task, number>
 
     constructor() {
         super('PerskeeDB')
@@ -22,6 +22,7 @@ export class PerskeeDB extends Dexie {
         this.lists = db.table('lists')
         this.tasks = db.table('tasks')
         this.lists.mapToClass(List)
+        this.tasks.mapToClass(Task)
     }
 }
 
