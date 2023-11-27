@@ -1,6 +1,6 @@
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { db } from './db'
-import { TASK_LIST } from './mysql'
+import { ID, TASK_EPIC, TASK_LIST } from './mysql'
 
 export interface Board {
     id: UniqueIdentifier
@@ -55,6 +55,7 @@ export class Task {
     story_points: number
     description: string
     list_name?: string
+    task_count?: number // if epic, the number tasks on epic
 
     constructor(
         id: number,
@@ -74,6 +75,29 @@ export class Task {
         this.story_points = story_points
         this.description = description
         this.name = name
+    }
+
+    async loadListName() {
+        const list = await db.lists.where(ID).equals(this[TASK_LIST]).first()
+        this.list_name = list?.name
+        return this
+    }
+
+    async loadTaskCount() {
+        const tasks = await db.tasks.where(TASK_EPIC).equals(this.id).toArray()
+
+        const filteredTasks = (
+            await Promise.all(
+                tasks.map((list) => {
+                    return list.loadListName()
+                })
+            )
+        ).filter((task) => {
+            return task.list_name != 'Done'
+        })
+
+        this.task_count = filteredTasks.length
+        return this
     }
 }
 

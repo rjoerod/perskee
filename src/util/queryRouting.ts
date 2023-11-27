@@ -89,6 +89,12 @@ export function route(
     }
 
     if (!Array.isArray(newParam) && !Array.isArray(paramValue)) {
+        if (!paramValue) {
+            searchParams.delete(newParam)
+            setSearchParams(searchParams)
+            return
+        }
+
         setSearchParams({ ...searchParams, [newParam]: paramValue })
         return
     }
