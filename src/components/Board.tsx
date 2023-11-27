@@ -47,28 +47,22 @@ const getQueryArray = (param: string | string[] | undefined | null) => {
 }
 
 function useBoard(id: UniqueIdentifier) {
-    const data = useLiveQuery(async () => {
+    const lists = useLiveQuery(async () => {
         const lists = await db.lists.where(LIST_BOARD).equals(id).toArray()
         return Promise.all(
             lists.map((list) => {
                 return list.loadTasks()
             })
         )
-    })
+    }, [id])
 
-    return {
-        data: { list: data ?? [] },
-        isLoading: false,
-        isError: {} as any,
-    }
+    return { list: lists ?? [] }
 }
 
 const Board = () => {
     const [deleteItem, setDeleteItem] = useState<Task | null>(null)
+    const [searchParams] = useSearchParams()
 
-    // TODO refactor search params
-    // const searchParams = useSearchParams();
-    const searchParams = { get: () => {}, getAll: () => {} } as any
     const epic_ids = searchParams?.getAll('epic_id')
     const board_id = searchParams?.get('board_id')
     const task_id = searchParams?.get('task_id')
@@ -78,7 +72,7 @@ const Board = () => {
     const currentBoardId = getQueryNum(board_id) ?? 1
     const modalItemId = getQueryNum(task_id)
 
-    const { data, isLoading } = useBoard(currentBoardId)
+    const data = useBoard(currentBoardId)
 
     useEffect(() => {
         document.title = 'Perskee'
@@ -171,7 +165,7 @@ const Board = () => {
                         'max-h-screen flex gap-4 p-8 bg-slate-900 overflow-auto'
                     }
                 >
-                    {data && !isLoading ? (
+                    {data ? (
                         <>
                             <ContainerList
                                 boardId={Number(currentBoardId)}
