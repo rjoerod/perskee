@@ -31,7 +31,7 @@ import SortableContainer, { Container } from '../sortable/SortableContainer'
 import { Item } from '../sortable/SortableItem'
 import AddListButton from '../buttons/AddListButton'
 import ToastMessage from '../util/ToastMessage'
-import { TASK_LIST, SORTED_ORDER_COLUMN } from '../../util/mysql'
+import { TASK_LIST, SORTED_ORDER_COLUMN } from '../../util/properties'
 import { Task, List, TaskI } from '../../util/types'
 import { db } from '../../util/db'
 

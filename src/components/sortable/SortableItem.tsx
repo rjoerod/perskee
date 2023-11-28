@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Task, TaskI } from '../../util/types'
 import { route } from '../../util/queryRouting'
 import { db } from '../../util/db'
-import { TASK_EPIC } from '../../util/mysql'
+import { TASK_EPIC } from '../../util/properties'
 import { useLiveQuery } from 'dexie-react-hooks'
 
 function getStoryPointsClass(points: number): { outer: string; inner: string } {

@@ -10,7 +10,7 @@ import {
     STORY_POINT_COLUMN,
     TASK_EPIC,
     TASK_LIST,
-} from '../../../util/mysql'
+} from '../../../util/properties'
 import { Task, List } from '../../../util/types'
 import Button from '../../buttons/Button'
 import ConfirmationModal from '../../util/ConfirmationModal'

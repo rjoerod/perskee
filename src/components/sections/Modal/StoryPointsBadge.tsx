@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Task } from '../../../util/types'
-import { STORY_POINT_COLUMN } from '../../../util/mysql'
+import { STORY_POINT_COLUMN } from '../../../util/properties'
 import SingleInput from '../../util/SingleInput'
 import ToastMessage from '../../util/ToastMessage'
 import { db } from '../../../util/db'

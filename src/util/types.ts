@@ -1,6 +1,6 @@
 import { UniqueIdentifier } from '@dnd-kit/core'
 import { db } from './db'
-import { ID, TASK_EPIC, TASK_LIST } from './mysql'
+import { ID, TASK_EPIC, TASK_LIST } from './properties'
 
 export interface Board {
     id: UniqueIdentifier

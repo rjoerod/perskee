@@ -1,5 +1,5 @@
 import ToastMessage from '../../util/ToastMessage'
-import { TASK_EPIC } from '../../../util/mysql'
+import { TASK_EPIC } from '../../../util/properties'
 import { Combobox, Popover } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useEffect, useRef, useState } from 'react'

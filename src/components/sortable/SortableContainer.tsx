@@ -15,7 +15,7 @@ import ToastMessage from '../util/ToastMessage'
 import AddTaskButton from '../buttons/AddTaskButton'
 import SingleInput from '../util/SingleInput'
 import { List, TaskI } from '../../util/types'
-import { NAME_COLUMN } from '../../util/mysql'
+import { NAME_COLUMN } from '../../util/properties'
 import { findListFromName } from '../../util/util'
 import { db } from '../../util/db'
 

@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { List, Task } from './types'
 import { useState, useEffect } from 'react'
 import { db } from './db'
-import { IS_EPIC_COLUMN, NAME_COLUMN } from './mysql'
+import { IS_EPIC_COLUMN, NAME_COLUMN } from './properties'
 
 export function findListFromName(id: string, listData: List[] | undefined) {
     if (!listData) {

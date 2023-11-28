@@ -7,7 +7,7 @@ import {
     STORY_POINT_COLUMN,
     TASK_EPIC,
     SORTED_ORDER_COLUMN,
-} from '../../util/mysql'
+} from '../../util/properties'
 import ToastMessage from '../util/ToastMessage'
 import ModalButton from './ModalButton'
 import { List } from '../../util/types'

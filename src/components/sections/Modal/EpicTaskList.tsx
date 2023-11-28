@@ -3,7 +3,7 @@ import { Task } from '../../../util/types'
 import Button from '../../buttons/Button'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../../../util/db'
-import { TASK_EPIC } from '../../../util/mysql'
+import { TASK_EPIC } from '../../../util/properties'
 
 const useEpicTasks = (epic: Task) => {
     const tasks = useLiveQuery(async () => {

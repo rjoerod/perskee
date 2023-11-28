@@ -14,7 +14,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Task, List, TaskI } from '../util/types'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../util/db'
-import { LIST_BOARD } from '../util/mysql'
+import { LIST_BOARD } from '../util/properties'
 import DropZone from './util/DropZone'
 
 const checkEpicFilter = (epicIds: number[], taskEpicId: number) => {
