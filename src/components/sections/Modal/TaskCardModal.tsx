@@ -20,10 +20,10 @@ interface TaskCardModalProps {
 
 function TaskCardModal({ modalItem }: TaskCardModalProps) {
     const [showLabelInput, setShowLabelInput] = useState(false)
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [_, setSearchParams] = useSearchParams()
 
     const onClose = () => {
-        route(searchParams, setSearchParams, 'task_id', null)
+        route(setSearchParams, 'task_id', null)
     }
 
     const onNameConfirm = async (value: string) => {

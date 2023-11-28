@@ -33,6 +33,7 @@ import AddListButton from '../buttons/AddListButton'
 import ToastMessage from '../util/ToastMessage'
 import { TASK_LIST, SORTED_ORDER_COLUMN } from '../../util/mysql'
 import { Task, List, TaskI } from '../../util/types'
+import { db } from '../../util/db'
 
 function getListsWithChanges(
     prev: Record<string, TaskI[]>,
@@ -72,7 +73,15 @@ const updateTaskOrder = async (
     prev: Record<string, TaskI[]> | null,
     curr: Record<string, TaskI[]> | null,
     listData: List[],
-    allItems: TaskI[]
+    allItems: TaskI[],
+    setUpdateParams: React.Dispatch<
+        React.SetStateAction<
+            {
+                list: List | undefined
+                tasksIds: (string | number | undefined)[]
+            }[]
+        >
+    >
 ) => {
     if (!prev || !curr) {
         ToastMessage('Failed to update order')
@@ -151,32 +160,14 @@ const updateTaskOrder = async (
         }
     })
 
-    const updateMap = updateParams.map(async (data) => {
-        if (!data?.list?.id) {
-            ToastMessage('Failed to find list to update')
-            return
-        }
-        // TODO: replace with update to local index
-        await fetch(`/api/task/put/updateOrder`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            method: 'PUT',
-            body: JSON.stringify({
-                [TASK_LIST]: data.list.id,
-                order: data.tasksIds,
-            }),
-        })
-    })
-
-    await Promise.all(updateMap)
+    setUpdateParams(updateParams)
 }
 
 interface ContainerListProps {
     boardId: number
     nextSortedOrder: number
     listItems: UniqueIdentifier[]
-    savedItems: Record<string, Task[]>
+    savedItems: Record<string, TaskI[]>
     listData: List[]
     setDeleteItem: React.Dispatch<React.SetStateAction<TaskI | null>>
     allItems: Task[]
@@ -194,6 +185,12 @@ function ContainerList({
     // Maintain state for each container and the items they contain
     const [items, setItems] = useState<Record<string, TaskI[]>>(savedItems)
     const [sortedListItems, setSortedListItems] = useState(listItems)
+    const [updateParams, setUpdateParams] = useState<
+        {
+            list: List | undefined
+            tasksIds: (string | number | undefined)[]
+        }[]
+    >([])
 
     // Use the defined sensors for drag and drop operation
     const sensors = useSensors(
@@ -416,14 +413,16 @@ function ContainerList({
                     itemsBeforeDrag.current,
                     newItems,
                     listData,
-                    allItems
+                    allItems,
+                    setUpdateParams
                 )
             } else {
                 updateTaskOrder(
                     itemsBeforeDrag.current,
                     items,
                     listData,
-                    allItems
+                    allItems,
+                    setUpdateParams
                 )
             }
 
@@ -509,6 +508,27 @@ function ContainerList({
         setItems(savedItems)
         setSortedListItems(listItems)
     }, [listItems, savedItems])
+
+    useEffect(() => {
+        if (!updateParams || updateParams.length === 0) {
+            return
+        }
+
+        updateParams.map(async (data) => {
+            if (!data?.list?.id) {
+                ToastMessage('Failed to find list to update')
+                return
+            }
+            Promise.all(
+                data.tasksIds.map((id, idx) => {
+                    return db.tasks.update(Number(id), {
+                        [TASK_LIST]: Number(data?.list?.id),
+                        [SORTED_ORDER_COLUMN]: idx + 1,
+                    })
+                })
+            ).then(() => {})
+        })
+    }, [updateParams])
 
     const activeId = active?.id ?? null
 

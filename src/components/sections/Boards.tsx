@@ -19,7 +19,7 @@ function useBoards() {
 }
 
 const Boards = ({ currentBoardId }: { currentBoardId: UniqueIdentifier }) => {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [_, setSearchParams] = useSearchParams()
 
     const { data } = useBoards()
 
@@ -44,7 +44,6 @@ const Boards = ({ currentBoardId }: { currentBoardId: UniqueIdentifier }) => {
                             } `}
                             onClick={() => {
                                 route(
-                                    searchParams,
                                     setSearchParams,
                                     ['board_id', 'epic_id'],
                                     [board.id, null]

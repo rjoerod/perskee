@@ -2,7 +2,6 @@ import { SetURLSearchParams } from 'react-router-dom'
 import ToastMessage from '../components/util/ToastMessage'
 
 export function route(
-    searchParams: URLSearchParams,
     setSearchParams: SetURLSearchParams,
     newParam: string | string[],
     paramValue: string | number | null | (string | number | null)[],

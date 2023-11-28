@@ -72,7 +72,7 @@ const EpicBadge = ({ modalItem }: EpicBadgeProps) => {
             })
 
             if (searchParams.get('epic_id')) {
-                route(searchParams, setSearchParams, 'epic_id', newEpic)
+                route(setSearchParams, 'epic_id', newEpic)
             }
         } catch (e) {
             ToastMessage('Failed to delete list')

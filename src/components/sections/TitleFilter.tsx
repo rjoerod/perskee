@@ -20,14 +20,14 @@ const TitleFilters = () => {
                     }}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
-                            route(searchParams, setSearchParams, 'title', title)
+                            route(setSearchParams, 'title', title)
                         }
                     }}
                     value={title}
                 />
                 <Button
                     onClick={() => {
-                        route(searchParams, setSearchParams, 'title', title)
+                        route(setSearchParams, 'title', title)
                     }}
                 >
                     Update

@@ -46,9 +46,13 @@ export class List {
         )
         if (this.tasks) {
             await Promise.all(
-                this.tasks.map((list) => {
-                    return list.loadEpic()
-                })
+                this.tasks
+                    .sort((a, b) => {
+                        return a.sorted_order - b.sorted_order
+                    })
+                    .map((list) => {
+                        return list.loadEpic()
+                    })
             )
         }
         return this

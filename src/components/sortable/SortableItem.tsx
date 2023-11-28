@@ -149,14 +149,14 @@ export const Item: FC<{
     isOverlay?: boolean
     setDeleteItem?: React.Dispatch<React.SetStateAction<TaskI | null>>
 }> = ({ item, activeId, isOverlay = false, setDeleteItem }) => {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [_, setSearchParams] = useSearchParams()
 
     const handleClick = (e: {
         nativeEvent: { button: number }
         preventDefault: () => void
     }) => {
         if (e.nativeEvent.button === 0) {
-            route(searchParams, setSearchParams, 'task_id', Number(item.id))
+            route(setSearchParams, 'task_id', Number(item.id))
         } else if (e.nativeEvent.button === 2) {
             e.preventDefault()
             if (setDeleteItem) {

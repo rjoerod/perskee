@@ -10,7 +10,7 @@ const Filters = ({
 }: {
     epicFilterIds: UniqueIdentifier[] | null
 }) => {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [_, setSearchParams] = useSearchParams()
 
     const data = useEpics()
 
@@ -38,7 +38,6 @@ const Filters = ({
                                         ? Number(task.id)
                                         : null
                                     route(
-                                        searchParams,
                                         setSearchParams,
                                         'epic_id',
                                         newEpicId,
