@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import TaskCardModal from './sections/Modal/TaskCardModal'
 import ContainerList from './sections/ContainerList'
 import Boards from './sections/Boards'
@@ -11,7 +11,7 @@ import ConfirmationModal from './util/ConfirmationModal'
 import Skeleton from 'react-loading-skeleton'
 import TitleFilters from './sections/TitleFilter'
 import { useSearchParams } from 'react-router-dom'
-import { Task, List } from '../util/types'
+import { Task, List, TaskI } from '../util/types'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../util/db'
 import { LIST_BOARD } from '../util/mysql'
@@ -48,19 +48,23 @@ const getQueryArray = (param: string | string[] | undefined | null) => {
 
 function useBoard(id: UniqueIdentifier) {
     const lists = useLiveQuery(async () => {
-        const lists = await db.lists.where(LIST_BOARD).equals(id).toArray()
+        const lists = await db.lists.toArray()
         return Promise.all(
             lists.map((list) => {
                 return list.loadTasks()
             })
         )
-    }, [id])
+    }, [])
 
-    return { list: lists ?? [] }
+    const filteredLists = lists?.filter((list) => {
+        return list?.[LIST_BOARD] === id
+    })
+
+    return { list: (filteredLists ?? []) as List[] }
 }
 
 const Board = () => {
-    const [deleteItem, setDeleteItem] = useState<Task | null>(null)
+    const [deleteItem, setDeleteItem] = useState<TaskI | null>(null)
     const [searchParams] = useSearchParams()
 
     const epic_ids = searchParams?.getAll('epic_id')
@@ -128,22 +132,14 @@ const Board = () => {
 
     const onConfirmDelete = async () => {
         if (!deleteItem) {
-            ToastMessage('Failed to find list')
+            ToastMessage('Failed to find task')
             return
         }
 
         try {
-            // TODO replace with update to local index
-            await fetch(`/api/task/delete/${deleteItem.id}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'DELETE',
-            })
-            // TODO replace with request for new data
-            // mutate(`/api/board/${currentBoardId}`);
+            await db.tasks.delete(Number(deleteItem.id))
         } catch (e) {
-            ToastMessage('Failed to delete list')
+            ToastMessage('Failed to delete task')
         } finally {
             setDeleteItem(null)
         }
@@ -176,10 +172,7 @@ const Board = () => {
                                 setDeleteItem={setDeleteItem}
                                 allItems={allItems}
                             />
-                            <TaskCardModal
-                                modalItem={modalItem}
-                                boardId={Number(currentBoardId)}
-                            />
+                            <TaskCardModal modalItem={modalItem} />
                             <ConfirmationModal
                                 label={`Delete "${deleteItem?.name}"?`}
                                 open={!!deleteItem}

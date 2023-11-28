@@ -8,17 +8,17 @@ export interface Board {
 }
 
 export class List {
-    id: UniqueIdentifier
     board_id: number
     sorted_order: number
     name: string
+    id?: UniqueIdentifier
     tasks?: Task[]
 
     constructor(
-        id: number,
         board_id: number,
         sorted_order: number,
-        name: string
+        name: string,
+        id?: number
     ) {
         this.id = id
         this.board_id = board_id
@@ -34,18 +34,43 @@ export class List {
     }
 
     async loadTasks() {
+        if (!this.id) {
+            return
+        }
+
         await Promise.all(
             await db.tasks
                 .where(TASK_LIST)
                 .equals(this.id)
-                .toArray((tasks) => (this.tasks = tasks))
+                .toArray((tasks) => (this.tasks = tasks as Task[]))
         )
+        if (this.tasks) {
+            await Promise.all(
+                this.tasks.map((list) => {
+                    return list.loadEpic()
+                })
+            )
+        }
         return this
     }
 }
 
-export class Task {
-    id: UniqueIdentifier
+export interface TaskI {
+    id?: UniqueIdentifier
+    list_id: number
+    sorted_order: number
+    name: string
+    epic_id: number
+    epic?: Task
+    is_epic: boolean
+    story_points: number
+    description: string
+    list_name?: string
+    task_count?: number
+}
+
+export class Task implements TaskI {
+    id?: UniqueIdentifier
     list_id: number
     sorted_order: number
     name: string
@@ -58,16 +83,16 @@ export class Task {
     task_count?: number // if epic, the number tasks on epic
 
     constructor(
-        id: number,
         list_id: number,
         epic_id: number,
         sorted_order: number,
         is_epic: boolean,
         story_points: number,
         description: string,
-        name: string
+        name: string,
+        id?: number
     ) {
-        this.id = id
+        if (id) this.id = id
         this.list_id = list_id
         this.epic_id = epic_id
         this.sorted_order = sorted_order
@@ -77,6 +102,15 @@ export class Task {
         this.name = name
     }
 
+    async loadEpic() {
+        const epic = (await db.tasks
+            .where(ID)
+            .equals(this[TASK_EPIC])
+            .first()) as Task
+        this.epic = epic
+        return this
+    }
+
     async loadListName() {
         const list = await db.lists.where(ID).equals(this[TASK_LIST]).first()
         this.list_name = list?.name
@@ -84,7 +118,14 @@ export class Task {
     }
 
     async loadTaskCount() {
-        const tasks = await db.tasks.where(TASK_EPIC).equals(this.id).toArray()
+        if (!this.id) {
+            return
+        }
+
+        const tasks = (await db.tasks
+            .where(TASK_EPIC)
+            .equals(this.id)
+            .toArray()) as Task[]
 
         const filteredTasks = (
             await Promise.all(

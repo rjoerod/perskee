@@ -1,11 +1,11 @@
 import Dexie from 'dexie'
 import 'dexie-export-import'
-import { Board, List, Task } from './types'
+import { Board, List, Task, TaskI } from './types'
 
 export class PerskeeDB extends Dexie {
     boards!: Dexie.Table<Board, number>
     lists: Dexie.Table<List, number>
-    tasks: Dexie.Table<Task, number>
+    tasks: Dexie.Table<TaskI, number>
 
     constructor() {
         super('PerskeeDB')

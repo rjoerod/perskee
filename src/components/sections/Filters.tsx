@@ -27,15 +27,15 @@ const Filters = ({
                             <div
                                 key={task.id}
                                 className={`${
-                                    epicFilterIds?.includes(task.id)
+                                    epicFilterIds?.includes(Number(task.id))
                                         ? 'text-sky-500 border-sky-500'
                                         : 'text-slate-400 hover:text-slate-300 border-slate-800'
                                 } font-semibold pl-6 py-4 cursor-pointer border-l-4`}
                                 onClick={() => {
                                     const newEpicId = !epicFilterIds?.includes(
-                                        task.id
+                                        Number(task.id)
                                     )
-                                        ? task.id
+                                        ? Number(task.id)
                                         : null
                                     route(
                                         searchParams,

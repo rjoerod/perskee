@@ -1,5 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks'
-import { List } from './types'
+import { List, Task } from './types'
 import { useState, useEffect } from 'react'
 import { db } from './db'
 import { IS_EPIC_COLUMN, NAME_COLUMN } from './mysql'
@@ -30,13 +30,13 @@ export const idiotsAtHeadlessUI = (e: {
     }
 }
 
-export function useEpics(filtered = true) {
+export function useEpics(filtered = true): { tasks: Task[] } {
     const tasks = useLiveQuery(async () => {
         if (filtered) {
-            const tasks = await db.tasks
+            const tasks = (await db.tasks
                 .where(IS_EPIC_COLUMN)
                 .equals(1)
-                .toArray()
+                .toArray()) as Task[]
             return Promise.all(
                 tasks.map((task) => {
                     return task.loadTaskCount()
@@ -48,15 +48,15 @@ export function useEpics(filtered = true) {
         return tasks.sort((a, b) => {
             return a[NAME_COLUMN] < b[NAME_COLUMN] ? -1 : 1
         })
-    }, [filtered])
+    }, [filtered]) as Task[]
 
     return {
         tasks: tasks
             ?.sort((a, b) => {
-                return (b.task_count ?? 0) - (a.task_count ?? 0)
+                return (b?.task_count ?? 0) - (a?.task_count ?? 0)
             })
             .filter((task) => {
-                return (task.task_count ?? 0) > 0
+                return !!task && (task?.task_count ?? 0) > 0
             }),
     }
 }
