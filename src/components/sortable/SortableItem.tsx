@@ -75,8 +75,8 @@ const useEpicTasks = (epic: TaskI) => {
 
     const epicInfo = tasks?.reduce(
         (prev: { completed: number; total: number }, curr) => {
-            const addTotal = curr.story_points
-            const addCompleted = curr.list_name == 'Done' ? addTotal : 0
+            const addTotal = Number(curr.story_points)
+            const addCompleted = curr.list_name == 'Done' ? Number(addTotal) : 0
 
             return {
                 completed: prev.completed + addCompleted,

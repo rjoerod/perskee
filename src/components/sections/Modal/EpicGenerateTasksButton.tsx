@@ -1,7 +1,16 @@
 import { Combobox, Popover } from '@headlessui/react'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
-import { LIST_BOARD, TASK_LIST } from '../../../util/mysql'
+import {
+    DESCRIPTION_COLUMN,
+    IS_EPIC_COLUMN,
+    LIST_BOARD,
+    NAME_COLUMN,
+    SORTED_ORDER_COLUMN,
+    STORY_POINT_COLUMN,
+    TASK_EPIC,
+    TASK_LIST,
+} from '../../../util/mysql'
 import { Task, List } from '../../../util/types'
 import Button from '../../buttons/Button'
 import ConfirmationModal from '../../util/ConfirmationModal'
@@ -27,16 +36,72 @@ const EpicGenerateTasksButton = ({
         }
 
         try {
-            // TODO: implement
-            await fetch(`/api/task/generateTasks/${epic.id}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                method: 'POST',
-                body: JSON.stringify({
-                    [TASK_LIST]: selectedList.id,
-                }),
+            const lastTaskInList = selectedList.tasks?.sort((a, b) => {
+                return b.sorted_order - a.sorted_order
+            })?.[0]
+
+            const maxOrder = lastTaskInList?.sorted_order ?? 0
+
+            /*
+                Parse description for bullet points
+            */
+            const description = epic.description
+            const splitDescription = description.split('\n')
+            const filteredDesc = splitDescription.filter((str: string) => {
+                return (
+                    (str[0] == '-' && str[1] == ' ') ||
+                    str[0] == '[' ||
+                    str[0] == '#'
+                )
             })
+            const mappedDesc = filteredDesc.map((str: string) => {
+                return str.split('\n')[0]
+            })
+
+            // Final array to create tasks from
+            const finalDesc = []
+            // List of prefixes to create multiple
+            let descPrefixes = ['']
+
+            for (const desc of mappedDesc) {
+                // Reset prefixes
+                if (desc[0] == '#') {
+                    descPrefixes = ['']
+                    continue
+                }
+
+                // Set prefix
+                if (desc[0] == '[') {
+                    const trimmedString = desc.replace('[', '').replace(']', '')
+                    const splitArray = trimmedString.split(',')
+                    descPrefixes = splitArray.map((desc: string) => desc.trim())
+                    continue
+                }
+
+                // Create task names
+                for (const prefix of descPrefixes) {
+                    if (prefix != '') {
+                        finalDesc.push(prefix + desc.replace('- ', ' '))
+                    } else {
+                        finalDesc.push(desc.replace('- ', ''))
+                    }
+                }
+            }
+
+            const finalTasks = finalDesc.map((desc, idx) => {
+                const splitDesc = desc.split('(')
+                const newDesc = splitDesc?.[1] ?? ''
+                return {
+                    [NAME_COLUMN]: splitDesc[0].trim(),
+                    [DESCRIPTION_COLUMN]: newDesc.replace(')', '').trim(),
+                    [TASK_LIST]: Number(selectedList.id),
+                    [TASK_EPIC]: Number(epic.id),
+                    [SORTED_ORDER_COLUMN]: maxOrder + 1 + idx,
+                    [IS_EPIC_COLUMN]: false,
+                    [STORY_POINT_COLUMN]: 0,
+                }
+            })
+            await db.tasks.bulkAdd(finalTasks)
             setOpen(false)
         } catch (e) {
             ToastMessage('Failed to generate tasks')
@@ -154,10 +219,19 @@ const EpicGenerateTasksButton = ({
 
 const useLists = () => {
     const lists = useLiveQuery(async () => {
-        return db.lists.where(LIST_BOARD).equals(1).toArray()
+        const lists = await db.lists.where(LIST_BOARD).equals(1).toArray()
+        return Promise.all(
+            lists.map((list) => {
+                return list.loadTasks()
+            })
+        )
     }, [])
 
-    return lists
+    const filteredLists = lists?.filter((list) => {
+        return list
+    })
+
+    return filteredLists as List[]
 }
 
 const EpicGenerateTasksButtonQuery = ({ epic }: { epic: Task }) => {
