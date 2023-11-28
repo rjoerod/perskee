@@ -10,10 +10,40 @@ function DropZone() {
     }, [])
     const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
+    const DownloadJSON = (data: Blob) => {
+        const dataUrl = window.URL.createObjectURL(data)
+        const download = document.createElement('a')
+        download.setAttribute('href', dataUrl)
+        download.setAttribute('download', 'dexie-export' + '.json')
+        document.body.appendChild(download)
+        download.click()
+        download.remove()
+    }
+
+    const exportPerskeeDB = async () => {
+        try {
+            const blob = await db.export({ prettyJson: true })
+            DownloadJSON(blob)
+        } catch (error) {
+            console.error('' + error)
+        }
+    }
+
     return (
-        <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            <p>Drag 'n' drop some files here, or click to select files</p>
+        <div className="flex gap-8 pl-12 pb-4 h-full">
+            <div
+                className="self-end underline cursor-pointer hover:text-sky-400"
+                {...getRootProps()}
+            >
+                <input {...getInputProps()} />
+                <p>Import</p>
+            </div>
+            <div
+                className="self-end underline cursor-pointer hover:text-sky-400"
+                onClick={exportPerskeeDB}
+            >
+                Export
+            </div>
         </div>
     )
 }
