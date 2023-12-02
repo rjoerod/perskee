@@ -50,15 +50,19 @@ export function useEpics(filtered = true): { tasks: Task[] } {
         })
     }, [filtered]) as Task[]
 
-    return {
-        tasks: tasks
-            ?.sort((a, b) => {
-                return (b?.task_count ?? 0) - (a?.task_count ?? 0)
-            })
-            .filter((task) => {
-                return !!task && (task?.task_count ?? 0) > 0
-            }),
+    if (filtered) {
+        return {
+            tasks: tasks
+                ?.sort((a, b) => {
+                    return (b?.task_count ?? 0) - (a?.task_count ?? 0)
+                })
+                .filter((task) => {
+                    return !!task && (task?.task_count ?? 0) > 0
+                }),
+        }
     }
+
+    return { tasks }
 }
 
 function getWindowDimensions() {
