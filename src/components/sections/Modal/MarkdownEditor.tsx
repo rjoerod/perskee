@@ -38,6 +38,16 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
         }
     }
 
+    const onEditorOpen = () => {
+        setShowEditor(true)
+        const cachedDescription = sessionStorage.getItem(
+            `${modalItem.name}-desc-${modalItem.id}`
+        )
+        if (cachedDescription && cachedDescription != value) {
+            setValue(cachedDescription)
+        }
+    }
+
     return (
         <div>
             <div>
@@ -47,10 +57,7 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
                     </div>
                     {!showEditor && (
                         <div className="w-1/6">
-                            <Button
-                                label={'Edit'}
-                                onClick={() => setShowEditor(true)}
-                            />
+                            <Button label={'Edit'} onClick={onEditorOpen} />
                         </div>
                     )}
                 </div>
@@ -58,13 +65,19 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
                     <MDEditor
                         height={`${(height * 2) / 3}px`}
                         value={value}
-                        onChange={setValue}
+                        onChange={(newValue) => {
+                            setValue(newValue)
+                            sessionStorage.setItem(
+                                `${modalItem.name}-desc-${modalItem.id}`,
+                                newValue ?? ''
+                            )
+                        }}
                     />
                 ) : (
                     (modalItem?.description ?? '').trim() != '' && (
                         <div
                             className="ring-1 p-4 rounded ring-slate-500 cursor-pointer"
-                            onClick={() => setShowEditor(true)}
+                            onClick={onEditorOpen}
                         >
                             <Markdown className="prose prose-invert prose-slate prose-hr:-mt-4 prose-hr:mb-6 prose-ul:mb-8">
                                 {modalItem?.description ?? ''}

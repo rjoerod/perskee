@@ -114,18 +114,10 @@ const Board = () => {
         })
         ?.flat() as Task[]
 
-    const filteredItems = allItems?.filter((task?: Task) => {
-        return (
-            !!task &&
-            checkEpicFilter(epicFilterIds ?? [], task.epic_id) &&
-            checkTitleFilter(task, title)
-        )
-    })
-
     const items = Object.fromEntries(itemsArray ?? [])
 
     const modalItem = modalItemId
-        ? filteredItems?.find((item: Task) => {
+        ? allItems?.find((item: Task) => {
               return item.id == modalItemId
           }) ?? null
         : null

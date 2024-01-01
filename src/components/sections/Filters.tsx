@@ -17,6 +17,18 @@ const Filters = ({
     const skeletonClassName =
         'text-slate-400 border-slate-800 font-semibold pl-6 py-4 border-l-4'
 
+    const getTextColor = (task: Task) => {
+        if (epicFilterIds?.includes(Number(task.id))) {
+            return 'text-sky-500 hover:text-sky-300 border-sky-500'
+        }
+
+        if (task.is_highlighted) {
+            return 'text-indigo-400 hover:text-indigo-300 border-slate-800'
+        }
+
+        return 'text-slate-400 hover:text-slate-300 border-slate-800'
+    }
+
     return (
         <div className="px-9 py-4">
             <div className="py-4 text-lg font-semibold">Filter By Epic</div>
@@ -26,11 +38,9 @@ const Filters = ({
                         return (
                             <div
                                 key={task.id}
-                                className={`${
-                                    epicFilterIds?.includes(Number(task.id))
-                                        ? 'text-sky-500 border-sky-500'
-                                        : 'text-slate-400 hover:text-slate-300 border-slate-800'
-                                } font-semibold pl-6 py-4 cursor-pointer border-l-4`}
+                                className={`${getTextColor(
+                                    task
+                                )} font-semibold pl-6 py-4 cursor-pointer border-l-4`}
                                 onClick={() => {
                                     const newEpicId = !epicFilterIds?.includes(
                                         Number(task.id)
