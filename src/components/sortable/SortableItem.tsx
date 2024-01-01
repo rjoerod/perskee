@@ -132,8 +132,8 @@ const TaskBadges: FC<{
         )
     }
 
-    const epicClassName =
-        'text-xs py-[2px] px-2 rounded text-slate-100 bg-sky-600'
+    const bgColor = item.epic?.is_highlighted ? 'bg-violet-700' : 'bg-sky-600'
+    const epicClassName = `text-xs py-[2px] px-2 rounded text-slate-100 ${bgColor}`
 
     return (
         <>

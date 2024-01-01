@@ -8,7 +8,7 @@ import MarkdownEditor from './MarkdownEditor'
 import EpicTaskList from './EpicTaskList'
 import EpicGenerateTasksButton from './EpicGenerateTasksButton'
 import { useSearchParams } from 'react-router-dom'
-import { NAME_COLUMN } from '../../../util/properties'
+import { IS_HIGHLIGHTED_COLUMN, NAME_COLUMN } from '../../../util/properties'
 import { Task } from '../../../util/types'
 import Button from '../../buttons/Button'
 import { route } from '../../../util/queryRouting'
@@ -37,7 +37,24 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                 [NAME_COLUMN]: value,
             })
         } catch (e) {
-            ToastMessage('Failed to delete list')
+            ToastMessage('Failed to update name')
+        } finally {
+            setShowLabelInput(false)
+        }
+    }
+
+    const onHighlightConfirm = async (value: boolean) => {
+        if (!modalItem) {
+            ToastMessage('Failed to find task')
+            return
+        }
+
+        try {
+            await db.tasks.update(Number(modalItem.id), {
+                [IS_HIGHLIGHTED_COLUMN]: value,
+            })
+        } catch (e) {
+            ToastMessage('Failed to update highlight flag')
         } finally {
             setShowLabelInput(false)
         }
@@ -99,14 +116,32 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                                             Copy Card Link
                                         </Button>
                                     </div>
-                                    <div>
-                                        {modalItem &&
-                                            Boolean(modalItem.is_epic) && (
-                                                <EpicGenerateTasksButton
-                                                    epic={modalItem}
-                                                />
-                                            )}
-                                    </div>
+
+                                    {modalItem &&
+                                        Boolean(modalItem.is_epic) && (
+                                            <>
+                                                <div>
+                                                    <EpicGenerateTasksButton
+                                                        epic={modalItem}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <Button
+                                                        size="base"
+                                                        className="hover:underline"
+                                                        onClick={() => {
+                                                            onHighlightConfirm(
+                                                                !modalItem?.is_highlighted
+                                                            )
+                                                        }}
+                                                    >
+                                                        {modalItem?.is_highlighted
+                                                            ? 'Un-highlight Epic'
+                                                            : 'Highlight Epic'}
+                                                    </Button>
+                                                </div>
+                                            </>
+                                        )}
                                 </div>
                                 <div className="text-left">
                                     {modalItem && (
