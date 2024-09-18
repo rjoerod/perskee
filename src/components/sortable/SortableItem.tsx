@@ -166,7 +166,6 @@ export const Item: FC<{
     }
 
     const isShowing = activeId == item.id && !isOverlay
-
     const className =
         'flex flex-col mb-2 rounded-lg content-box mr-1 pt-2 pr-2 pb-2 pl-3 box-shadow-card text-slate-300 cursor-pointer select-none bg-slate-700 hover:bg-gray-500'
 
