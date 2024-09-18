@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react'
 import { useState } from 'react'
-import ToastMessage from '../../util/ToastMessage'
+import ToastMessage, { ToastInfo } from '../../util/ToastMessage'
 import SingleInput from '../../util/SingleInput'
 import EpicBadge from './EpicBadge'
 import StoryPointsBadge from './StoryPointsBadge'
@@ -111,6 +111,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                                                 navigator.clipboard.writeText(
                                                     `[${modalItem?.name}](${window.location.href})`
                                                 )
+                                                ToastInfo('Copied to clipboard')
                                             }}
                                         >
                                             Copy Card Link
