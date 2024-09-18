@@ -10,6 +10,16 @@ const ToastMessage = (message: string) => {
     )
 }
 
+export const ToastInfo = (message: string) => {
+    toast.info(
+        <div style={{ display: 'flex' }}>
+            <div style={{ flexGrow: 1, fontSize: 15, padding: '8px 12px' }}>
+                {message}
+            </div>
+        </div>
+    )
+}
+
 ToastMessage.dismiss = toast.dismiss
 
 ToastMessage.dismiss = toast.dismiss
