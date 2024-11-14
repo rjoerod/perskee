@@ -89,7 +89,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                 >
                     <div className="fixed inset-0 w-screen overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center p-4">
-                            <Dialog.Panel className="rounded-lg flex flex-col min-h-full bg-slate-800 text-white w-2/5 max-w-2xl min-w-[480px] py-8 px-8">
+                            <Dialog.Panel className="rounded-lg flex flex-col min-h-full bg-slate-800 text-white w-2/5 max-w-2xl min-w-[632px] py-8 px-8">
                                 <Dialog.Title className="text-slate-100 text-3xl mb-6 font-bold">
                                     {showLabelInput ? (
                                         <SingleInput
