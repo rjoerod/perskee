@@ -13,6 +13,18 @@ import { Task } from '../../../util/types'
 import Button from '../../buttons/Button'
 import { route } from '../../../util/queryRouting'
 import { db } from '../../../util/db'
+import ListBadge from './ListBadge'
+import { useLiveQuery } from 'dexie-react-hooks'
+
+const useTaskCardModalQuery = (modalItem: Task | null) => {
+    const task = useLiveQuery(async () => {
+        if (!modalItem) return modalItem
+
+        return modalItem.loadListName()
+    }, [modalItem])
+
+    return task
+}
 
 interface TaskCardModalProps {
     modalItem: Task | null
@@ -77,7 +89,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                 >
                     <div className="fixed inset-0 w-screen overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center p-4">
-                            <Dialog.Panel className="rounded-lg flex flex-col min-h-full bg-slate-800 text-white w-2/5 max-w-2xl min-w-[480px] py-8 px-8">
+                            <Dialog.Panel className="rounded-lg flex flex-col min-h-full bg-slate-800 text-white w-2/5 max-w-2xl min-w-[632px] py-8 px-8">
                                 <Dialog.Title className="text-slate-100 text-3xl mb-6 font-bold">
                                     {showLabelInput ? (
                                         <SingleInput
@@ -95,6 +107,9 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                                     )}
                                 </Dialog.Title>
                                 <div className="flex gap-6 mb-6">
+                                    {modalItem && (
+                                        <ListBadge modalItem={modalItem} />
+                                    )}
                                     {isNotEpic && (
                                         <>
                                             <EpicBadge modalItem={modalItem} />
@@ -162,4 +177,14 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
     )
 }
 
-export default TaskCardModal
+const TaskCardModalQuery = ({ modalItem }: TaskCardModalProps) => {
+    const task = useTaskCardModalQuery(modalItem)
+
+    if (!task?.list_name) {
+        return <></>
+    }
+
+    return <TaskCardModal modalItem={task} />
+}
+
+export default TaskCardModalQuery

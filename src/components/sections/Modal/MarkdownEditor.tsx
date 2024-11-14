@@ -38,7 +38,10 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
         }
     }
 
-    const onEditorOpen = () => {
+    const onEditorOpen = (e: React.SyntheticEvent<HTMLElement>) => {
+        var element = e.target as HTMLElement
+        if (element.tagName.toLowerCase() === 'a') return
+
         setShowEditor(true)
         const cachedDescription = sessionStorage.getItem(
             `${modalItem.name}-desc-${modalItem.id}`

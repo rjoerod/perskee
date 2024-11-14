@@ -80,6 +80,9 @@ const Board = () => {
 
     useEffect(() => {
         document.title = 'Perskee'
+        document.body.onmousedown = (e) => {
+            if (e.button === 1) return false
+        }
     }, [])
 
     const listItems = data?.list?.map((myList: List) => {

@@ -70,6 +70,7 @@ export interface TaskI {
     story_points: number
     description: string
     is_highlighted?: boolean
+    is_highlighted_task?: boolean
     list_name?: string
     task_count?: number
 }
@@ -85,6 +86,7 @@ export class Task implements TaskI {
     story_points: number
     description: string
     is_highlighted?: boolean
+    is_highlighted_task?: boolean
     list_name?: string
     task_count?: number // if epic, the number tasks on epic
 
@@ -97,10 +99,12 @@ export class Task implements TaskI {
         description: string,
         name: string,
         id?: number,
-        is_highlighted?: boolean
+        is_highlighted?: boolean,
+        is_highlighted_task?: boolean
     ) {
         if (id) this.id = id
         if (is_highlighted) this.is_highlighted = is_highlighted
+        if (is_highlighted_task) this.is_highlighted_task = is_highlighted_task
         this.list_id = list_id
         this.epic_id = epic_id
         this.sorted_order = sorted_order
