@@ -13,6 +13,18 @@ import { Task } from '../../../util/types'
 import Button from '../../buttons/Button'
 import { route } from '../../../util/queryRouting'
 import { db } from '../../../util/db'
+import ListBadge from './ListBadge'
+import { useLiveQuery } from 'dexie-react-hooks'
+
+const useTaskCardModalQuery = (modalItem: Task | null) => {
+    const task = useLiveQuery(async () => {
+        if (!modalItem) return modalItem
+
+        return modalItem.loadListName()
+    }, [modalItem])
+
+    return task
+}
 
 interface TaskCardModalProps {
     modalItem: Task | null
@@ -95,6 +107,9 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                                     )}
                                 </Dialog.Title>
                                 <div className="flex gap-6 mb-6">
+                                    {modalItem && (
+                                        <ListBadge modalItem={modalItem} />
+                                    )}
                                     {isNotEpic && (
                                         <>
                                             <EpicBadge modalItem={modalItem} />
@@ -162,4 +177,14 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
     )
 }
 
-export default TaskCardModal
+const TaskCardModalQuery = ({ modalItem }: TaskCardModalProps) => {
+    const task = useTaskCardModalQuery(modalItem)
+
+    if (!task?.list_name) {
+        return <></>
+    }
+
+    return <TaskCardModal modalItem={task} />
+}
+
+export default TaskCardModalQuery
