@@ -7,8 +7,9 @@ import { useSearchParams } from 'react-router-dom'
 import { Task, TaskI } from '../../util/types'
 import { route } from '../../util/queryRouting'
 import { db } from '../../util/db'
-import { TASK_EPIC } from '../../util/properties'
+import { IS_HIGHLIGHTED_TASK_COLUMN, TASK_EPIC } from '../../util/properties'
 import { useLiveQuery } from 'dexie-react-hooks'
+import ToastMessage from '../util/ToastMessage'
 
 function getStoryPointsClass(points: number): { outer: string; inner: string } {
     switch (points) {
@@ -165,15 +166,33 @@ export const Item: FC<{
         }
     }
 
+    const onHighlightTaskConfirm = async (e: {
+        nativeEvent: { button: number }
+        preventDefault: () => void
+    }) => {
+        if (e.nativeEvent.button !== 1) return
+        e.preventDefault()
+        try {
+            await db.tasks.update(Number(item.id), {
+                [IS_HIGHLIGHTED_TASK_COLUMN]: !item.is_highlighted_task,
+            })
+        } catch (e) {
+            ToastMessage('Failed to update highlight task')
+        }
+    }
+
     const isShowing = activeId == item.id && !isOverlay
-    const className =
-        'flex flex-col mb-2 rounded-lg content-box mr-1 pt-2 pr-2 pb-2 pl-3 box-shadow-card text-slate-300 cursor-pointer select-none bg-slate-700 hover:bg-gray-500'
+    const bgClasses = item.is_highlighted_task
+        ? 'bg-sky-900 hover:bg-sky-700'
+        : 'bg-slate-700 hover:bg-gray-500'
+    const className = `flex flex-col mb-2 rounded-lg content-box mr-1 pt-2 pr-2 pb-2 pl-3 box-shadow-card text-slate-300 cursor-pointer select-none ${bgClasses}`
 
     return (
         <div
             className={className}
             onClick={handleClick}
             onContextMenu={handleClick}
+            onAuxClick={onHighlightTaskConfirm}
         >
             <div className={`text-sm ${isShowing && 'invisible'}`}>
                 {item.name}
