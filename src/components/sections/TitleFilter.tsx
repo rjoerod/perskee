@@ -25,13 +25,23 @@ const TitleFilters = () => {
                     }}
                     value={title}
                 />
-                <Button
-                    onClick={() => {
-                        route(setSearchParams, 'title', title)
-                    }}
-                >
-                    Update
-                </Button>
+                <div className="flex gap-8">
+                    <Button
+                        onClick={() => {
+                            setTitle('')
+                            route(setSearchParams, 'title', '')
+                        }}
+                    >
+                        Reset
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            route(setSearchParams, 'title', title)
+                        }}
+                    >
+                        Update
+                    </Button>
+                </div>
             </div>
         </div>
     )
