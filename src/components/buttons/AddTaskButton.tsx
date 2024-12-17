@@ -1,4 +1,3 @@
-import { FormEvent } from 'react'
 import {
     NAME_COLUMN,
     TASK_LIST,
@@ -21,19 +20,13 @@ interface AddTaskButtonProps {
 }
 
 const AddTaskButton = ({ boardId, listId, listData }: AddTaskButtonProps) => {
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
+    const handleSubmit = async (name: string) => {
         const list = findListFromName(listId, listData)
 
         if (!list) {
             ToastMessage('Failed to find list')
             return
         }
-
-        const form = e.currentTarget
-        const formData = new FormData(form)
-        const name = formData.get('name')
 
         // Add to end of list
         const maxTask = await db.tasks
