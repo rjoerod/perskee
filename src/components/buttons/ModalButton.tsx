@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from '../buttons/Button'
 import { idiotsAtHeadlessUI } from '../../util/util'
 
