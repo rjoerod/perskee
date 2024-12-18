@@ -121,7 +121,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                                     <div>
                                         <Button
                                             size="base"
-                                            className="hover:underline"
+                                            className="hover:underline py-[6px] px-3"
                                             onClick={() => {
                                                 navigator.clipboard.writeText(
                                                     `[${modalItem?.name}](${window.location.href})`
