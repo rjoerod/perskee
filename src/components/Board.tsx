@@ -9,13 +9,14 @@ import 'react-toastify/dist/ReactToastify.css'
 import ToastMessage from './util/ToastMessage'
 import ConfirmationModal from './util/ConfirmationModal'
 import Skeleton from 'react-loading-skeleton'
-import TitleFilters from './sections/TitleFilter'
 import { useSearchParams } from 'react-router-dom'
 import { Task, List, TaskI } from '../util/types'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../util/db'
 import { LIST_BOARD } from '../util/properties'
 import DropZone from './util/DropZone'
+import TaskFilters from './sections/TaskFilters'
+import TaskFiltersModal from './util/TaskFiltersModal'
 
 const checkEpicFilter = (epicIds: number[], taskEpicId: number) => {
     if (epicIds.length == 0) {
@@ -27,6 +28,18 @@ const checkEpicFilter = (epicIds: number[], taskEpicId: number) => {
 
 const checkTitleFilter = (task: Task, title: string) => {
     return task.name.toLowerCase().includes(title.toLowerCase())
+}
+
+const checkDescriptionFilter = (task: Task, description: string) => {
+    return (task.description ?? '')
+        .toLowerCase()
+        .includes(description.toLowerCase())
+}
+
+const checkHighlightedFilter = (task: Task, highlighted: number) => {
+    if (!highlighted) return true
+
+    return task.is_highlighted_task
 }
 
 const getQueryNum = (param: string | string[] | undefined | null) => {
@@ -64,6 +77,8 @@ function useBoard(id: UniqueIdentifier) {
 }
 
 const Board = () => {
+    const [filtersModalIsOpen, setFilterModalIsOpen] = useState(false)
+
     const [deleteItem, setDeleteItem] = useState<TaskI | null>(null)
     const [searchParams] = useSearchParams()
 
@@ -71,6 +86,8 @@ const Board = () => {
     const board_id = searchParams?.get('board_id')
     const task_id = searchParams?.get('task_id')
     const title = searchParams?.get('title') ?? ''
+    const description = searchParams?.get('description') ?? ''
+    const highlightedTask = Number(searchParams?.get('highlighted')) ?? 0
 
     const epicFilterIds = getQueryArray(epic_ids)
     const currentBoardId = getQueryNum(board_id) ?? 1
@@ -101,7 +118,9 @@ const Board = () => {
                 if (
                     (checkEpicFilter(epicFilterIds ?? [], task.epic_id) ||
                         currentBoardId == 2) &&
-                    checkTitleFilter(task, title)
+                    checkTitleFilter(task, title) &&
+                    checkDescriptionFilter(task, description) &&
+                    checkHighlightedFilter(task, highlightedTask)
                 ) {
                     return task
                 }
@@ -148,7 +167,7 @@ const Board = () => {
                     {currentBoardId == 1 && (
                         <Filters epicFilterIds={epicFilterIds} />
                     )}
-                    <TitleFilters />
+                    <TaskFilters openModal={() => setFilterModalIsOpen(true)} />
                     <DropZone />
                 </div>
                 <div
@@ -176,6 +195,10 @@ const Board = () => {
                                 }}
                                 onConfirm={onConfirmDelete}
                             />
+                            <TaskFiltersModal
+                                open={filtersModalIsOpen}
+                                onClose={() => setFilterModalIsOpen(false)}
+                            ></TaskFiltersModal>
                         </>
                     ) : (
                         <>
