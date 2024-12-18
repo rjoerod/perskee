@@ -1,4 +1,3 @@
-import { FormEvent } from 'react'
 import {
     NAME_COLUMN,
     TASK_LIST,
@@ -13,6 +12,17 @@ import ModalButton from './ModalButton'
 import { List } from '../../util/types'
 import { findListFromName } from '../../util/util'
 import { db } from '../../util/db'
+import { useSearchParams } from 'react-router-dom'
+
+const getQueryArray = (param: string | string[] | undefined | null) => {
+    if (!param) {
+        return null
+    }
+    if (typeof param == 'string') {
+        return [Number(param)]
+    }
+    return param.map((p) => Number(p))
+}
 
 interface AddTaskButtonProps {
     boardId: number
@@ -21,9 +31,11 @@ interface AddTaskButtonProps {
 }
 
 const AddTaskButton = ({ boardId, listId, listData }: AddTaskButtonProps) => {
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const [searchParams] = useSearchParams()
+    const epic_ids = searchParams?.getAll('epic_id')
+    const epicFilterIds = getQueryArray(epic_ids)
 
+    const handleSubmit = async (name: string) => {
         const list = findListFromName(listId, listData)
 
         if (!list) {
@@ -31,9 +43,8 @@ const AddTaskButton = ({ boardId, listId, listData }: AddTaskButtonProps) => {
             return
         }
 
-        const form = e.currentTarget
-        const formData = new FormData(form)
-        const name = formData.get('name')
+        // Add to currently filtered epic if only on is selected
+        const epicId = epicFilterIds?.length === 1 ? epicFilterIds[0] : -1
 
         // Add to end of list
         const maxTask = await db.tasks
@@ -44,7 +55,7 @@ const AddTaskButton = ({ boardId, listId, listData }: AddTaskButtonProps) => {
 
         try {
             await db.tasks.add({
-                [TASK_EPIC]: -1,
+                [TASK_EPIC]: epicId,
                 [SORTED_ORDER_COLUMN]:
                     (maxTask?.[0]?.[SORTED_ORDER_COLUMN] ?? 0) + 1,
                 [TASK_LIST]: Number(list.id),

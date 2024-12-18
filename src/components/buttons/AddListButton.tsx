@@ -1,4 +1,3 @@
-import { FormEvent } from 'react'
 import ToastMessage from '../util/ToastMessage'
 import ModalButton from './ModalButton'
 import { db } from '../../util/db'
@@ -10,14 +9,9 @@ interface AddListButtonProps {
 }
 
 const AddListButton = ({ boardId, nextSortedOrder }: AddListButtonProps) => {
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
-        const form = e.currentTarget
-        const formData = new FormData(form)
-        const name = formData.get('name')
+    const handleSubmit = async (name: string) => {
         try {
-            const newList = new List(boardId, nextSortedOrder, String(name))
+            const newList = new List(boardId, nextSortedOrder, name)
             await db.lists.add(newList)
         } catch (e) {
             ToastMessage('Failed to add list')

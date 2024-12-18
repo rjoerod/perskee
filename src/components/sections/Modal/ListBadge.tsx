@@ -6,12 +6,16 @@ interface ListBadgeProps {
 
 const ListBadge = ({ modalItem }: ListBadgeProps) => {
     return (
-        <div
-            className={
-                'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-slate-700 ring-slate-500 text-slate-100'
-            }
-        >
-            <div>{modalItem.list_name}</div>
+        <div>
+            <div>
+                <div
+                    className={
+                        'bg-slate-700 ring-1 ring-slate-700 py-[6px] px-3 rounded text-slate-100 cursor-pointer'
+                    }
+                >
+                    {modalItem.list_name}
+                </div>
+            </div>
         </div>
     )
 }
