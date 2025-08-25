@@ -94,7 +94,7 @@ const DescriptionFilter = () => {
 const HighlightedTaskFilter = () => {
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const higlightedTaskParam = searchParams?.get('highlighted') ?? 0
+    const higlightedTaskParam = Number(searchParams?.get('highlighted') ?? 0)
     const [isHighlighted, setIsHighlighted] = useState(higlightedTaskParam)
 
     const updateHighlightedFilter = (val: number) => {

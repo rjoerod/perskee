@@ -30,9 +30,9 @@ const Filters = ({
     }
 
     return (
-        <div className="px-9 py-4">
+        <div className="px-9 py-4 h-[calc(100vh-27rem)]">
             <div className="py-4 text-lg font-semibold">Filter By Epic</div>
-            <div className="flex flex-col grow max-h-full overflow-auto pb-8 bl border-slate-800 select-none">
+            <div className="flex flex-col grow h-[calc(100vh-34rem)] overflow-auto pb-8 bl border-slate-800 select-none">
                 {data?.tasks ? (
                     data.tasks.map((task: Task) => {
                         return (

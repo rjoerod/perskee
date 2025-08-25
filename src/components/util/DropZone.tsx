@@ -30,7 +30,7 @@ function DropZone() {
     }
 
     return (
-        <div className="flex gap-8 pl-12 pb-4 h-full">
+        <div className="flex gap-8 pl-12 pb-4">
             <div
                 className="self-end underline cursor-pointer hover:text-sky-400"
                 {...getRootProps()}
