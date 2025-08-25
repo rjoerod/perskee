@@ -60,7 +60,7 @@ const AddTaskButton = ({ boardId, listId, listData }: AddTaskButtonProps) => {
                     (maxTask?.[0]?.[SORTED_ORDER_COLUMN] ?? 0) + 1,
                 [TASK_LIST]: Number(list.id),
                 [NAME_COLUMN]: String(name),
-                [IS_EPIC_COLUMN]: boardId == 2,
+                [IS_EPIC_COLUMN]: boardId == 2 ? 1 : 0,
                 [STORY_POINT_COLUMN]: 0,
                 [DESCRIPTION_COLUMN]: '',
             })

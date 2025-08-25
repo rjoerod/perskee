@@ -97,7 +97,7 @@ const EpicGenerateTasksButton = ({
                     [TASK_LIST]: Number(selectedList.id),
                     [TASK_EPIC]: Number(epic.id),
                     [SORTED_ORDER_COLUMN]: maxOrder + 1 + idx,
-                    [IS_EPIC_COLUMN]: false,
+                    [IS_EPIC_COLUMN]: 0,
                     [STORY_POINT_COLUMN]: 0,
                 }
             })
