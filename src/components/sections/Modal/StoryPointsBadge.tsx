@@ -6,7 +6,8 @@ import ToastMessage from '../../util/ToastMessage'
 import { db } from '../../../util/db'
 
 function getStoryPointsClass(points: number): { outer: string; inner: string } {
-    switch (points) {
+    const coercedPoints = Number(points);
+    switch (coercedPoints) {
         case 1:
             return {
                 outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-emerald-700 text-slate-100 hover:bg-emerald-800',

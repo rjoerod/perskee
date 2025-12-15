@@ -12,7 +12,8 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import ToastMessage from '../util/ToastMessage'
 
 function getStoryPointsClass(points: number): { outer: string; inner: string } {
-    switch (points) {
+    const coercedPoints = Number(points);
+    switch (coercedPoints) {
         case 1:
             return {
                 outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-emerald-700 text-slate-100',
