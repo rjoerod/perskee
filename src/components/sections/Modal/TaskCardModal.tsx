@@ -83,7 +83,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
                 onClose={onClose}
             >
                 <div
-                    className={`fixed inset-0 p-8 max-h-4/5 z-10 flex justify-center overflow-y-auto ${
+                    className={`fixed inset-0 p-8 z-10 flex justify-center overflow-y-auto ${
                         modalItem && 'bg-gray-950/50'
                     }`}
                 >

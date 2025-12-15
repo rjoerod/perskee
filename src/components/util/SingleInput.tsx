@@ -34,7 +34,7 @@ const SingleInput = ({ initialValue, handleSubmit }: SingleInputProps) => {
 			<input
 				autoFocus
 				name="name"
-				className="w-full py-1 px-2 border-gray-400 border-2 bg-gray-900 rounded"
+				className="w-full py-1 px-2 border-gray-400 border-2 bg-gray-900 rounded-sm"
 				value={inputValue}
 				onChange={(e) => {
 					setInputValue(e.target.value);

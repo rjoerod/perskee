@@ -136,7 +136,7 @@ const EpicGenerateTasksButton = ({
                             onChange={(list) => setSelectedList(list)}
                         >
                             <div className="relative mt-1 pt-4">
-                                <div className="relative w-48 cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                                <div className="relative w-48 cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
                                     <Combobox.Input
                                         className="w-48 border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
                                         displayValue={(list: List) =>
@@ -153,7 +153,7 @@ const EpicGenerateTasksButton = ({
                                         />
                                     </Combobox.Button>
                                 </div>
-                                <Combobox.Options className="absolute mt-1 max-h-60 w-48 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <Combobox.Options className="absolute mt-1 max-h-60 w-48 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden sm:text-sm">
                                     {filteredLists.length === 0 &&
                                     query != '' ? (
                                         <div className="relative cursor-default select-none py-2 px-4 text-gray-700">

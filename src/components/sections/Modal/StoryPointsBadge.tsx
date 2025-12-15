@@ -10,32 +10,32 @@ function getStoryPointsClass(points: number): { outer: string; inner: string } {
     switch (coercedPoints) {
         case 1:
             return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-emerald-700 text-slate-100 hover:bg-emerald-800',
+                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-emerald-700 text-slate-100 hover:bg-emerald-800',
                 inner: 'rounded-xl px-[5px] text-emerald-700 bg-black font-black',
             }
         case 2:
             return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-green-700 text-slate-100 hover:bg-green-800',
+                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-green-700 text-slate-100 hover:bg-green-800',
                 inner: 'rounded-xl px-[5px] text-green-700 bg-black font-black',
             }
         case 3:
             return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-lime-700 text-slate-100 hover:bg-lime-800',
+                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-lime-700 text-slate-100 hover:bg-lime-800',
                 inner: 'rounded-xl px-[5px] text-lime-700 bg-black font-black',
             }
         case 5:
             return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-yellow-700 text-slate-100 hover:bg-yellow-800',
+                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-yellow-700 text-slate-100 hover:bg-yellow-800',
                 inner: 'rounded-xl px-[5px] text-yellow-700 bg-black font-black',
             }
         case 8:
             return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-orange-700 text-slate-100 hover:bg-orange-800',
+                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-orange-700 text-slate-100 hover:bg-orange-800',
                 inner: 'rounded-xl px-[5px] text-orange-700 bg-black font-black',
             }
         default:
             return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded bg-emerald-700 text-slate-100 hover:bg-emerald-800',
+                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-emerald-700 text-slate-100 hover:bg-emerald-800',
                 inner: 'rounded-xl px-[5px] text-emerald-700 bg-black font-black',
             }
     }

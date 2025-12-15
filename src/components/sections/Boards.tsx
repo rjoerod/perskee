@@ -24,7 +24,7 @@ const Boards = ({ currentBoardId }: { currentBoardId: UniqueIdentifier }) => {
     const { data } = useBoards()
 
     const skeletonClassName =
-        'rounded-md cursor-pointer text-lg text-white ring-1 ring-slate-700 text-center shadow-md focus:outline-none bg-transparent'
+        'rounded-md cursor-pointer text-lg text-white ring-1 ring-slate-700 text-center shadow-md focus:outline-hidden bg-transparent'
 
     return (
         <div
@@ -37,7 +37,7 @@ const Boards = ({ currentBoardId }: { currentBoardId: UniqueIdentifier }) => {
                     return (
                         <div
                             key={board.id}
-                            className={`rounded-md cursor-pointer text-lg text-white ring-1 ring-slate-700 text-center px-5 py-4 shadow-md focus:outline-none  ${
+                            className={`rounded-md cursor-pointer text-lg text-white ring-1 ring-slate-700 text-center px-5 py-4 shadow-md focus:outline-hidden  ${
                                 currentBoardId == board.id
                                     ? 'bg-sky-600'
                                     : 'bg-transparent hover:bg-slate-800 hover:ring-slate-800'

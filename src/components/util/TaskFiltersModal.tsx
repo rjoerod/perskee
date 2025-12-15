@@ -22,7 +22,7 @@ const GenericFilter = ({
             <div className="pb-4 text-lg font-semibold">{title}</div>
             <div className="flex flex-col grow max-h-full gap-6">
                 <input
-                    className="w-full py-1 px-2 border-gray-400 border-2 bg-gray-900 rounded"
+                    className="w-full py-1 px-2 border-gray-400 border-2 bg-gray-900 rounded-sm"
                     onChange={(e) => {
                         updateState(e.target.value)
                     }}
@@ -165,7 +165,7 @@ const TaskFiltersModal = ({ open, onClose }: TaskFiltersModalProps) => {
             onClose={onClose}
         >
             <div
-                className={`fixed inset-0 p-8 max-h-4/5 z-10 flex justify-center overflow-y-auto bg-gray-950/50`}
+                className={`fixed inset-0 p-8 z-10 flex justify-center overflow-y-auto bg-gray-950/50`}
             >
                 <div className="fixed inset-0 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-center justify-center p-4">
