@@ -85,11 +85,11 @@ const EpicBadge = ({ modalItem }: EpicBadgeProps) => {
         <div ref={wrapperRef}>
             <div onClick={() => setShowComboBox(true)}>
                 {modalItem.epic ? (
-                    <div className="bg-sky-600 py-[6px] px-3 rounded text-slate-100 cursor-pointer hover:bg-sky-700">
+                    <div className="bg-sky-600 py-[6px] px-3 rounded-sm text-slate-100 cursor-pointer hover:bg-sky-700">
                         {modalItem?.epic?.name}
                     </div>
                 ) : (
-                    <div className="bg-transparent ring-1 ring-slate-700 hover:bg-slate-700 py-[6px] px-3 rounded text-slate-100 cursor-pointer">
+                    <div className="bg-transparent ring-1 ring-slate-700 hover:bg-slate-700 py-[6px] px-3 rounded-sm text-slate-100 cursor-pointer">
                         Add to epic
                     </div>
                 )}
@@ -99,7 +99,7 @@ const EpicBadge = ({ modalItem }: EpicBadgeProps) => {
                     <Popover.Panel static>
                         <Combobox value={selected} onChange={onEpicConfirm}>
                             <div className="relative mt-1">
-                                <div className="relative w-48 cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                                <div className="relative w-48 cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
                                     <Combobox.Input
                                         className="w-48 border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
                                         displayValue={(epic: Task) => epic.name}
@@ -116,7 +116,7 @@ const EpicBadge = ({ modalItem }: EpicBadgeProps) => {
                                 </div>
                                 <Combobox.Options
                                     static
-                                    className="absolute mt-1 max-h-60 w-48 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                                    className="absolute mt-1 max-h-60 w-48 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden sm:text-sm"
                                 >
                                     {filteredEpics.length === 0 &&
                                     query !== '' ? (

@@ -12,36 +12,37 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import ToastMessage from '../util/ToastMessage'
 
 function getStoryPointsClass(points: number): { outer: string; inner: string } {
-    switch (points) {
+    const coercedPoints = Number(points);
+    switch (coercedPoints) {
         case 1:
             return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-emerald-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg px-[5px] text-emerald-700 bg-black font-black',
+                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-emerald-700 text-slate-100',
+                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-emerald-700 bg-black font-black',
             }
         case 2:
             return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-green-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg px-[5px] text-green-700 bg-black font-black',
+                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-green-700 text-slate-100',
+                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-green-700 bg-black font-black',
             }
         case 3:
             return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-lime-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg px-[5px] text-lime-700 bg-black font-black',
+                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-lime-700 text-slate-100',
+                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-lime-700 bg-black font-black',
             }
         case 5:
             return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-yellow-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg px-[5px] text-yellow-700 bg-black font-black',
+                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-yellow-700 text-slate-100',
+                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-yellow-700 bg-black font-black',
             }
         case 8:
             return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-orange-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg px-[5px] text-orange-700 bg-black font-black',
+                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-orange-700 text-slate-100',
+                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-orange-700 bg-black font-black',
             }
         default:
             return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded bg-emerald-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg px-[5px] text-emerald-700 bg-black font-black',
+                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-emerald-700 text-slate-100',
+                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-emerald-700 bg-black font-black',
             }
     }
 }
@@ -134,7 +135,7 @@ const TaskBadges: FC<{
     }
 
     const bgColor = item.epic?.is_highlighted ? 'bg-violet-700' : 'bg-sky-600'
-    const epicClassName = `text-xs py-[2px] px-2 rounded text-slate-100 ${bgColor}`
+    const epicClassName = `text-xs py-[2px] px-2 rounded-sm text-slate-100 ${bgColor}`
 
     return (
         <>

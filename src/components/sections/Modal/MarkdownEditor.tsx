@@ -79,10 +79,10 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
                 ) : (
                     (modalItem?.description ?? '').trim() != '' && (
                         <div
-                            className="ring-1 p-4 rounded ring-slate-500 cursor-pointer"
+                            className="ring-1 p-4 rounded-sm ring-slate-500 cursor-pointer"
                             onClick={onEditorOpen}
                         >
-                            <Markdown className="prose prose-invert prose-slate prose-hr:-mt-4 prose-hr:mb-6 prose-ul:mb-8">
+                            <Markdown className="prose prose-invert prose-slate prose-hr:-mt-4 prose-hr:mb-6 prose-ul:mb-8 wrap-break-word">
                                 {modalItem?.description ?? ''}
                             </Markdown>
                         </div>

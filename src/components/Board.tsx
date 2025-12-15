@@ -96,7 +96,6 @@ const Board = () => {
     const data = useBoard(currentBoardId)
 
     useEffect(() => {
-        document.title = 'Perskee'
         document.body.onmousedown = (e) => {
             if (e.button === 1) return false
         }

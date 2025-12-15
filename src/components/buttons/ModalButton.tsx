@@ -66,7 +66,7 @@ const ModalButton = ({
                     <input
                         autoFocus
                         name="name"
-                        className="py-1 px-2 mb-4 border-gray-400 border-2 bg-gray-900 rounded w-full"
+                        className="py-1 px-2 mb-4 border-gray-400 border-2 bg-gray-900 rounded-sm w-full"
                         placeholder={placeholder}
                         onKeyDown={handleKeyDown}
                     />

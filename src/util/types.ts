@@ -146,7 +146,7 @@ export class Task implements TaskI {
                 })
             )
         ).filter((task) => {
-            return task.list_name != 'Done'
+            return task.list_name != 'Done' && !task.is_epic
         })
 
         this.task_count = filteredTasks.length
