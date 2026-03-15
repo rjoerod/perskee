@@ -73,8 +73,8 @@
 
 ### Phase 9: Remaining
 
-- [ ] `ContainerList.tsx` (mostly dnd-kit logic, minimal styling)
-- [ ] `AddListButton.tsx`, `AddTaskButton.tsx` (thin wrappers, likely no CSS)
+- [x] `ContainerList.tsx` + `ContainerList.module.scss` (mostly dnd-kit logic, minimal styling)
+- [x] `AddListButton.tsx`, `AddTaskButton.tsx` (thin wrappers, no Tailwind classes present)
 
 ### Phase 10: Cleanup
 

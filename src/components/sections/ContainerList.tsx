@@ -30,6 +30,7 @@ import {
 import SortableContainer, { Container } from '../sortable/SortableContainer'
 import { Item } from '../sortable/SortableItem'
 import AddListButton from '../buttons/AddListButton'
+import styles from './ContainerList.module.scss'
 import ToastMessage from '../util/ToastMessage'
 import { TASK_LIST, SORTED_ORDER_COLUMN } from '../../util/properties'
 import { Task, List, TaskI } from '../../util/types'
@@ -588,8 +589,8 @@ function ContainerList({
                 ) : null}
             </DragOverlay>
 
-            <div className="w-72">
-                <div className="w-72">
+            <div className={styles.addListWrapper}>
+                <div className={styles.addListWrapper}>
                     <AddListButton
                         boardId={boardId}
                         nextSortedOrder={nextSortedOrder}
