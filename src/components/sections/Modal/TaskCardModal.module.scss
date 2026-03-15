@@ -1,6 +1,6 @@
 
 .overlay {
-    composes: overlay from '../../../styles/shared.module.scss';
+    @include overlay;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,7 @@
 }
 
 .panel {
-    composes: modalPanel from '../../../styles/shared.module.scss';
+    @include modal-panel;
     background-color: $color-bg-card;
     width: 40%;
     max-width: 42rem;

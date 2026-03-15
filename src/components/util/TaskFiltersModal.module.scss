@@ -1,6 +1,6 @@
 
 .overlay {
-    composes: overlay from '../../styles/shared.module.scss';
+    @include overlay;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +9,7 @@
 }
 
 .panel {
-    composes: modalPanel from '../../styles/shared.module.scss';
+    @include modal-panel;
     width: 40%;
     max-width: 42rem;
     min-width: 39.5rem;
@@ -44,7 +44,7 @@
 }
 
 .filterInput {
-    composes: inputField from '../../styles/shared.module.scss';
+    @include input-base;
 }
 
 .filterButtons {

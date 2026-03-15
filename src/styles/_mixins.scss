@@ -17,3 +17,47 @@
         border-color: $color-sky-500;
     }
 }
+
+@mixin btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-card;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    transition: $transition-bg;
+}
+
+@mixin card {
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius-card;
+    background-color: $color-bg-card;
+}
+
+@mixin badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $gap-1;
+    font-size: $font-xs;
+    padding: $gap-0-5 $gap-2;
+    border-radius: $radius-badge;
+    color: $color-text-primary;
+}
+
+@mixin overlay {
+    position: fixed;
+    inset: 0;
+    background-color: $color-overlay-bg;
+    z-index: $z-overlay;
+}
+
+@mixin modal-panel {
+    @include card;
+    color: $color-text-primary;
+    background-color: $color-bg-modal;
+    padding: $gap-8;
+}

@@ -11,7 +11,7 @@ $sp-colors: (
 
 // ---- Story point badge ----
 .spOuter {
-    composes: badge from '../../styles/shared.module.scss';
+    @include badge;
     gap: $sp-outer-gap;
     padding-left: $gap-1;
     padding-right: $gap-2;
@@ -78,7 +78,7 @@ $sp-colors: (
 
 // ---- Epic badge on task card ----
 .epicBadge {
-    composes: badge from '../../styles/shared.module.scss';
+    @include badge;
     padding: $epic-badge-padding-y $gap-2;
 }
 

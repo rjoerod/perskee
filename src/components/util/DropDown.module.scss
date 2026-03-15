@@ -1,6 +1,6 @@
 
 .trigger {
-    composes: btnBase from '../../styles/shared.module.scss';
+    @include btn-base;
     display: inline-flex;
     align-items: center;
     gap: $gap-2;

@@ -1,12 +1,11 @@
 import { MouseEventHandler } from 'react'
 import styles from './Button.module.scss'
-import shared from '../../styles/shared.module.scss'
 
 const SIZE_CLASS: Record<string, string> = {
-    sm: shared.textSm,
-    base: shared.textBase,
-    lg: shared.textLg,
-    xl: shared.textXl,
+    sm: styles.textSm,
+    base: styles.textBase,
+    lg: styles.textLg,
+    xl: styles.textXl,
 }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -23,7 +22,7 @@ const Button = ({
     className,
     ...props
 }: ButtonProps) => {
-    const sizeClass = SIZE_CLASS[size ?? 'sm'] ?? shared.textSm
+    const sizeClass = SIZE_CLASS[size ?? 'sm'] ?? styles.textSm
     return (
         <button
             type="button"
