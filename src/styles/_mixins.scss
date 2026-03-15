@@ -1,0 +1,19 @@
+@use './tokens' as *;
+
+// Shared mixins reusable across SCSS modules.
+
+@mixin input-base {
+    width: 100%;
+    padding: $space-1 $space-2;
+    border: $border-input;
+    background-color: var(--c-bg-input);
+    border-radius: var(--radius-badge);
+    color: var(--c-text-primary);
+    font-size: $font-sm;
+    font-family: inherit;
+    outline: none;
+
+    &:focus {
+        border-color: var(--c-sky-500);
+    }
+}

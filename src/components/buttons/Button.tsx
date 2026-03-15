@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react'
-import styles from './Button.module.css'
-import shared from '../../styles/shared.module.css'
+import styles from './Button.module.scss'
+import shared from '../../styles/shared.module.scss'
 
 const SIZE_CLASS: Record<string, string> = {
     sm: shared.textSm,

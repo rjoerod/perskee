@@ -1,0 +1,17 @@
+@use '../../styles/tokens' as *;
+
+.btn {
+    composes: btnBase from '../../styles/shared.module.scss';
+    padding: $space-2 $space-3;
+    width: 100%;
+    box-shadow: 0 0 0 1px var(--c-border);
+    color: inherit;
+
+    &:hover:not(:disabled) {
+        background-color: var(--c-bg-card-alt);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}

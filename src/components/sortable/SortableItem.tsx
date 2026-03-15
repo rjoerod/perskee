@@ -10,10 +10,12 @@ import { db } from '../../util/db'
 import { IS_HIGHLIGHTED_TASK_COLUMN, TASK_EPIC } from '../../util/properties'
 import { useLiveQuery } from 'dexie-react-hooks'
 import ToastMessage from '../util/ToastMessage'
-import styles from './SortableItem.module.css'
+import styles from './SortableItem.module.scss'
+
+const KNOWN_STORY_POINTS = new Set([1, 2, 3, 5, 8])
 
 const StoryPointsBadge = ({ points }: { points: number }) => {
-    const pts = String(points)
+    const pts = KNOWN_STORY_POINTS.has(points) ? String(points) : undefined
     return (
         <div className={styles.spOuter} data-points={pts}>
             <div className={styles.spInner} data-points={pts}>P</div>

@@ -1,6 +1,9 @@
+@use './tokens' as *;
+@use './mixins' as *;
+
 /* -------------------------------------------------------
    Shared composable classes — use via CSS Modules composes:
-   e.g.  .myClass { composes: card from './shared.module.css'; }
+   e.g.  .myClass { composes: card from './shared.module.scss'; }
 ------------------------------------------------------- */
 
 /* ---- Buttons ---------------------------------------- */
@@ -14,42 +17,18 @@
     border: none;
     outline: none;
     font-family: inherit;
-    transition: background-color 0.15s ease;
+    transition: $transition-bg;
 }
 
 /* ---- Font sizes ------------------------------------ */
-
-.textSm {
-    font-size: 0.875rem;
-}
-
-.textBase {
-    font-size: 1rem;
-}
-
-.textLg {
-    font-size: 1.125rem;
-}
-
-.textXl {
-    font-size: 1.25rem;
-}
+.textSm   { font-size: $font-sm; }
+.textBase { font-size: $font-base; }
+.textLg   { font-size: $font-lg; }
+.textXl   { font-size: $font-xl; }
 
 /* ---- Inputs ----------------------------------------- */
 .inputField {
-    width: 100%;
-    padding: 0.25rem 0.5rem;
-    border: 2px solid rgb(156 163 175); /* gray-400 */
-    background-color: var(--c-bg-input);
-    border-radius: 0.125rem;
-    color: var(--c-text-primary);
-    font-size: 0.875rem;
-    font-family: inherit;
-    outline: none;
-}
-
-.inputField:focus {
-    border-color: var(--c-sky-500);
+    @include input-base;
 }
 
 /* ---- Cards ------------------------------------------ */
@@ -64,9 +43,9 @@
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    font-size: 0.75rem;
-    padding: 0.125rem 0.5rem;
+    gap: $space-1;
+    font-size: $font-xs;
+    padding: $space-0-5 $space-2;
     border-radius: var(--radius-badge);
     color: var(--c-text-primary);
 }
@@ -75,8 +54,8 @@
 .overlay {
     position: fixed;
     inset: 0;
-    background-color: rgb(3 7 18 / 0.5); /* gray-950/50 */
-    z-index: 10;
+    background-color: $color-overlay-bg;
+    z-index: $z-overlay;
 }
 
 /* ---- Modal panel ------------------------------------ */
@@ -84,5 +63,5 @@
     composes: card;
     color: var(--c-text-primary);
     background-color: var(--c-bg-modal);
-    padding: 2rem;
+    padding: $space-8;
 }

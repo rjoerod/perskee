@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { idiotsAtHeadlessUI } from "../../util/util";
-import styles from "./SingleInput.module.css";
+import styles from "./SingleInput.module.scss";
 
 interface SingleInputProps {
 	initialValue: string;

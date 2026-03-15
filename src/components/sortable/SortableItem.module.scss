@@ -1,0 +1,148 @@
+@use '../../styles/tokens' as *;
+
+// Story point color palette — add new entries here to extend the scale.
+// Both the per-value rules and the fallback :not() chain are generated automatically.
+$sp-colors: (
+    "1": var(--c-emerald-700),
+    "2": var(--c-green-700),
+    "3": var(--c-lime-700),
+    "5": var(--c-yellow-700),
+    "8": var(--c-orange-700),
+);
+
+// ---- Story point badge ----
+.spOuter {
+    composes: badge from '../../styles/shared.module.scss';
+    gap: $sp-outer-gap;
+    padding-left: $space-1;
+    padding-right: $space-2;
+}
+
+.spInner {
+    font-size: $sp-inner-font-size;
+    border-radius: var(--radius-card);
+    padding-top: $sp-inner-padding-y;
+    padding-left: $sp-inner-padding-x;
+    padding-right: $sp-inner-padding-x;
+    background: black;
+    font-weight: $font-weight-black;
+}
+
+// Story point color variants — generated from $sp-colors map
+@each $points, $color in $sp-colors {
+    .spOuter[data-points="#{$points}"] { background-color: $color; }
+    .spInner[data-points="#{$points}"] { color: $color; }
+}
+
+// Default color when no data-points attribute is present (unknown value, handled by JS)
+.spOuter:not([data-points]) { background-color: var(--c-emerald-700); }
+.spInner:not([data-points]) { color: var(--c-emerald-700); }
+
+// ---- Epic progress bar ----
+.progressBar {
+    height: $space-5;
+    font-size: $font-sm;
+    color: var(--c-text-primary);
+    width: 100%;
+    border-radius: var(--radius-card);
+    position: relative;
+
+    &::before {
+        content: attr(data-label);
+        width: 100%;
+        text-align: center;
+        position: absolute;
+    }
+}
+
+.progressBarNoTasks {
+    composes: progressBar;
+    background-color: $color-slate-500;
+}
+
+.progressBarActive {
+    composes: progressBar;
+    background-color: $color-red-800;
+}
+
+.progressFill {
+    height: 100%;
+    text-align: left;
+    display: inline-block;
+    background-color: var(--c-green-800);
+    border-radius: var(--radius-card);
+}
+
+.skeletonWrap {
+    margin-top: $skeleton-wrap-offset;
+}
+
+// ---- Epic badge on task card ----
+.epicBadge {
+    composes: badge from '../../styles/shared.module.scss';
+    padding: $epic-badge-padding-y $space-2;
+}
+
+.epicBadgeDefault {
+    composes: epicBadge;
+    background-color: var(--c-sky-600);
+}
+
+.epicBadgeHighlighted {
+    composes: epicBadge;
+    background-color: var(--c-violet-700);
+}
+
+// ---- Task card ----
+.card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $space-2;
+    border-radius: var(--radius-card);
+    box-sizing: content-box;
+    margin-right: $space-1;
+    padding: $space-2 $space-2 $space-2 $space-3;
+    box-shadow: var(--shadow-card-inset);
+    color: var(--c-text-muted);
+    cursor: pointer;
+    user-select: none;
+}
+
+.cardDefault {
+    composes: card;
+    background-color: var(--c-bg-card-alt);
+
+    &:hover {
+        background-color: $color-gray-500;
+    }
+}
+
+.cardHighlighted {
+    composes: card;
+    background-color: $color-sky-900;
+
+    &:hover {
+        background-color: var(--c-sky-700);
+    }
+}
+
+.cardText {
+    font-size: $font-sm;
+}
+
+.cardBadges {
+    display: flex;
+    gap: $space-2;
+    margin-top: $space-1;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+// ---- Sortable wrapper ----
+.sortableWrapper {
+    &:last-child {
+        margin-bottom: -$space-2;
+    }
+}

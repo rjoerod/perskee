@@ -1,8 +1,11 @@
-.container {
+@use '../../styles/tokens' as *;
+
+// Private placeholder — not exported as a CSS Module class
+%container {
     display: flex;
     flex-direction: column;
-    padding: 0.25rem 0.25rem;
-    width: 18rem;
+    padding: $space-1;
+    width: $container-list-width;
     max-height: 100%;
     background-color: var(--c-bg-card);
     border-radius: var(--radius-card);
@@ -10,45 +13,46 @@
 }
 
 .containerDragging {
-    composes: container;
-    padding-right: 0.25rem;
+    @extend %container;
+    padding-right: $space-1;
 }
 
 .containerIdle {
-    composes: container;
-    padding-left: 0.25rem;
+    @extend %container;
+    padding-left: $space-1;
 }
 
 .header {
     display: flex;
-    padding: 0.25rem 0.5rem 1rem;
-    gap: 1rem;
+    padding: $space-1 $space-2 $space-4;
+    gap: $space-4;
     justify-content: space-between;
     align-items: center;
 }
 
 .label {
     color: var(--c-text-muted);
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
 }
 
-.itemsArea {
-    margin: 0 0.25rem;
+// Private placeholder — not exported as a CSS Module class
+%itemsArea {
+    margin: 0 $space-1;
 }
 
 .itemsOverflow {
-    composes: itemsArea;
+    @extend %itemsArea;
     overflow: auto;
 }
 
 .itemsHidden {
-    composes: itemsArea;
+    @extend %itemsArea;
     overflow: hidden;
     visibility: hidden;
 }
 
 .footer {
-    padding: 1rem 0.5rem 0.5rem 1rem;
+    padding: $space-4 $space-2 $space-2 $space-4;
 }
 
 .invisible {

@@ -18,7 +18,7 @@ import { List, TaskI } from '../../util/types'
 import { NAME_COLUMN } from '../../util/properties'
 import { findListFromName } from '../../util/util'
 import { db } from '../../util/db'
-import styles from './SortableContainer.module.css'
+import styles from './SortableContainer.module.scss'
 
 export const Container: FC<{
     items: TaskI[]
