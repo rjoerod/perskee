@@ -48,16 +48,16 @@
 }
 
 .chevron {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: $icon-sm;
+    height: $icon-sm;
     color: rgb(196 181 253);
     flex-shrink: 0;
 }
 
 .icon {
     margin-right: $gap-2;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: $icon-sm;
+    height: $icon-sm;
     flex-shrink: 0;
 }
 

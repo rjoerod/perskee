@@ -101,6 +101,13 @@ $sp-inner-padding-x:   5px;
 $epic-badge-padding-y: 2px;
 $skeleton-wrap-offset: -6px;
 
+// Icon sizes
+$icon-sm:              1.25rem;  // h-5 w-5 (heroicons default)
+
+// Combobox / dropdown
+$combobox-width:       12rem;    // w-48
+$dropdown-max-height:  15rem;    // max-h-60
+
 // Layout
 $sidebar-width:         320px;
 $container-list-width:  18rem;

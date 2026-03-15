@@ -61,11 +61,11 @@
 - [x] `MarkdownEditor.tsx` + `MarkdownEditor.module.scss` (replicated `@tailwindcss/typography` prose as plain CSS)
 - [x] `DropZone.tsx` + `DropZone.module.scss`
 
-### Phase 7: Custom Combobox + Epic Components (Headless Combobox+Popover → custom)
+### Phase 7: Custom Combobox + Epic Components (Headless Combobox+Popover → custom) ✅
 
-- [ ] Create `ComboboxPopover.tsx` + `ComboboxPopover.module.css` — Radix Popover + controlled input + filtered list
-- [ ] `EpicBadge.tsx` + `EpicBadge.module.css` — replace Headless Combobox+Popover
-- [ ] `EpicGenerateTasksButton.tsx` + `EpicGenerateTasksButton.module.css`
+- [x] Created `ComboboxPopover.tsx` + `ComboboxPopover.module.scss` — Radix Popover + controlled input + filtered list (self-contained open state, `extraOption` for "No Epic" sentinel)
+- [x] `EpicBadge.tsx` + `EpicBadge.module.scss` — replaced Headless Combobox+Popover+wrapperRef with `ComboboxPopover`; removed `useEffect` click-outside logic
+- [x] `EpicGenerateTasksButton.tsx` + `EpicGenerateTasksButton.module.scss` — replaced Headless Combobox+Popover with inline combobox (focus-driven dropdown, `onMouseDown` prevent-default to allow click before blur)
 
 ### Phase 8: Main Task Modal
 

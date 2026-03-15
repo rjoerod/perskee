@@ -1,0 +1,84 @@
+@use '../../../styles/tokens' as *;
+
+/* Inline combobox wrapper — relative so the dropdown is absolutely positioned below it */
+.comboboxWrap {
+    position: relative;
+    padding-top: $gap-4;
+    width: $combobox-width;
+    margin: 0 auto;
+}
+
+.comboboxInputRow {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.comboboxInput {
+    width: 100%;
+    padding: $gap-2 $gap-10 $gap-2 $gap-3;
+    background: $color-bg-input;
+    border: 1px solid $color-border;
+    border-radius: $radius-badge;
+    color: $color-text-primary;
+    font-size: $font-sm;
+    font-family: inherit;
+    outline: none;
+
+    &:focus { border-color: $color-sky-500; }
+    &::placeholder { color: $color-text-dimmer; }
+}
+
+.comboboxChevron {
+    position: absolute;
+    right: $gap-2;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    color: $color-text-dimmer;
+
+    svg {
+        width: $icon-sm;
+        height: $icon-sm;
+    }
+}
+
+/* Absolute dropdown list */
+.comboboxList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: $dropdown-max-height;
+    overflow-y: auto;
+    background: $color-bg-modal;
+    border: 1px solid $color-border;
+    border-radius: $radius-card;
+    box-shadow: $shadow-md;
+    list-style: none;
+    padding: $gap-1 0;
+    z-index: $z-overlay;
+    margin-top: $gap-1;
+}
+
+.comboboxOption {
+    padding: $gap-2 $gap-3;
+    cursor: pointer;
+    font-size: $font-sm;
+    color: $color-text-primary;
+    user-select: none;
+
+    &:hover { background-color: $color-sky-700; }
+}
+
+.comboboxOptionSelected {
+    composes: comboboxOption;
+    background-color: $color-sky-900;
+}
+
+.comboboxEmpty {
+    padding: $gap-2 $gap-4;
+    font-size: $font-sm;
+    color: $color-text-dimmer;
+    cursor: default;
+}

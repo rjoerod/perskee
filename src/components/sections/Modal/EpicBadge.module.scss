@@ -1,0 +1,26 @@
+@use '../../../styles/tokens' as *;
+
+/* Badge showing an assigned epic */
+.epicSet {
+    background-color: $color-sky-600;
+    padding: 6px $gap-3;
+    border-radius: $radius-badge;
+    color: $color-text-primary;
+    cursor: pointer;
+    transition: $transition-bg;
+
+    &:hover { background-color: $color-sky-700; }
+}
+
+/* Badge shown when no epic is assigned */
+.epicEmpty {
+    background-color: transparent;
+    box-shadow: 0 0 0 1px $color-border;    // ring-1 ring-slate-700
+    padding: 6px $gap-3;
+    border-radius: $radius-badge;
+    color: $color-text-primary;
+    cursor: pointer;
+    transition: $transition-bg;
+
+    &:hover { background-color: $color-bg-card-alt; }  // hover:bg-slate-700
+}
