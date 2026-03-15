@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { idiotsAtHeadlessUI } from "../../util/util";
 import styles from "./SingleInput.module.scss";
 
 interface SingleInputProps {
@@ -41,8 +40,6 @@ const SingleInput = ({ initialValue, handleSubmit }: SingleInputProps) => {
 					setInputValue(e.target.value);
 				}}
 				onKeyDown={async (e) => {
-					idiotsAtHeadlessUI(e);
-
 					if (e.key === "Enter") {
 						await handleSubmit(inputValue);
 					}

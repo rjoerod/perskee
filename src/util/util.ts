@@ -20,16 +20,6 @@ export function findListFromName(id: string, listData: List[] | undefined) {
     return list
 }
 
-// https://github.com/tailwindlabs/headlessui/discussions/820
-export const idiotsAtHeadlessUI = (e: {
-    code: string
-    stopPropagation: () => void
-}) => {
-    if (e.code === 'Space') {
-        e.stopPropagation()
-    }
-}
-
 export function useEpics(filtered = true): { tasks: Task[] } {
     const tasks = useLiveQuery(async () => {
         if (filtered) {

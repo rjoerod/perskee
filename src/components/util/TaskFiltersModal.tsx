@@ -115,7 +115,7 @@ const HighlightedTaskFilter = () => {
                         data-active={String(isHighlighted === 0)}
                         onChange={() => updateHighlightedFilter(0)}
                     >
-                        <b className="select-none">OFF</b>
+                        <b>OFF</b>
                         <input
                             className={styles.radioInput}
                             type="radio"
@@ -130,7 +130,7 @@ const HighlightedTaskFilter = () => {
                         data-active={String(isHighlighted === 1)}
                         onChange={() => updateHighlightedFilter(1)}
                     >
-                        <b className="select-none">ON</b>
+                        <b>ON</b>
                         <input
                             className={styles.radioInput}
                             type="radio"

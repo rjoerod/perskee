@@ -78,12 +78,12 @@
 
 ### Phase 10: Cleanup
 
-- [ ] Remove `@import 'tailwindcss'`, `@plugin`, `@theme` from `src/index.css`
-- [ ] Remove `@tailwindcss/vite` from `vite.config.ts`
-- [ ] Empty or delete `postcss.config.js`
-- [ ] Uninstall: `tailwindcss`, `@tailwindcss/postcss`, `@tailwindcss/vite`, `@tailwindcss/typography`, `@headlessui/react`
-- [ ] Refactor: convert inlined base styles to cross-file `composes` where beneficial
-- [ ] Audit: grep `src/` for remaining Tailwind class names / Headless UI imports
+- [x] Remove `@import 'tailwindcss'`, `@plugin`, `@theme` from `src/index.css`
+- [x] Remove `@tailwindcss/vite` from `vite.config.ts`
+- [x] Empty or delete `postcss.config.js`
+- [x] Uninstall: `tailwindcss`, `@tailwindcss/postcss`, `@tailwindcss/vite`, `@tailwindcss/typography`, `@headlessui/react`
+- [x] Refactor: `select-none` → `user-select: none` in `TaskFiltersModal.module.scss`; removed `idiotsAtHeadlessUI` from `util.ts` and `SingleInput.tsx`
+- [x] Audit: grep `src/` for remaining Tailwind class names / Headless UI imports — none found
 - [ ] Verify: manual visual check of all views
 
 ## Design Tokens (CSS custom properties in `:root`)

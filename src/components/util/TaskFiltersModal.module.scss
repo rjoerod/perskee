@@ -74,6 +74,7 @@
     padding: $gap-2 $gap-9 $gap-2 $gap-6;
     border-radius: $radius-md;
     cursor: pointer;
+    user-select: none;
 
     &[data-active="true"] {
         background-color: $color-sky-600;
