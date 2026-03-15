@@ -10,49 +10,13 @@ import { db } from '../../util/db'
 import { IS_HIGHLIGHTED_TASK_COLUMN, TASK_EPIC } from '../../util/properties'
 import { useLiveQuery } from 'dexie-react-hooks'
 import ToastMessage from '../util/ToastMessage'
-
-function getStoryPointsClass(points: number): { outer: string; inner: string } {
-    const coercedPoints = Number(points);
-    switch (coercedPoints) {
-        case 1:
-            return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-emerald-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-emerald-700 bg-black font-black',
-            }
-        case 2:
-            return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-green-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-green-700 bg-black font-black',
-            }
-        case 3:
-            return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-lime-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-lime-700 bg-black font-black',
-            }
-        case 5:
-            return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-yellow-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-yellow-700 bg-black font-black',
-            }
-        case 8:
-            return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-orange-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-orange-700 bg-black font-black',
-            }
-        default:
-            return {
-                outer: 'flex gap-[7px] text-xs py-[2px] pl-1 pr-2 rounded-sm bg-emerald-700 text-slate-100',
-                inner: 'text-[8px] rounded-lg pt-[3px] px-[5px] text-emerald-700 bg-black font-black',
-            }
-    }
-}
+import styles from './SortableItem.module.css'
 
 const StoryPointsBadge = ({ points }: { points: number }) => {
-    const storyPointsClass = getStoryPointsClass(points)
-
+    const pts = String(points)
     return (
-        <div className={storyPointsClass.outer}>
-            <div className={storyPointsClass.inner}>P</div>
+        <div className={styles.spOuter} data-points={pts}>
+            <div className={styles.spInner} data-points={pts}>P</div>
             <div>{points}</div>
         </div>
     )
@@ -103,16 +67,14 @@ const TaskBadges: FC<{
                 epicInfo.total == 0
                     ? 'No Tasks'
                     : `${epicInfo.completed} / ${epicInfo.total}`
-            const background =
-                epicInfo.total == 0 ? 'bg-slate-500' : 'bg-red-800'
 
             return (
                 <div
-                    className={`h-5 text-sm text-slate-100 ${background} w-full rounded-lg relative before:w-full before:content-[attr(data-label)] before:text-center before:absolute`}
+                    className={epicInfo.total == 0 ? styles.progressBarNoTasks : styles.progressBarActive}
                     data-label={dataLabel}
                 >
                     <div
-                        className={`h-full text-left inline-block bg-green-800 rounded-lg`}
+                        className={styles.progressFill}
                         style={{ width: `${percentage}%` }}
                     />
                 </div>
@@ -120,9 +82,9 @@ const TaskBadges: FC<{
         }
 
         return (
-            <div className="-mt-[6px]">
+            <div className={styles.skeletonWrap}>
                 <Skeleton
-                    className={`text-sm bg-slate-600 w-full rounded-lg relative`}
+                    className={styles.progressBar}
                     baseColor="rgb(100 116 139)"
                     highlightColor=" rgb(71 85 105)"
                     width={252}
@@ -134,8 +96,9 @@ const TaskBadges: FC<{
         )
     }
 
-    const bgColor = item.epic?.is_highlighted ? 'bg-violet-700' : 'bg-sky-600'
-    const epicClassName = `text-xs py-[2px] px-2 rounded-sm text-slate-100 ${bgColor}`
+    const epicClassName = item.epic?.is_highlighted
+        ? styles.epicBadgeHighlighted
+        : styles.epicBadgeDefault
 
     return (
         <>
@@ -183,22 +146,21 @@ export const Item: FC<{
     }
 
     const isShowing = activeId == item.id && !isOverlay
-    const bgClasses = item.is_highlighted_task
-        ? 'bg-sky-900 hover:bg-sky-700'
-        : 'bg-slate-700 hover:bg-gray-500'
-    const className = `flex flex-col mb-2 rounded-lg content-box mr-1 pt-2 pr-2 pb-2 pl-3 box-shadow-card text-slate-300 cursor-pointer select-none ${bgClasses}`
+    const cardClass = item.is_highlighted_task
+        ? styles.cardHighlighted
+        : styles.cardDefault
 
     return (
         <div
-            className={className}
+            className={cardClass}
             onClick={handleClick}
             onContextMenu={handleClick}
             onAuxClick={onHighlightTaskConfirm}
         >
-            <div className={`text-sm ${isShowing && 'invisible'}`}>
+            <div className={`${styles.cardText} ${isShowing ? styles.invisible : ''}`}>
                 {item.name}
             </div>
-            <div className={`flex gap-2 mt-1 ${isShowing && 'invisible'}`}>
+            <div className={`${styles.cardBadges} ${isShowing ? styles.invisible : ''}`}>
                 <TaskBadges item={item} />
             </div>
         </div>
@@ -221,7 +183,7 @@ const SortableItem: FC<{
     return (
         <div
             ref={setNodeRef}
-            className="last:-mb-2"
+            className={styles.sortableWrapper}
             style={style}
             {...attributes}
             {...listeners}

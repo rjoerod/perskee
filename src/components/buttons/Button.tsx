@@ -1,4 +1,13 @@
 import { MouseEventHandler } from 'react'
+import styles from './Button.module.css'
+import shared from '../../styles/shared.module.css'
+
+const SIZE_CLASS: Record<string, string> = {
+    sm: shared.textSm,
+    base: shared.textBase,
+    lg: shared.textLg,
+    xl: shared.textXl,
+}
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     label?: string
@@ -14,14 +23,11 @@ const Button = ({
     className,
     ...props
 }: ButtonProps) => {
+    const sizeClass = SIZE_CLASS[size ?? 'sm'] ?? shared.textSm
     return (
         <button
             type="button"
-            className={`py-2 px-3 h-min w-full ring-1 ring-slate-700 bg-transparent hover:bg-slate-700 rounded-lg text-${
-                size ?? 'sm'
-            } ${className ?? ''} ${
-                props?.disabled && 'hover:bg-transparent cursor-not-allowed'
-            }`}
+            className={[styles.btn, sizeClass, className ?? ''].join(' ')}
             onClick={onClick}
             {...props}
         >

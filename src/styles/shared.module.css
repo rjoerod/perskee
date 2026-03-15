@@ -1,0 +1,88 @@
+/* -------------------------------------------------------
+   Shared composable classes — use via CSS Modules composes:
+   e.g.  .myClass { composes: card from './shared.module.css'; }
+------------------------------------------------------- */
+
+/* ---- Buttons ---------------------------------------- */
+.btnBase {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-card);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    transition: background-color 0.15s ease;
+}
+
+/* ---- Font sizes ------------------------------------ */
+
+.textSm {
+    font-size: 0.875rem;
+}
+
+.textBase {
+    font-size: 1rem;
+}
+
+.textLg {
+    font-size: 1.125rem;
+}
+
+.textXl {
+    font-size: 1.25rem;
+}
+
+/* ---- Inputs ----------------------------------------- */
+.inputField {
+    width: 100%;
+    padding: 0.25rem 0.5rem;
+    border: 2px solid rgb(156 163 175); /* gray-400 */
+    background-color: var(--c-bg-input);
+    border-radius: 0.125rem;
+    color: var(--c-text-primary);
+    font-size: 0.875rem;
+    font-family: inherit;
+    outline: none;
+}
+
+.inputField:focus {
+    border-color: var(--c-sky-500);
+}
+
+/* ---- Cards ------------------------------------------ */
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-card);
+    background-color: var(--c-bg-card);
+}
+
+/* ---- Badges ----------------------------------------- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-badge);
+    color: var(--c-text-primary);
+}
+
+/* ---- Modal overlay / backdrop ----------------------- */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(3 7 18 / 0.5); /* gray-950/50 */
+    z-index: 10;
+}
+
+/* ---- Modal panel ------------------------------------ */
+.modalPanel {
+    composes: card;
+    color: var(--c-text-primary);
+    background-color: var(--c-bg-modal);
+    padding: 2rem;
+}

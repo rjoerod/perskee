@@ -1,0 +1,15 @@
+.btn {
+    composes: btnBase from '../styles/shared.module.css';
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    box-shadow: 0 0 0 1px var(--c-border);
+    color: inherit;
+}
+
+.btn:hover:not(:disabled) {
+    background-color: var(--c-bg-card-alt);
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+}
