@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Button from '../buttons/Button'
-import { idiotsAtHeadlessUI } from '../../util/util'
+import styles from './ModalButton.module.scss'
 
 interface ModalButtonProps {
     initialLabel: string
@@ -36,19 +36,8 @@ const ModalButton = ({
         }
     }, [])
 
-    const handleKeyDown = (e: {
-        code: string
-        stopPropagation: () => void
-        key: string
-    }) => {
-        idiotsAtHeadlessUI(e)
-        if (e.key === 'Enter') {
-            e.stopPropagation()
-        }
-    }
-
     return (
-        <div className="h-min" ref={wrapperRef}>
+        <div className={styles.wrapper} ref={wrapperRef}>
             {isActive ? (
                 <form
                     onSubmit={async (e) => {
@@ -61,16 +50,15 @@ const ModalButton = ({
                             setIsActive(false)
                         }
                     }}
-                    className="py-3 px-3 h-min bg-slate-800 rounded-lg text-sm"
+                    className={styles.form}
                 >
                     <input
                         autoFocus
                         name="name"
-                        className="py-1 px-2 mb-4 border-gray-400 border-2 bg-gray-900 rounded-sm w-full"
+                        className={styles.input}
                         placeholder={placeholder}
-                        onKeyDown={handleKeyDown}
                     />
-                    <div className="flex gap-3">
+                    <div className={styles.buttonRow}>
                         <Button type="submit" label={confirmLabel} />
                         <Button
                             label="Cancel"

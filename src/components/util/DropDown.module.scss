@@ -6,21 +6,21 @@
     align-items: center;
     gap: $gap-2;
     padding: $gap-2 $gap-4;
-    background-color: var(--c-bg-card-hi);
-    color: var(--c-text-primary);
+    background-color: $color-bg-card-hi;
+    color: $color-text-primary;
     font-size: $font-sm;
     font-weight: $font-weight-semibold;
-    border-radius: var(--radius-card);
+    border-radius: $radius-card;
 
     &:hover {
-        background-color: var(--c-bg-card-alt);
+        background-color: $color-bg-card-alt;
     }
 }
 
 .content {
     min-width: 7rem;
     background-color: white;
-    border-radius: var(--radius-card);
+    border-radius: $radius-card;
     box-shadow: $shadow-md;
     padding: 2px;
     z-index: $z-overlay;

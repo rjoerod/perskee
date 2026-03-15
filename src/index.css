@@ -33,46 +33,6 @@
     --background-end-rgb: 255, 255, 255;
     --shadow-card: 0px 1px 1px rgb(100 116 139 / 40),
         0px 0px 1px rgb(100 116 139 / 40);
-
-    /* Design tokens — used by CSS Modules */
-    --c-bg-main:      rgb(13, 17, 23);
-    --c-bg-side:      rgb(22, 27, 34);
-    --c-bg-outline:   rgb(33, 38, 45);
-    --c-bg-card:      rgb(30, 41, 59);      /* slate-800 */
-    --c-bg-card-alt:  rgb(51, 65, 85);      /* slate-700 */
-    --c-bg-card-hi:   rgb(71, 85, 105);     /* slate-600 */
-    --c-bg-input:     rgb(17, 24, 39);      /* gray-900 */
-    --c-bg-modal:     rgb(31, 41, 55);      /* gray-800 */
-
-    --c-text-primary: rgb(230, 237, 243);   /* slate-200 / --color-words */
-    --c-text-muted:   rgb(203, 213, 225);   /* slate-300 */
-    --c-text-dimmer:  rgb(148, 163, 184);   /* slate-400 */
-
-    --c-border:       rgb(51, 65, 85);      /* slate-700 */
-    --c-border-light: rgb(71, 85, 105);     /* slate-600 */
-
-    --c-sky-500:      rgb(14, 165, 233);
-    --c-sky-600:      rgb(2, 132, 199);
-    --c-sky-700:      rgb(3, 105, 161);
-
-    --c-indigo-400:   rgb(129, 140, 248);
-    --c-indigo-300:   rgb(165, 180, 252);
-
-    --c-violet-700:   rgb(109, 40, 217);
-
-    --c-red-500:      rgb(239, 68, 68);
-
-    --c-green-500:    rgb(34, 197, 94);
-    --c-green-700:    rgb(21, 128, 61);
-    --c-green-800:    rgb(22, 101, 52);
-    --c-lime-700:     rgb(77, 124, 15);
-    --c-yellow-700:   rgb(161, 98, 7);
-    --c-orange-700:   rgb(194, 65, 12);
-    --c-emerald-700:  rgb(4, 120, 87);
-
-    --shadow-card-inset: inset 0 1px 0 0 #ffffff1a;
-    --radius-card:    0.5rem;   /* rounded-lg */
-    --radius-badge:   0.125rem; /* rounded-sm */
 }
 
 @media (prefers-color-scheme: dark) {

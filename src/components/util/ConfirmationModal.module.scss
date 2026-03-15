@@ -1,0 +1,32 @@
+@use '../../styles/tokens' as *;
+
+.overlay {
+    composes: overlay from '../../styles/shared.module.scss';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel {
+    composes: modalPanel from '../../styles/shared.module.scss';
+    width: 24rem;
+    padding: $gap-8 $gap-4;
+    text-align: center;
+    color: $color-text-primary;
+}
+
+.title {
+    color: $color-red-500;
+    font-size: $font-3xl;
+    margin-bottom: $gap-4;
+}
+
+.actions {
+    display: flex;
+    gap: $gap-8;
+    padding-top: $gap-8;
+}
+
+.actionBtn {
+    width: 50%;
+}

@@ -6,14 +6,14 @@
     width: 100%;
     padding: $gap-1 $gap-2;
     border: $border-input;
-    background-color: var(--c-bg-input);
-    border-radius: var(--radius-badge);
-    color: var(--c-text-primary);
+    background-color: $color-bg-input;
+    border-radius: $radius-badge;
+    color: $color-text-primary;
     font-size: $font-sm;
     font-family: inherit;
     outline: none;
 
     &:focus {
-        border-color: var(--c-sky-500);
+        border-color: $color-sky-500;
     }
 }

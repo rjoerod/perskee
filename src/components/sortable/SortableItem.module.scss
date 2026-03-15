@@ -3,11 +3,11 @@
 // Story point color palette — add new entries here to extend the scale.
 // Both the per-value rules and the fallback :not() chain are generated automatically.
 $sp-colors: (
-    "1": var(--c-emerald-700),
-    "2": var(--c-green-700),
-    "3": var(--c-lime-700),
-    "5": var(--c-yellow-700),
-    "8": var(--c-orange-700),
+    "1": $color-emerald-700,
+    "2": $color-green-700,
+    "3": $color-lime-700,
+    "5": $color-yellow-700,
+    "8": $color-orange-700,
 );
 
 // ---- Story point badge ----
@@ -20,7 +20,7 @@ $sp-colors: (
 
 .spInner {
     font-size: $sp-inner-font-size;
-    border-radius: var(--radius-card);
+    border-radius: $radius-card;
     padding-top: $sp-inner-padding-y;
     padding-left: $sp-inner-padding-x;
     padding-right: $sp-inner-padding-x;
@@ -35,16 +35,16 @@ $sp-colors: (
 }
 
 // Default color when no data-points attribute is present (unknown value, handled by JS)
-.spOuter:not([data-points]) { background-color: var(--c-emerald-700); }
-.spInner:not([data-points]) { color: var(--c-emerald-700); }
+.spOuter:not([data-points]) { background-color: $color-emerald-700; }
+.spInner:not([data-points]) { color: $color-emerald-700; }
 
 // ---- Epic progress bar ----
 .progressBar {
     height: $gap-5;
     font-size: $font-sm;
-    color: var(--c-text-primary);
+    color: $color-text-primary;
     width: 100%;
-    border-radius: var(--radius-card);
+    border-radius: $radius-card;
     position: relative;
 
     &::before {
@@ -69,8 +69,8 @@ $sp-colors: (
     height: 100%;
     text-align: left;
     display: inline-block;
-    background-color: var(--c-green-800);
-    border-radius: var(--radius-card);
+    background-color: $color-green-800;
+    border-radius: $radius-card;
 }
 
 .skeletonWrap {
@@ -85,12 +85,12 @@ $sp-colors: (
 
 .epicBadgeDefault {
     composes: epicBadge;
-    background-color: var(--c-sky-600);
+    background-color: $color-sky-600;
 }
 
 .epicBadgeHighlighted {
     composes: epicBadge;
-    background-color: var(--c-violet-700);
+    background-color: $color-violet-700;
 }
 
 // ---- Task card ----
@@ -98,19 +98,19 @@ $sp-colors: (
     display: flex;
     flex-direction: column;
     margin-bottom: $gap-2;
-    border-radius: var(--radius-card);
+    border-radius: $radius-card;
     box-sizing: content-box;
     margin-right: $gap-1;
     padding: $gap-2 $gap-2 $gap-2 $gap-3;
-    box-shadow: var(--shadow-card-inset);
-    color: var(--c-text-muted);
+    box-shadow: $shadow-card-inset;
+    color: $color-text-muted;
     cursor: pointer;
     user-select: none;
 }
 
 .cardDefault {
     composes: card;
-    background-color: var(--c-bg-card-alt);
+    background-color: $color-bg-card-alt;
 
     &:hover {
         background-color: $color-gray-500;
@@ -122,7 +122,7 @@ $sp-colors: (
     background-color: $color-sky-900;
 
     &:hover {
-        background-color: var(--c-sky-700);
+        background-color: $color-sky-700;
     }
 }
 

@@ -46,11 +46,11 @@
 
 - [x] `DropDown.tsx` + `DropDown.module.scss` — replace `@headlessui/react` Menu + Transition with `@radix-ui/react-dropdown-menu`
 
-### Phase 5: Basic Modals (Headless Dialog → Radix Dialog)
+### Phase 5: Basic Modals (Headless Dialog → Radix Dialog) ✅
 
-- [ ] `ConfirmationModal.tsx` + `ConfirmationModal.module.css` — replace Headless Dialog
-- [ ] `ModalButton.tsx` + `ModalButton.module.css`
-- [ ] `TaskFiltersModal.tsx` + `TaskFiltersModal.module.css` — replace Headless Dialog
+- [x] `ConfirmationModal.tsx` + `ConfirmationModal.module.scss` — replace Headless Dialog
+- [x] `ModalButton.tsx` + `ModalButton.module.scss` — removed `idiotsAtHeadlessUI` workaround, replaced Tailwind classes
+- [x] `TaskFiltersModal.tsx` + `TaskFiltersModal.module.scss` — replace Headless Dialog
 
 ### Phase 6: Modal Internals
 

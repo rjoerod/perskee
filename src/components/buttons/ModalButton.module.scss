@@ -1,0 +1,23 @@
+@use '../../styles/tokens' as *;
+
+.wrapper {
+    height: min-content;
+}
+
+.form {
+    padding: $gap-3;
+    height: min-content;
+    background-color: $color-bg-card;
+    border-radius: $radius-card;
+    font-size: $font-sm;
+}
+
+.input {
+    composes: inputField from '../../styles/shared.module.scss';
+    margin-bottom: $gap-4;
+}
+
+.buttonRow {
+    display: flex;
+    gap: $gap-3;
+}

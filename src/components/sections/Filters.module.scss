@@ -29,24 +29,24 @@
     padding-top: $gap-4;
     padding-bottom: $gap-4;
     cursor: pointer;
-    border-left: 4px solid var(--c-bg-card); // invisible border by default, holds layout
+    border-left: 4px solid $color-bg-card; // invisible border by default, holds layout
 }
 
 // Default: no active epic filter, not highlighted
 .filterItem {
     @extend %filterItemBase;
-    color: var(--c-text-dimmer);
+    color: $color-text-dimmer;
 
     &:hover {
-        color: var(--c-text-muted);
+        color: $color-text-muted;
     }
 }
 
 // This epic is currently active in the filter
 .filterItemActive {
     @extend %filterItemBase;
-    color: var(--c-sky-500);
-    border-left-color: var(--c-sky-500);
+    color: $color-sky-500;
+    border-left-color: $color-sky-500;
 
     &:hover {
         color: $color-sky-300;
@@ -56,9 +56,9 @@
 // Epic has is_highlighted flag set
 .filterItemHighlighted {
     @extend %filterItemBase;
-    color: var(--c-indigo-400);
+    color: $color-indigo-400;
 
     &:hover {
-        color: var(--c-indigo-300);
+        color: $color-indigo-300;
     }
 }

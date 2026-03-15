@@ -11,7 +11,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius-card);
+    border-radius: $radius-card;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -35,8 +35,8 @@
 .card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius-card);
-    background-color: var(--c-bg-card);
+    border-radius: $radius-card;
+    background-color: $color-bg-card;
 }
 
 /* ---- Badges ----------------------------------------- */
@@ -46,8 +46,8 @@
     gap: $gap-1;
     font-size: $font-xs;
     padding: $gap-0-5 $gap-2;
-    border-radius: var(--radius-badge);
-    color: var(--c-text-primary);
+    border-radius: $radius-badge;
+    color: $color-text-primary;
 }
 
 /* ---- Modal overlay / backdrop ----------------------- */
@@ -61,7 +61,7 @@
 /* ---- Modal panel ------------------------------------ */
 .modalPanel {
     composes: card;
-    color: var(--c-text-primary);
-    background-color: var(--c-bg-modal);
+    color: $color-text-primary;
+    background-color: $color-bg-modal;
     padding: $gap-8;
 }

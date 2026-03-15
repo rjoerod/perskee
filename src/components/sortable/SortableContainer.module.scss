@@ -7,8 +7,8 @@
     padding: $gap-1;
     width: $container-list-width;
     max-height: 100%;
-    background-color: var(--c-bg-card);
-    border-radius: var(--radius-card);
+    background-color: $color-bg-card;
+    border-radius: $radius-card;
     cursor: pointer;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .label {
-    color: var(--c-text-muted);
+    color: $color-text-muted;
     font-weight: $font-weight-semibold;
 }
 

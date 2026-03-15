@@ -1,6 +1,7 @@
-import { Dialog } from "@headlessui/react";
+import * as Dialog from "@radix-ui/react-dialog";
 import Button from "../buttons/Button";
 import React from "react";
+import styles from "./ConfirmationModal.module.scss";
 
 interface ConfirmationModalProps {
 	label: string;
@@ -18,27 +19,24 @@ function ConfirmationModal({
 	children,
 }: ConfirmationModalProps) {
 	return (
-		<Dialog
-			as="div"
-			className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto ${
-				open && "bg-gray-900/50"
-			}`}
-			open={open}
-			onClose={onCancel}
-		>
-			<Dialog.Panel className="rounded-lg flex flex-col bg-gray-800 text-white w-96 py-8 px-4 text-center">
-				<Dialog.Title className="text-red-500 text-3xl">{label}</Dialog.Title>
-				{children}
-				<div className="flex gap-8 pt-8">
-					<div className="w-1/2">
-						<Button label={"Cancel"} onClick={onCancel} />
-					</div>
-					<div className="w-1/2">
-						<Button label={"Confirm"} onClick={onConfirm} />
-					</div>
-				</div>
-			</Dialog.Panel>
-		</Dialog>
+		<Dialog.Root open={open} onOpenChange={(o) => !o && onCancel()}>
+			<Dialog.Portal>
+				<Dialog.Overlay className={styles.overlay}>
+					<Dialog.Content className={styles.panel}>
+						<Dialog.Title className={styles.title}>{label}</Dialog.Title>
+						{children}
+						<div className={styles.actions}>
+							<div className={styles.actionBtn}>
+								<Button label={"Cancel"} onClick={onCancel} />
+							</div>
+							<div className={styles.actionBtn}>
+								<Button label={"Confirm"} onClick={onConfirm} />
+							</div>
+						</div>
+					</Dialog.Content>
+				</Dialog.Overlay>
+			</Dialog.Portal>
+		</Dialog.Root>
 	);
 }
 
