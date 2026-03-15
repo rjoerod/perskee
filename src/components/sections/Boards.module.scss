@@ -1,0 +1,53 @@
+@use '../../styles/tokens' as *;
+
+.boardList {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-6;
+    padding: $gap-8;
+    font-weight: $font-weight-semibold;
+}
+
+// Applied when viewing the "all boards" board (id=2) — fills remaining sidebar height
+.boardListGrow {
+    flex-grow: 1;
+}
+
+// Applied on boards that have filters below them — visual separator
+.boardListBordered {
+    border-bottom: 1px solid var(--c-border);
+}
+
+.boardItem {
+    border-radius: $radius-md;
+    cursor: pointer;
+    font-size: $font-lg;
+    color: white;
+    box-shadow: 0 0 0 1px var(--c-border), $shadow-md;
+    text-align: center;
+    padding: $gap-4 $gap-5;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.boardItemActive {
+    background-color: var(--c-sky-600);
+}
+
+.boardItemInactive {
+    background-color: transparent;
+
+    &:hover {
+        background-color: var(--c-bg-card);
+        box-shadow: 0 0 0 1px var(--c-bg-card), $shadow-md;
+    }
+}
+
+// Used as Skeleton containerClassName
+.skeletonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-6;
+}

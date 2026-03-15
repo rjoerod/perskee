@@ -4,13 +4,15 @@
 // ================================================================
 
 // ---- Spacing scale (4px base unit) ---------------------------
-$space-0-5: 0.125rem;  //  2px
-$space-1:   0.25rem;   //  4px
-$space-2:   0.5rem;    //  8px
-$space-3:   0.75rem;   // 12px
-$space-4:   1rem;      // 16px
-$space-5:   1.25rem;   // 20px
-$space-8:   2rem;      // 32px
+$gap-0-5: 0.125rem;  //  2px
+$gap-1:   0.25rem;   //  4px
+$gap-2:   0.5rem;    //  8px
+$gap-3:   0.75rem;   // 12px
+$gap-4:   1rem;      // 16px
+$gap-5:   1.25rem;   // 20px
+$gap-6:   1.5rem;    // 24px
+$gap-8:   2rem;      // 32px
+$gap-9:   2.25rem;   // 36px
 
 // ---- Font sizes ----------------------------------------------
 $font-xs:   0.75rem;   // 12px
@@ -23,13 +25,22 @@ $font-xl:   1.25rem;   // 20px
 $font-weight-semibold: 600;
 $font-weight-black:    900;
 
+// ---- Radii --------------------------------------------------
+$radius-md: 0.375rem;  // rounded-md (board items)
+
 // ---- Raw colors not exposed as CSS custom properties ---------
 $color-gray-400:   rgb(156 163 175);     // input border
 $color-gray-500:   rgb(107 114 128);     // cardDefault:hover
 $color-slate-500:  rgb(100 116 139);     // progress bar — no tasks
+$color-slate-900:  rgb(15, 23, 42);      // layout / sidebar background
+$color-sky-300:    rgb(125, 211, 252);   // filter active item hover
 $color-sky-900:    rgb(12 74 110);       // cardHighlighted bg
 $color-red-800:    rgb(153 27 27);       // progress bar — active
 $color-overlay-bg: rgba(3, 7, 18, 0.5); // modal backdrop
+
+// ---- Shadows -------------------------------------------------
+// Tailwind shadow-md equivalent
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
 // ---- Borders -------------------------------------------------
 $border-input: 2px solid $color-gray-400;
@@ -50,4 +61,7 @@ $epic-badge-padding-y: 2px;
 $skeleton-wrap-offset: -6px;
 
 // Layout
-$container-list-width: 18rem;
+$sidebar-width:         320px;
+$container-list-width:  18rem;
+$filters-outer-height:  calc(100vh - 27rem); // Filters section height
+$filters-list-height:   calc(100vh - 34rem); // Filters scrollable list height

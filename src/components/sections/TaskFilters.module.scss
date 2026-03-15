@@ -1,0 +1,9 @@
+@use '../../styles/tokens' as *;
+
+.container {
+    padding: $gap-8 $gap-9;
+    border-top: 1px solid var(--c-border);
+    display: flex;
+    flex-direction: column;
+    gap: $gap-6;
+}

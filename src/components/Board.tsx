@@ -17,6 +17,7 @@ import { LIST_BOARD } from '../util/properties'
 import DropZone from './util/DropZone'
 import TaskFilters from './sections/TaskFilters'
 import TaskFiltersModal from './util/TaskFiltersModal'
+import styles from './Board.module.scss'
 
 const checkEpicFilter = (epicIds: number[], taskEpicId: number) => {
     if (epicIds.length == 0) {
@@ -160,8 +161,8 @@ const Board = () => {
 
     return (
         <>
-            <div className="grid min-h-screen w-auto grid-cols-[320px_1fr] gap-0 overflow-hidden">
-                <div className="max-h-screen flex flex-col bg-slate-900 border-r border-slate-700">
+            <div className={styles.layout}>
+                <div className={styles.sidebar}>
                     <Boards currentBoardId={currentBoardId} />
                     {currentBoardId == 1 && (
                         <Filters epicFilterIds={epicFilterIds} />
@@ -169,11 +170,7 @@ const Board = () => {
                     <TaskFilters openModal={() => setFilterModalIsOpen(true)} />
                     <DropZone />
                 </div>
-                <div
-                    className={
-                        'max-h-screen flex gap-4 p-8 bg-slate-900 overflow-auto'
-                    }
-                >
+                <div className={styles.main}>
                     {data ? (
                         <>
                             <ContainerList
@@ -205,11 +202,11 @@ const Board = () => {
                                 return (
                                     <div
                                         key={val}
-                                        className="flex flex-col gap-2 py-1 px-1 w-72 max-h-full h-fit bg-slate-800 rounded-lg"
+                                        className={styles.skeletonColumn}
                                     >
-                                        <div className="flex gap-2 justify-between">
+                                        <div className={styles.skeletonHeader}>
                                             <Skeleton
-                                                className="flex flex-col rounded-lg content-box mr-1 box-shadow-card text-slate-300 select-none bg-slate-700"
+                                                className={styles.skeletonCard}
                                                 width={118}
                                                 height={36}
                                                 count={1}
@@ -218,7 +215,7 @@ const Board = () => {
                                                 highlightColor="#1e293b"
                                             />
                                             <Skeleton
-                                                className="flex flex-col rounded-lg content-box mr-1 box-shadow-card text-slate-300 select-none bg-slate-700"
+                                                className={styles.skeletonCard}
                                                 width={108}
                                                 height={36}
                                                 count={1}
@@ -228,8 +225,8 @@ const Board = () => {
                                             />
                                         </div>
                                         <Skeleton
-                                            containerClassName="flex flex-col gap-2"
-                                            className="flex flex-col rounded-lg content-box mr-1 box-shadow-card text-slate-300 select-none bg-slate-700"
+                                            containerClassName={styles.skeletonCardStack}
+                                            className={styles.skeletonCard}
                                             inline
                                             height={60}
                                             count={val}
@@ -237,7 +234,7 @@ const Board = () => {
                                             highlightColor="#1e293b"
                                         />
                                         <Skeleton
-                                            className="flex flex-col mb-2 rounded-lg content-box mr-1 box-shadow-card text-slate-300 select-none bg-slate-700"
+                                            className={styles.skeletonCard}
                                             height={36}
                                             count={1}
                                             inline
@@ -254,9 +251,7 @@ const Board = () => {
                                     inline
                                     height={36}
                                     width={288}
-                                    className={
-                                        'py-2 px-3 h-min w-full ring-1 ring-slate-700 bg-transparent rounded-lg text-sm'
-                                    }
+                                    className={styles.skeletonAddList}
                                     borderRadius={8}
                                     count={1}
                                 />

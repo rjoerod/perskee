@@ -4,7 +4,7 @@
 
 @mixin input-base {
     width: 100%;
-    padding: $space-1 $space-2;
+    padding: $gap-1 $gap-2;
     border: $border-input;
     background-color: var(--c-bg-input);
     border-radius: var(--radius-badge);

@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import Button from '../buttons/Button'
 import { route } from '../../util/queryRouting'
+import styles from './TaskFilters.module.scss'
 
 interface TaskFiltersModalProps {
     openModal: () => void
@@ -17,7 +18,7 @@ const TaskFilters = ({ openModal }: TaskFiltersModalProps) => {
     }
 
     return (
-        <div className="px-9 py-8 border-t border-t-slate-700 flex flex-col gap-6">
+        <div className={styles.container}>
             <Button size="lg" onClick={openModal}>
                 More Filters
             </Button>

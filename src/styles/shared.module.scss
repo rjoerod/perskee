@@ -43,9 +43,9 @@
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: $space-1;
+    gap: $gap-1;
     font-size: $font-xs;
-    padding: $space-0-5 $space-2;
+    padding: $gap-0-5 $gap-2;
     border-radius: var(--radius-badge);
     color: var(--c-text-primary);
 }
@@ -63,5 +63,5 @@
     composes: card;
     color: var(--c-text-primary);
     background-color: var(--c-bg-modal);
-    padding: $space-8;
+    padding: $gap-8;
 }

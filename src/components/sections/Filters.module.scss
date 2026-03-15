@@ -1,0 +1,64 @@
+@use '../../styles/tokens' as *;
+
+.container {
+    padding: $gap-4 $gap-9;
+    height: $filters-outer-height;
+}
+
+.title {
+    padding: $gap-4 0;
+    font-size: $font-lg;
+    font-weight: $font-weight-semibold;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: $filters-list-height;
+    overflow: auto;
+    padding-bottom: $gap-8;
+    user-select: none;
+}
+
+// ---- Filter items ----
+// Shared base via SCSS placeholder — not exported as a CSS Module class
+%filterItemBase {
+    font-weight: $font-weight-semibold;
+    padding-left: $gap-6;
+    padding-top: $gap-4;
+    padding-bottom: $gap-4;
+    cursor: pointer;
+    border-left: 4px solid var(--c-bg-card); // invisible border by default, holds layout
+}
+
+// Default: no active epic filter, not highlighted
+.filterItem {
+    @extend %filterItemBase;
+    color: var(--c-text-dimmer);
+
+    &:hover {
+        color: var(--c-text-muted);
+    }
+}
+
+// This epic is currently active in the filter
+.filterItemActive {
+    @extend %filterItemBase;
+    color: var(--c-sky-500);
+    border-left-color: var(--c-sky-500);
+
+    &:hover {
+        color: $color-sky-300;
+    }
+}
+
+// Epic has is_highlighted flag set
+.filterItemHighlighted {
+    @extend %filterItemBase;
+    color: var(--c-indigo-400);
+
+    &:hover {
+        color: var(--c-indigo-300);
+    }
+}

@@ -14,8 +14,8 @@ $sp-colors: (
 .spOuter {
     composes: badge from '../../styles/shared.module.scss';
     gap: $sp-outer-gap;
-    padding-left: $space-1;
-    padding-right: $space-2;
+    padding-left: $gap-1;
+    padding-right: $gap-2;
 }
 
 .spInner {
@@ -40,7 +40,7 @@ $sp-colors: (
 
 // ---- Epic progress bar ----
 .progressBar {
-    height: $space-5;
+    height: $gap-5;
     font-size: $font-sm;
     color: var(--c-text-primary);
     width: 100%;
@@ -80,7 +80,7 @@ $sp-colors: (
 // ---- Epic badge on task card ----
 .epicBadge {
     composes: badge from '../../styles/shared.module.scss';
-    padding: $epic-badge-padding-y $space-2;
+    padding: $epic-badge-padding-y $gap-2;
 }
 
 .epicBadgeDefault {
@@ -97,11 +97,11 @@ $sp-colors: (
 .card {
     display: flex;
     flex-direction: column;
-    margin-bottom: $space-2;
+    margin-bottom: $gap-2;
     border-radius: var(--radius-card);
     box-sizing: content-box;
-    margin-right: $space-1;
-    padding: $space-2 $space-2 $space-2 $space-3;
+    margin-right: $gap-1;
+    padding: $gap-2 $gap-2 $gap-2 $gap-3;
     box-shadow: var(--shadow-card-inset);
     color: var(--c-text-muted);
     cursor: pointer;
@@ -132,8 +132,8 @@ $sp-colors: (
 
 .cardBadges {
     display: flex;
-    gap: $space-2;
-    margin-top: $space-1;
+    gap: $gap-2;
+    margin-top: $gap-1;
 }
 
 .invisible {
@@ -143,6 +143,6 @@ $sp-colors: (
 // ---- Sortable wrapper ----
 .sortableWrapper {
     &:last-child {
-        margin-bottom: -$space-2;
+        margin-bottom: -$gap-2;
     }
 }

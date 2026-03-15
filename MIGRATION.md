@@ -35,12 +35,12 @@
 - [x] `SortableItem.tsx` + `SortableItem.module.css` — `data-points` attribute for story point color variants; `composes: badge` from shared; same-file composes for card/progress variants
 - [x] `SortableContainer.tsx` + `SortableContainer.module.css` — same-file composes for container/items variants
 
-### Phase 3: Layout & Navigation
+### Phase 3: Layout & Navigation ✅
 
-- [ ] `Board.tsx` + `Board.module.css`
-- [ ] `Boards.tsx` + `Boards.module.css`
-- [ ] `Filters.tsx` + `Filters.module.css`
-- [ ] `TaskFilters.tsx` + `TaskFilters.module.css`
+- [x] `Board.tsx` + `Board.module.scss`
+- [x] `Boards.tsx` + `Boards.module.scss`
+- [x] `Filters.tsx` + `Filters.module.scss`
+- [x] `TaskFilters.tsx` + `TaskFilters.module.scss`
 
 ### Phase 4: Dropdown (Headless Menu → Radix DropdownMenu)
 
