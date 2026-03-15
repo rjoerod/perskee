@@ -42,9 +42,9 @@
 - [x] `Filters.tsx` + `Filters.module.scss`
 - [x] `TaskFilters.tsx` + `TaskFilters.module.scss`
 
-### Phase 4: Dropdown (Headless Menu → Radix DropdownMenu)
+### Phase 4: Dropdown (Headless Menu → Radix DropdownMenu) ✅
 
-- [ ] `DropDown.tsx` + `DropDown.module.css` — replace `@headlessui/react` Menu + Transition with `@radix-ui/react-dropdown-menu`
+- [x] `DropDown.tsx` + `DropDown.module.scss` — replace `@headlessui/react` Menu + Transition with `@radix-ui/react-dropdown-menu`
 
 ### Phase 5: Basic Modals (Headless Dialog → Radix Dialog)
 

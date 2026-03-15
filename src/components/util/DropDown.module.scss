@@ -1,0 +1,67 @@
+@use '../../styles/tokens' as *;
+
+.trigger {
+    composes: btnBase from '../../styles/shared.module.scss';
+    display: inline-flex;
+    align-items: center;
+    gap: $gap-2;
+    padding: $gap-2 $gap-4;
+    background-color: var(--c-bg-card-hi);
+    color: var(--c-text-primary);
+    font-size: $font-sm;
+    font-weight: $font-weight-semibold;
+    border-radius: var(--radius-card);
+
+    &:hover {
+        background-color: var(--c-bg-card-alt);
+    }
+}
+
+.content {
+    min-width: 7rem;
+    background-color: white;
+    border-radius: var(--radius-card);
+    box-shadow: $shadow-md;
+    padding: 2px;
+    z-index: $z-overlay;
+    animation: fadeIn 0.1s ease-out;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: $gap-2;
+    font-size: $font-sm;
+    color: rgb(17 24 39);
+    border-radius: $radius-md;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+
+    &[data-highlighted] {
+        background-color: rgb(139 92 246);
+        color: white;
+        outline: none;
+    }
+}
+
+.chevron {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: rgb(196 181 253);
+    flex-shrink: 0;
+}
+
+.icon {
+    margin-right: $gap-2;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
