@@ -1,7 +1,7 @@
 
 /* Badge showing an assigned epic */
 .epicSet {
-    background-color: $color-sky-600;
+    background-color: $color-epic-badge;
     padding: 6px $gap-3;
     border-radius: $radius-badge;
     color: $color-text-primary;
@@ -9,7 +9,7 @@
     cursor: pointer;
     transition: $transition-bg;
 
-    &:hover { background-color: $color-sky-700; }
+    &:hover { background-color: $color-epic-hover; }
 }
 
 /* Badge shown when no epic is assigned */

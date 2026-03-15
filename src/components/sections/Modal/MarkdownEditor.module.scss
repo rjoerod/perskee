@@ -17,7 +17,7 @@
 }
 
 .previewWrap {
-    box-shadow: 0 0 0 1px $color-slate-500;  // ring-1 ring-slate-500
+    box-shadow: 0 0 0 1px $color-ring;  // ring-1
     padding: $gap-4;
     border-radius: $radius-badge;
     cursor: pointer;
@@ -78,7 +78,7 @@
 
     // Horizontal rule — prose-hr:-mt-4 prose-hr:mb-6
     hr {
-        border-color: rgba(255, 255, 255, 0.15);
+        border-color: $color-border-subtle;
         margin-top: -1rem;
         margin-bottom: 1.5rem;
     }
@@ -108,9 +108,9 @@
 
     // Links
     a {
-        color: $color-sky-500;
+        color: $color-accent;
         text-decoration: underline;
-        &:hover { color: $color-sky-300; }
+        &:hover { color: $color-accent-light; }
     }
 
     // Blockquote

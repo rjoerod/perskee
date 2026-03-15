@@ -8,7 +8,7 @@
     padding: $gap-4 0;
     font-size: $font-lg;
     font-weight: $font-weight-semibold;
-    color: $color-white;
+    color: $color-text-inverse;
 }
 
 .list {
@@ -45,20 +45,20 @@
 // This epic is currently active in the filter
 .filterItemActive {
     @extend %filterItemBase;
-    color: $color-sky-500;
-    border-left-color: $color-sky-500;
+    color: $color-accent;
+    border-left-color: $color-accent;
 
     &:hover {
-        color: $color-sky-300;
+        color: $color-accent-light;
     }
 }
 
 // Epic has is_highlighted flag set
 .filterItemHighlighted {
     @extend %filterItemBase;
-    color: $color-indigo-400;
+    color: $color-highlight;
 
     &:hover {
-        color: $color-indigo-300;
+        color: $color-highlight-hover;
     }
 }

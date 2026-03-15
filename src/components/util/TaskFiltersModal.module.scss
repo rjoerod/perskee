@@ -76,14 +76,14 @@
     user-select: none;
 
     &[data-active="true"] {
-        background-color: $color-sky-600;
+        background-color: $color-epic-badge;
     }
 
     &[data-active="false"] {
         background-color: $color-bg-card-hi;
 
         &:hover {
-            background-color: $color-sky-700;
+            background-color: $color-epic-hover;
         }
     }
 }

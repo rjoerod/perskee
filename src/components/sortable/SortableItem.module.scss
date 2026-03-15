@@ -2,11 +2,11 @@
 // Story point color palette — add new entries here to extend the scale.
 // Both the per-value rules and the fallback :not() chain are generated automatically.
 $sp-colors: (
-    "1": $color-emerald-700,
-    "2": $color-green-700,
-    "3": $color-lime-700,
-    "5": $color-yellow-700,
-    "8": $color-orange-700,
+    "1": $color-sp-1,
+    "2": $color-sp-2,
+    "3": $color-sp-3,
+    "5": $color-sp-5,
+    "8": $color-sp-8,
 );
 
 // ---- Story point badge ----
@@ -34,8 +34,8 @@ $sp-colors: (
 }
 
 // Default color when no data-points attribute is present (unknown value, handled by JS)
-.spOuter:not([data-points]) { background-color: $color-emerald-700; }
-.spInner:not([data-points]) { color: $color-emerald-700; }
+.spOuter:not([data-points]) { background-color: $color-sp-1; }
+.spInner:not([data-points]) { color: $color-sp-1; }
 
 // ---- Epic progress bar ----
 .progressBar {
@@ -56,19 +56,19 @@ $sp-colors: (
 
 .progressBarNoTasks {
     composes: progressBar;
-    background-color: $color-slate-500;
+    background-color: $color-bg-disabled;
 }
 
 .progressBarActive {
     composes: progressBar;
-    background-color: $color-red-800;
+    background-color: $color-danger-dark;
 }
 
 .progressFill {
     height: 100%;
     text-align: left;
     display: inline-block;
-    background-color: $color-green-800;
+    background-color: $color-success-dark;
     border-radius: $radius-card;
 }
 
@@ -84,12 +84,12 @@ $sp-colors: (
 
 .epicBadgeDefault {
     composes: epicBadge;
-    background-color: $color-sky-600;
+    background-color: $color-epic-badge;
 }
 
 .epicBadgeHighlighted {
     composes: epicBadge;
-    background-color: $color-violet-700;
+    background-color: $color-epic;
 }
 
 // ---- Task card ----
@@ -112,16 +112,16 @@ $sp-colors: (
     background-color: $color-bg-card-alt;
 
     &:hover {
-        background-color: $color-gray-500;
+        background-color: $color-bg-disabled;
     }
 }
 
 .cardHighlighted {
     composes: card;
-    background-color: $color-sky-900;
+    background-color: $color-epic-dark;
 
     &:hover {
-        background-color: $color-sky-700;
+        background-color: $color-epic-hover;
     }
 }
 

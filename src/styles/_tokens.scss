@@ -32,53 +32,145 @@ $radius-md:    0.375rem;  // rounded-md (board items)
 $radius-card: 0.5rem;    // rounded-lg
 $radius-badge: 0.125rem;  // rounded-sm
 
-// ---- Colors ------------------------------------------------
-$color-white:        rgb(255, 255, 255);
+// ---- Color palette ------------------------------------------
+// Raw values only. Ordered by family, then shade (lower = lighter, higher = darker).
+// Do not use these directly in component styles; use semantic tokens below.
+
+// White
+$color-white:         rgb(255, 255, 255);
+
+// Gray
+$color-gray-200:      rgb(229, 231, 235);
+$color-gray-400:      rgb(156, 163, 175);
+$color-gray-500:      rgb(107, 114, 128);
+$color-gray-800:      rgb(31, 41, 55);
+$color-gray-840:      rgb(33, 38, 45);   // custom shade
+$color-gray-880:      rgb(22, 27, 34);   // custom shade
+$color-gray-900:      rgb(17, 24, 39);
+$color-gray-950:      rgb(13, 17, 23);
+$color-gray-980:      rgb(3, 7, 18);     // overlay base
+
+// Slate
+$color-slate-100:     rgb(241, 245, 249);
+$color-slate-200:     rgb(230, 237, 243);
+$color-slate-300:     rgb(203, 213, 225);
+$color-slate-400:     rgb(148, 163, 184);
+$color-slate-500:     rgb(100, 116, 139);
+$color-slate-600:     rgb(71, 85, 105);
+$color-slate-700:     rgb(49, 65, 88);
+$color-slate-800:     rgb(29, 41, 61);
+$color-slate-900:     rgb(15, 23, 43);
+
+// Sky
+$color-sky-300:       rgb(125, 211, 252);
+$color-sky-400:       rgb(56, 189, 248);
+$color-sky-500:       rgb(14, 165, 233);
+$color-sky-600:       rgb(2, 132, 199);
+$color-sky-700:       rgb(3, 105, 161);
+$color-sky-900:       rgb(12, 74, 110);
+
+// Indigo
+$color-indigo-300:    rgb(165, 180, 252);
+$color-indigo-400:    rgb(129, 140, 248);
+
+// Violet
+$color-violet-300:    rgb(196, 181, 253);
+$color-violet-500:    rgb(139, 92, 246);
+$color-violet-700:    rgb(109, 40, 217);
+
+// Red
+$color-red-500:       rgb(239, 68, 68);
+$color-red-800:       rgb(153, 27, 27);
+
+// Orange
+$color-orange-700:    rgb(194, 65, 12);
+$color-orange-800:    rgb(154, 52, 18);
+
+// Yellow
+$color-yellow-700:    rgb(161, 98, 7);
+$color-yellow-800:    rgb(133, 77, 14);
+
+// Lime
+$color-lime-700:      rgb(77, 124, 15);
+$color-lime-800:      rgb(63, 98, 18);
+
+// Green
+$color-green-500:     rgb(34, 197, 94);
+$color-green-700:     rgb(21, 128, 61);
+$color-green-800:     rgb(22, 101, 52);
+
+// Emerald
+$color-emerald-700:   rgb(4, 120, 87);
+$color-emerald-800:   rgb(6, 95, 70);
+
+// ---- Semantic color tokens ----------------------------------
+// All values must reference a palette variable above; never use rgb() directly.
+
 // Backgrounds
-$color-bg-main:      rgb(13, 17, 23);
-$color-bg-side:      rgb(22, 27, 34);
-$color-bg-outline:   rgb(33, 38, 45);
-$color-bg-card:      rgb(30, 41, 59);       // slate-800
-$color-bg-card-alt:  rgb(51, 65, 85);       // slate-700
-$color-bg-card-hi:   rgb(71, 85, 105);      // slate-600
-$color-bg-input:     rgb(17, 24, 39);       // gray-900
-$color-bg-modal:     rgb(31, 41, 55);       // gray-800
+$color-bg-app:        $color-slate-900;
+$color-bg-outline:    $color-gray-840;
+$color-bg-card:       $color-slate-800;
+$color-bg-card-alt:   $color-slate-700;
+$color-bg-card-hi:    $color-slate-600;
+$color-bg-input:      $color-gray-900;
+$color-bg-modal:      $color-gray-800;
+$color-bg-disabled:   $color-gray-500;
+
 // Text
-$color-text-primary: rgb(230, 237, 243);    // slate-200
-$color-text-muted:   rgb(203, 213, 225);    // slate-300
-$color-text-dimmer:  rgb(148, 163, 184);    // slate-400
-// Borders
-$color-border:       rgb(51, 65, 85);       // slate-700
-$color-border-light: rgb(71, 85, 105);      // slate-600
-// Palette
-$color-gray-200:     rgb(229 231 235);
-$color-gray-400:     rgb(156 163 175);
-$color-gray-500:     rgb(107 114 128);
-$color-slate-500:    rgb(100 116 139);
-$color-slate-900:    rgb(15, 23, 42);
-$color-sky-300:      rgb(125, 211, 252);
-$color-sky-400:      rgb(56, 189, 248);
-$color-sky-500:      rgb(14, 165, 233);
-$color-sky-600:      rgb(2, 132, 199);
-$color-sky-700:      rgb(3, 105, 161);
-$color-sky-900:      rgb(12 74 110);
-$color-indigo-300:   rgb(165, 180, 252);
-$color-indigo-400:   rgb(129, 140, 248);
-$color-violet-700:   rgb(109, 40, 217);
-$color-red-500:      rgb(239, 68, 68);
-$color-red-800:      rgb(153 27 27);
-$color-green-500:    rgb(34, 197, 94);
-$color-green-700:    rgb(21, 128, 61);
-$color-green-800:    rgb(22, 101, 52);
-$color-lime-700:     rgb(77, 124, 15);
-$color-lime-800:     rgb(63, 98, 18);
-$color-yellow-700:   rgb(161, 98, 7);
-$color-yellow-800:   rgb(133, 77, 14);
-$color-orange-700:   rgb(194, 65, 12);
-$color-orange-800:   rgb(154, 52, 18);
-$color-emerald-700:  rgb(4, 120, 87);
-$color-emerald-800:  rgb(6, 95, 70);
-$color-overlay-bg:   rgba(3, 7, 18, 0.5);
+$color-text-primary:  $color-slate-200;
+$color-text-muted:    $color-slate-300;
+$color-text-dimmer:   $color-slate-400;
+$color-text-inverse:  $color-white;
+
+// Borders & outlines
+$color-border:        $color-slate-700;
+$color-border-light:  $color-slate-600;
+$color-border-subtle: rgba($color-white, 0.15);
+$color-ring:          $color-slate-500;
+
+// Accents & interactive states
+$color-accent:        $color-sky-500;
+$color-accent-light:  $color-sky-300;
+$color-accent-bright: $color-sky-400;
+$color-accent-hover:  $color-violet-500;
+$color-accent-muted:  $color-violet-300;
+
+// Epic & board UI
+$color-epic-badge:    $color-sky-600;
+$color-epic-hover:    $color-sky-700;
+$color-epic-dark:     $color-sky-900;
+
+// Status & feedback
+$color-danger:        $color-red-500;
+$color-danger-dark:   $color-red-800;
+$color-success:       $color-green-500;
+$color-success-dark:  $color-green-800;
+
+// Highlights & special states
+$color-highlight:     $color-indigo-400;
+$color-highlight-hover: $color-indigo-300;
+$color-epic:          $color-violet-700;
+
+// Story point scale
+$color-sp-1:          $color-emerald-700;
+$color-sp-1-hover:    $color-emerald-800;
+$color-sp-2:          $color-green-700;
+$color-sp-2-hover:    $color-green-800;
+$color-sp-3:          $color-lime-700;
+$color-sp-3-hover:    $color-lime-800;
+$color-sp-5:          $color-yellow-700;
+$color-sp-5-hover:    $color-yellow-800;
+$color-sp-8:          $color-orange-700;
+$color-sp-8-hover:    $color-orange-800;
+
+// Dropdown-specific
+$color-dropdown-text: $color-gray-900;
+
+// Badge text
+$color-badge-text:    $color-slate-100;
+
+// Overlays
+$color-overlay-bg:    rgba($color-gray-980, 0.5);
 
 // ---- Shadows -------------------------------------------------
 // Tailwind shadow-md equivalent
