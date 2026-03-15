@@ -1,0 +1,41 @@
+@use '../../../styles/tokens' as *;
+
+.overlay {
+    composes: overlay from '../../../styles/shared.module.scss';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $gap-4;
+    overflow-y: auto;
+}
+
+.panel {
+    composes: modalPanel from '../../../styles/shared.module.scss';
+    background-color: $color-bg-card;
+    width: 40%;
+    max-width: 42rem;
+    min-width: 39.5rem;
+}
+
+.title {
+    font-size: $font-3xl;
+    font-weight: bold;
+    margin-bottom: $gap-6;
+}
+
+.badges {
+    display: flex;
+    gap: $gap-6;
+    margin-bottom: $gap-6;
+    align-items: center;
+}
+
+.description {
+    text-align: left;
+}
+
+.textBtn {
+    &:hover {
+        text-decoration: underline;
+    }
+}

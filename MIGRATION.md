@@ -69,7 +69,7 @@
 
 ### Phase 8: Main Task Modal
 
-- [ ] `TaskCardModal.tsx` + `TaskCardModal.module.css` — replace Headless Dialog with Radix Dialog (largest modal)
+- [x] `TaskCardModal.tsx` + `TaskCardModal.module.scss` — replace Headless Dialog with Radix Dialog (largest modal)
 
 ### Phase 9: Remaining
 

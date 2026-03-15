@@ -1,4 +1,4 @@
-import { Dialog } from '@headlessui/react'
+import * as Dialog from '@radix-ui/react-dialog'
 import { useState } from 'react'
 import ToastMessage, { ToastInfo } from '../../util/ToastMessage'
 import SingleInput from '../../util/SingleInput'
@@ -15,6 +15,7 @@ import { route } from '../../../util/queryRouting'
 import { db } from '../../../util/db'
 import ListBadge from './ListBadge'
 import { useLiveQuery } from 'dexie-react-hooks'
+import styles from './TaskCardModal.module.scss'
 
 const useTaskCardModalQuery = (modalItem: Task | null) => {
     const task = useLiveQuery(async () => {
@@ -75,105 +76,83 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
     const isNotEpic = modalItem && !modalItem?.is_epic
 
     return (
-        <>
-            <Dialog
-                as="div"
-                className="relative z-50"
-                open={!!modalItem}
-                onClose={onClose}
-            >
-                <div
-                    className={`fixed inset-0 p-8 z-10 flex justify-center overflow-y-auto ${
-                        modalItem && 'bg-gray-950/50'
-                    }`}
-                >
-                    <div className="fixed inset-0 w-screen overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4">
-                            <Dialog.Panel className="rounded-lg flex flex-col min-h-full bg-slate-800 text-white w-2/5 max-w-2xl min-w-[632px] py-8 px-8">
-                                <Dialog.Title className="text-slate-100 text-3xl mb-6 font-bold">
-                                    {showLabelInput ? (
-                                        <SingleInput
-                                            initialValue={modalItem?.name ?? ''}
-                                            handleSubmit={onNameConfirm}
+        <Dialog.Root open={!!modalItem} onOpenChange={(o) => !o && onClose()}>
+            <Dialog.Portal>
+                <Dialog.Overlay className={styles.overlay}>
+                    <Dialog.Content className={styles.panel}>
+                        <Dialog.Title className={styles.title}>
+                            {showLabelInput ? (
+                                <SingleInput
+                                    initialValue={modalItem?.name ?? ''}
+                                    handleSubmit={onNameConfirm}
+                                />
+                            ) : (
+                                <div onClick={() => setShowLabelInput(true)}>
+                                    <h3>{modalItem?.name}</h3>
+                                </div>
+                            )}
+                        </Dialog.Title>
+                        <div className={styles.badges}>
+                            {modalItem && (
+                                <ListBadge modalItem={modalItem} />
+                            )}
+                            {isNotEpic && (
+                                <>
+                                    <EpicBadge modalItem={modalItem} />
+                                    <StoryPointsBadge modalItem={modalItem} />
+                                </>
+                            )}
+                            <div>
+                                <Button
+                                    size="base"
+                                    className={styles.textBtn}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(
+                                            `[${modalItem?.name}](${window.location.href})`
+                                        )
+                                        ToastInfo('Copied to clipboard')
+                                    }}
+                                >
+                                    Copy Card Link
+                                </Button>
+                            </div>
+                            {modalItem && Boolean(modalItem.is_epic) && (
+                                <>
+                                    <div>
+                                        <EpicGenerateTasksButton
+                                            epic={modalItem}
                                         />
-                                    ) : (
-                                        <div
-                                            onClick={() =>
-                                                setShowLabelInput(true)
-                                            }
-                                        >
-                                            <h3>{modalItem?.name}</h3>
-                                        </div>
-                                    )}
-                                </Dialog.Title>
-                                <div className="flex gap-6 mb-6">
-                                    {modalItem && (
-                                        <ListBadge modalItem={modalItem} />
-                                    )}
-                                    {isNotEpic && (
-                                        <>
-                                            <EpicBadge modalItem={modalItem} />
-                                            <StoryPointsBadge
-                                                modalItem={modalItem}
-                                            />
-                                        </>
-                                    )}
+                                    </div>
                                     <div>
                                         <Button
                                             size="base"
-                                            className="hover:underline"
+                                            className={styles.textBtn}
                                             onClick={() => {
-                                                navigator.clipboard.writeText(
-                                                    `[${modalItem?.name}](${window.location.href})`
+                                                onHighlightConfirm(
+                                                    !modalItem?.is_highlighted
                                                 )
-                                                ToastInfo('Copied to clipboard')
                                             }}
                                         >
-                                            Copy Card Link
+                                            {modalItem?.is_highlighted
+                                                ? 'Un-highlight Epic'
+                                                : 'Highlight Epic'}
                                         </Button>
                                     </div>
-
-                                    {modalItem &&
-                                        Boolean(modalItem.is_epic) && (
-                                            <>
-                                                <div>
-                                                    <EpicGenerateTasksButton
-                                                        epic={modalItem}
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <Button
-                                                        size="base"
-                                                        className="hover:underline"
-                                                        onClick={() => {
-                                                            onHighlightConfirm(
-                                                                !modalItem?.is_highlighted
-                                                            )
-                                                        }}
-                                                    >
-                                                        {modalItem?.is_highlighted
-                                                            ? 'Un-highlight Epic'
-                                                            : 'Highlight Epic'}
-                                                    </Button>
-                                                </div>
-                                            </>
-                                        )}
-                                </div>
-                                <div className="text-left">
-                                    {modalItem && (
-                                        <MarkdownEditor modalItem={modalItem} />
-                                    )}
-                                </div>
-
-                                {modalItem && Boolean(modalItem.is_epic) && (
-                                    <EpicTaskList epic={modalItem} />
-                                )}
-                            </Dialog.Panel>
+                                </>
+                            )}
                         </div>
-                    </div>
-                </div>
-            </Dialog>
-        </>
+                        <div className={styles.description}>
+                            {modalItem && (
+                                <MarkdownEditor modalItem={modalItem} />
+                            )}
+                        </div>
+                        {modalItem && Boolean(modalItem.is_epic) && (
+                            <EpicTaskList epic={modalItem} />
+                        )}
+                    </Dialog.Content>
+                </Dialog.Overlay>
+            </Dialog.Portal>
+        </Dialog.Root>
     )
 }
 
