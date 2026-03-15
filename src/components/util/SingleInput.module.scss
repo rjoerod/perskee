@@ -1,5 +1,3 @@
-@use '../../styles/mixins' as *;
-
 .input {
     @include input-base;
 }

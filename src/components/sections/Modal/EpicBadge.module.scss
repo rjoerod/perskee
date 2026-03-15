@@ -1,4 +1,3 @@
-@use '../../../styles/tokens' as *;
 
 /* Badge showing an assigned epic */
 .epicSet {
@@ -6,6 +5,7 @@
     padding: 6px $gap-3;
     border-radius: $radius-badge;
     color: $color-text-primary;
+    font-size: $font-xs;
     cursor: pointer;
     transition: $transition-bg;
 
@@ -19,6 +19,7 @@
     padding: 6px $gap-3;
     border-radius: $radius-badge;
     color: $color-text-primary;
+    font-size: $font-xs;
     cursor: pointer;
     transition: $transition-bg;
 

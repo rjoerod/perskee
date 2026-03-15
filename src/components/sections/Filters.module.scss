@@ -1,4 +1,3 @@
-@use '../../styles/tokens' as *;
 
 .container {
     padding: $gap-4 $gap-9;
@@ -9,6 +8,7 @@
     padding: $gap-4 0;
     font-size: $font-lg;
     font-weight: $font-weight-semibold;
+    color: $color-white;
 }
 
 .list {

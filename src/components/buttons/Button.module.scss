@@ -1,4 +1,3 @@
-@use '../../styles/tokens' as *;
 
 .btn {
     composes: btnBase from '../../styles/shared.module.scss';

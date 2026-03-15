@@ -1,5 +1,3 @@
-@use '../../styles/tokens' as *;
-
 // Private placeholder — not exported as a CSS Module class
 %container {
     display: flex;
@@ -31,7 +29,7 @@
 }
 
 .label {
-    color: $color-text-muted;
+    color: $color-white;
     font-weight: $font-weight-semibold;
 }
 

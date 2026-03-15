@@ -1,4 +1,3 @@
-@use '../../../styles/tokens' as *;
 
 .overlay {
     composes: overlay from '../../../styles/shared.module.scss';

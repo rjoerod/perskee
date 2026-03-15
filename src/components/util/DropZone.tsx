@@ -37,7 +37,7 @@ function DropZone() {
                 {...getRootProps()}
             >
                 <input {...getInputProps()} />
-                <p>Import</p>
+                <span>Import</span>
             </div>
             <div
                 className={styles.link}

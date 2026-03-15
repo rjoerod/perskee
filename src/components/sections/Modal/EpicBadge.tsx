@@ -17,7 +17,9 @@ const EpicBadge = ({ modalItem }: EpicBadgeProps) => {
     const data = useEpics(false)
 
     const epicItems: ComboboxItem[] =
-        data?.tasks?.map((t: Task) => ({ id: t.id, name: t.name })) ?? []
+        data?.tasks
+            ?.filter((t: Task) => t.id != null)
+            .map((t: Task) => ({ id: t.id as string | number, name: t.name })) ?? []
 
     const onEpicConfirm = async (item: ComboboxItem) => {
         const newEpic = item.id === 'no-epic' ? null : Number(item.id)
