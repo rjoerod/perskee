@@ -1,4 +1,5 @@
 import { Task } from '../../../util/types'
+import styles from './ListBadge.module.scss'
 
 interface ListBadgeProps {
     modalItem: Task
@@ -8,11 +9,7 @@ const ListBadge = ({ modalItem }: ListBadgeProps) => {
     return (
         <div>
             <div>
-                <div
-                    className={
-                        'bg-slate-700 ring-1 ring-slate-700 py-[6px] px-3 rounded-sm text-slate-100'
-                    }
-                >
+                <div className={styles.badge}>
                     {modalItem.list_name}
                 </div>
             </div>

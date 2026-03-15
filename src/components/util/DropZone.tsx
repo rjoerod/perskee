@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { db } from '../../util/db'
+import styles from './DropZone.module.scss'
 
 function DropZone() {
     const onDrop = useCallback(async (acceptedFiles: any[]) => {
@@ -30,16 +31,16 @@ function DropZone() {
     }
 
     return (
-        <div className="flex gap-8 pl-12 pb-4">
+        <div className={styles.container}>
             <div
-                className="self-end underline cursor-pointer hover:text-sky-400"
+                className={styles.link}
                 {...getRootProps()}
             >
                 <input {...getInputProps()} />
                 <p>Import</p>
             </div>
             <div
-                className="self-end underline cursor-pointer hover:text-sky-400"
+                className={styles.link}
                 onClick={exportPerskeeDB}
             >
                 Export

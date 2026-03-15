@@ -1,0 +1,9 @@
+@use '../../../styles/tokens' as *;
+
+.badge {
+    background-color: $color-bg-card-alt;           // slate-700
+    box-shadow: 0 0 0 1px $color-bg-card-alt;       // ring-1 ring-slate-700
+    padding: 6px $gap-3;                            // py-[6px] px-3
+    border-radius: $radius-badge;
+    color: $color-text-primary;
+}

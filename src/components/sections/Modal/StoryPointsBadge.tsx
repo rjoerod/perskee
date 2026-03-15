@@ -4,42 +4,9 @@ import { STORY_POINT_COLUMN } from '../../../util/properties'
 import SingleInput from '../../util/SingleInput'
 import ToastMessage from '../../util/ToastMessage'
 import { db } from '../../../util/db'
+import styles from './StoryPointsBadge.module.scss'
 
-function getStoryPointsClass(points: number): { outer: string; inner: string } {
-    const coercedPoints = Number(points);
-    switch (coercedPoints) {
-        case 1:
-            return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-emerald-700 text-slate-100 hover:bg-emerald-800',
-                inner: 'rounded-xl px-[5px] text-emerald-700 bg-black font-black',
-            }
-        case 2:
-            return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-green-700 text-slate-100 hover:bg-green-800',
-                inner: 'rounded-xl px-[5px] text-green-700 bg-black font-black',
-            }
-        case 3:
-            return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-lime-700 text-slate-100 hover:bg-lime-800',
-                inner: 'rounded-xl px-[5px] text-lime-700 bg-black font-black',
-            }
-        case 5:
-            return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-yellow-700 text-slate-100 hover:bg-yellow-800',
-                inner: 'rounded-xl px-[5px] text-yellow-700 bg-black font-black',
-            }
-        case 8:
-            return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-orange-700 text-slate-100 hover:bg-orange-800',
-                inner: 'rounded-xl px-[5px] text-orange-700 bg-black font-black',
-            }
-        default:
-            return {
-                outer: 'flex gap-[7px] py-[6px] pl-2 pr-3 rounded-sm bg-emerald-700 text-slate-100 hover:bg-emerald-800',
-                inner: 'rounded-xl px-[5px] text-emerald-700 bg-black font-black',
-            }
-    }
-}
+const KNOWN_STORY_POINTS = new Set([1, 2, 3, 5, 8])
 
 interface StoryPointsBadgeProps {
     modalItem: Task
@@ -47,7 +14,9 @@ interface StoryPointsBadgeProps {
 
 const StoryPointsBadge = ({ modalItem }: StoryPointsBadgeProps) => {
     const [showLabelInput, setShowLabelInput] = useState(false)
-    const storyPointsClass = getStoryPointsClass(modalItem.story_points)
+    const pts = KNOWN_STORY_POINTS.has(Number(modalItem.story_points))
+        ? String(modalItem.story_points)
+        : undefined
 
     const onConfirm = async (value: string) => {
         if (!modalItem) {
@@ -75,7 +44,7 @@ const StoryPointsBadge = ({ modalItem }: StoryPointsBadgeProps) => {
         <div>
             <div onClick={() => setShowLabelInput(true)}>
                 {showLabelInput ? (
-                    <div className="w-8">
+                    <div className={styles.inputWrap}>
                         <SingleInput
                             initialValue={String(modalItem?.story_points ?? 0)}
                             handleSubmit={onConfirm}
@@ -84,10 +53,10 @@ const StoryPointsBadge = ({ modalItem }: StoryPointsBadgeProps) => {
                 ) : (
                     <div
                         onClick={() => setShowLabelInput(true)}
-                        className="cursor-pointer"
+                        className={styles.badgeWrap}
                     >
-                        <div className={storyPointsClass.outer}>
-                            <div className={storyPointsClass.inner}>P</div>
+                        <div className={styles.badgeOuter} data-points={pts}>
+                            <div className={styles.badgeInner} data-points={pts}>P</div>
                             <div>{modalItem.story_points}</div>
                         </div>
                     </div>

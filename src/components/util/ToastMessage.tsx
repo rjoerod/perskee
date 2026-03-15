@@ -22,6 +22,4 @@ export const ToastInfo = (message: string) => {
 
 ToastMessage.dismiss = toast.dismiss
 
-ToastMessage.dismiss = toast.dismiss
-
 export default ToastMessage

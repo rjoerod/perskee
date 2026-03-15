@@ -1,0 +1,42 @@
+@use '../../../styles/tokens' as *;
+
+.wrap {
+    padding-top: $gap-6;
+}
+
+.title {
+    font-size: $font-lg;
+    font-weight: 700;
+    margin-bottom: $gap-3;
+}
+
+.list {
+    padding-left: 3rem;     // pl-12 = 48px
+    list-style-type: disc;
+}
+
+.item {
+    padding: $gap-1;
+    color: $color-text-primary;
+}
+
+.itemDone {
+    composes: item;
+    color: $color-green-500;
+}
+
+.itemPlaceholder {
+    padding: $gap-1;
+    visibility: hidden;
+}
+
+.pagination {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: $gap-6;
+}
+
+.pageLabel {
+    justify-self: center;
+    align-self: center;
+}

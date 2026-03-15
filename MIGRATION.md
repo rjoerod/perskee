@@ -52,14 +52,14 @@
 - [x] `ModalButton.tsx` + `ModalButton.module.scss` — removed `idiotsAtHeadlessUI` workaround, replaced Tailwind classes
 - [x] `TaskFiltersModal.tsx` + `TaskFiltersModal.module.scss` — replace Headless Dialog
 
-### Phase 6: Modal Internals
+### Phase 6: Modal Internals ✅
 
-- [ ] `ToastMessage.tsx` (minimal — already inline styles)
-- [ ] `StoryPointsBadge.tsx` + `StoryPointsBadge.module.css`
-- [ ] `ListBadge.tsx` + `ListBadge.module.css`
-- [ ] `EpicTaskList.tsx` + `EpicTaskList.module.css`
-- [ ] `MarkdownEditor.tsx` + `MarkdownEditor.module.css` (replicate `@tailwindcss/typography` prose as plain CSS)
-- [ ] `DropZone.tsx` + `DropZone.module.css`
+- [x] `ToastMessage.tsx` (minimal — already inline styles; fixed duplicate dismiss line)
+- [x] `StoryPointsBadge.tsx` + `StoryPointsBadge.module.scss`
+- [x] `ListBadge.tsx` + `ListBadge.module.scss`
+- [x] `EpicTaskList.tsx` + `EpicTaskList.module.scss`
+- [x] `MarkdownEditor.tsx` + `MarkdownEditor.module.scss` (replicated `@tailwindcss/typography` prose as plain CSS)
+- [x] `DropZone.tsx` + `DropZone.module.scss`
 
 ### Phase 7: Custom Combobox + Epic Components (Headless Combobox+Popover → custom)
 
