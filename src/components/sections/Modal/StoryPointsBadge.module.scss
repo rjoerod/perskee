@@ -1,0 +1,51 @@
+
+// Story point color palette for the modal badge (larger padding + hover).
+// Format: (points, bg-color, hover-color)
+$sp-palette: (
+    ("1", $color-sp-1, $color-sp-1-hover),
+    ("2", $color-sp-2, $color-sp-2-hover),
+    ("3", $color-sp-3, $color-sp-3-hover),
+    ("5", $color-sp-5, $color-sp-5-hover),
+    ("8", $color-sp-8, $color-sp-8-hover),
+);
+
+.badgeOuter {
+    @include modal-badge;
+    display: inline-flex;
+    align-items: center;
+    gap: $sp-outer-gap;
+    padding: 6px $gap-3 6px $gap-2;
+    color: $color-badge-text;
+    transition: $transition-bg;
+}
+
+.badgeInner {
+    border-radius: 0.75rem;     // rounded-xl
+    padding: 0 $sp-inner-padding-x;
+    background: black;
+    font-weight: $font-weight-black;
+}
+
+// Per-value color variants
+@each $pts, $bg, $bg-h in $sp-palette {
+    .badgeOuter[data-points="#{$pts}"] {
+        background-color: $bg;
+        &:hover { background-color: $bg-h; }
+    }
+    .badgeInner[data-points="#{$pts}"] { color: $bg; }
+}
+
+// Fallback when data-points is absent (unknown value)
+.badgeOuter:not([data-points]) {
+    background-color: $color-sp-1;
+    &:hover { background-color: $color-sp-1-hover; }
+}
+.badgeInner:not([data-points]) { color: $color-sp-1; }
+
+.badgeWrap {
+    cursor: pointer;
+}
+
+.inputWrap {
+    width: 2rem;
+}

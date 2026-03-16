@@ -1,0 +1,21 @@
+
+/* Badge showing an assigned epic */
+.epicSet {
+    @include modal-badge;
+    background-color: $color-epic-badge;
+    cursor: pointer;
+    transition: $transition-bg;
+
+    &:hover { background-color: $color-epic-hover; }
+}
+
+/* Badge shown when no epic is assigned */
+.epicEmpty {
+    @include modal-badge;
+    background-color: transparent;
+    box-shadow: 0 0 0 1px $color-border;
+    cursor: pointer;
+    transition: $transition-bg;
+
+    &:hover { background-color: $color-bg-card-alt; }
+}

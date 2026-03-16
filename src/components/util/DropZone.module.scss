@@ -1,0 +1,16 @@
+
+.container {
+    display: flex;
+    gap: $gap-8;
+    padding-left: 3rem;     // pl-12 = 48px
+    padding-bottom: $gap-4;
+}
+
+.link {
+    align-self: flex-end;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.15s ease;
+
+    &:hover { color: $color-accent-bright; }
+}

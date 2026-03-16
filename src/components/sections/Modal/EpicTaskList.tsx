@@ -4,6 +4,7 @@ import Button from '../../buttons/Button'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../../../util/db'
 import { TASK_EPIC } from '../../../util/properties'
+import styles from './EpicTaskList.module.scss'
 
 const useEpicTasks = (epic: Task) => {
     const tasks = useLiveQuery(async () => {
@@ -43,19 +44,19 @@ const PaginatedTasks = ({ tasks }: { tasks: Task[] }) => {
     const remainder = PER_PAGE - currentTasks.length
 
     return (
-        <div className="pt-6">
-            <div className="text-lg font-bold mb-3">
+        <div className={styles.wrap}>
+            <div className={styles.title}>
                 Epic Tasks ({completedTasksCount} / {tasks.length} Completed)
             </div>
-            <ul className="pl-12 list-disc">
+            <ul className={styles.list}>
                 {currentTasks?.map((task) => {
                     return (
                         <li
-                            className={`p-1 ${
+                            className={
                                 task.list_name == 'Done'
-                                    ? 'text-green-500'
-                                    : 'text-white-500'
-                            }`}
+                                    ? styles.itemDone
+                                    : styles.item
+                            }
                             key={task.id}
                         >
                             {task.name}
@@ -63,14 +64,14 @@ const PaginatedTasks = ({ tasks }: { tasks: Task[] }) => {
                     )
                 })}
                 {[...Array(remainder)].map((_, idx) => {
-                    return <li className={`p-1 invisible`} key={idx}></li>
+                    return <li className={styles.itemPlaceholder} key={idx}></li>
                 })}
             </ul>
-            <div className="grid grid-cols-3 mt-6">
+            <div className={styles.pagination}>
                 <Button onClick={() => setPage(page - 1)} disabled={page == 0}>
                     PREV
                 </Button>
-                <div className="justify-self-center self-center">
+                <div className={styles.pageLabel}>
                     {page + 1} of {max_page}
                 </div>
                 <Button

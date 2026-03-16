@@ -5,6 +5,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../../util/db'
 import { useSearchParams } from 'react-router-dom'
 import { route } from '../../util/queryRouting'
+import styles from './Boards.module.scss'
 
 function useBoards() {
     const boards = useLiveQuery(async () => {
@@ -23,25 +24,24 @@ const Boards = ({ currentBoardId }: { currentBoardId: UniqueIdentifier }) => {
 
     const { data } = useBoards()
 
-    const skeletonClassName =
-        'rounded-md cursor-pointer text-lg text-white ring-1 ring-slate-700 text-center shadow-md focus:outline-hidden bg-transparent'
-
     return (
         <div
-            className={`flex flex-col gap-6 p-8 font-semibold ${
-                currentBoardId == 2 ? 'grow' : ''
-            } ${currentBoardId != 2 ? 'border-b border-b-slate-700' : ''}`}
+            className={[
+                styles.boardList,
+                currentBoardId == 2 ? styles.boardListGrow : styles.boardListBordered,
+            ].join(' ')}
         >
             {data?.boards ? (
                 data.boards.map((board: Board) => {
                     return (
                         <div
                             key={board.id}
-                            className={`rounded-md cursor-pointer text-lg text-white ring-1 ring-slate-700 text-center px-5 py-4 shadow-md focus:outline-hidden  ${
+                            className={[
+                                styles.boardItem,
                                 currentBoardId == board.id
-                                    ? 'bg-sky-600'
-                                    : 'bg-transparent hover:bg-slate-800 hover:ring-slate-800'
-                            } `}
+                                    ? styles.boardItemActive
+                                    : styles.boardItemInactive,
+                            ].join(' ')}
                             onClick={() => {
                                 route(
                                     setSearchParams,
@@ -58,11 +58,11 @@ const Boards = ({ currentBoardId }: { currentBoardId: UniqueIdentifier }) => {
                 <Skeleton
                     baseColor="#0f172a"
                     highlightColor="#1e293b"
-                    containerClassName="flex flex-col gap-6"
+                    containerClassName={styles.skeletonContainer}
                     inline
                     height={60}
                     borderRadius={8}
-                    className={skeletonClassName}
+                    className={styles.boardItem}
                     count={2}
                 />
             )}

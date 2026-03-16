@@ -115,11 +115,13 @@ export class Task implements TaskI {
     }
 
     async loadEpic() {
-        const epic = (await db.tasks
-            .where(ID)
-            .equals(this[TASK_EPIC])
-            .first()) as Task
-        this.epic = epic
+        if (this[TASK_EPIC]) {
+            const epic = (await db.tasks
+                .where(ID)
+                .equals(this[TASK_EPIC])
+                .first()) as Task
+            this.epic = epic
+        }
         return this
     }
 

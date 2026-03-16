@@ -1,0 +1,88 @@
+
+.overlay {
+    @include modal-overlay-scrollable;
+}
+
+.panel {
+    @include modal-panel;
+    width: 40%;
+    max-width: 42rem;
+    min-width: 39.5rem;
+    color: $color-text-primary;
+}
+
+.title {
+    font-size: $font-3xl;
+    font-weight: $font-weight-black;
+    margin-bottom: $gap-6;
+    color: $color-text-primary;
+}
+
+/* ---- GenericFilter section ---- */
+.filterSection {
+    padding: $gap-6 $gap-9 $gap-8;
+    border-top: 1px solid $color-border;
+}
+
+.filterTitle {
+    padding-bottom: $gap-4;
+    font-size: $font-lg;
+    font-weight: $font-weight-semibold;
+}
+
+.filterContent {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-height: 100%;
+    gap: $gap-6;
+}
+
+.filterInput {
+    @include input-base;
+}
+
+.filterButtons {
+    display: flex;
+    gap: $gap-8;
+}
+
+/* ---- HighlightedTaskFilter section ---- */
+.highlightSection {
+    padding: $gap-4 $gap-9;
+    border-top: 1px solid $color-border;
+}
+
+.highlightTitle {
+    padding: $gap-4 0;
+    font-size: $font-lg;
+    font-weight: $font-weight-semibold;
+}
+
+.radioGroup {
+    display: flex;
+    gap: $gap-8;
+}
+
+.radioLabel {
+    padding: $gap-2 $gap-6 $gap-2 $gap-6;
+    border-radius: $radius-md;
+    cursor: pointer;
+    user-select: none;
+
+    &[data-active="true"] {
+        background-color: $color-epic-badge;
+    }
+
+    &[data-active="false"] {
+        background-color: $color-bg-card-hi;
+
+        &:hover {
+            background-color: $color-epic-hover;
+        }
+    }
+}
+
+.radioInput {
+    margin-left: $gap-6;
+}

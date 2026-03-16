@@ -18,6 +18,7 @@ import { List, TaskI } from '../../util/types'
 import { NAME_COLUMN } from '../../util/properties'
 import { findListFromName } from '../../util/util'
 import { db } from '../../util/db'
+import styles from './SortableContainer.module.scss'
 
 export const Container: FC<{
     items: TaskI[]
@@ -47,9 +48,9 @@ export const Container: FC<{
 
     const isBeingDragged = !isOverlay && id == activeId
 
-    const className = isBeingDragged
-        ? 'flex flex-col py-1 px-1 w-72 max-h-full bg-slate-800 rounded-lg cursor-pointer'
-        : 'flex flex-col py-1 pl-1 w-72 max-h-full bg-slate-800 rounded-lg cursor-pointer'
+    const containerClass = isBeingDragged
+        ? styles.containerDragging
+        : styles.containerIdle
 
     const dropDownItems = [
         {
@@ -72,11 +73,9 @@ export const Container: FC<{
     ]
 
     return (
-        <div className={className} {...listeners}>
+        <div className={containerClass} {...listeners}>
             <div
-                className={`flex px-2 pt-1 gap-4 pb-4 justify-between items-center ${
-                    isBeingDragged && 'invisible'
-                }`}
+                className={`${styles.header} ${isBeingDragged ? styles.invisible : ''}`}
             >
                 {showLabelInput ? (
                     <SingleInput
@@ -104,9 +103,7 @@ export const Container: FC<{
                 ) : (
                     <div onClick={() => setShowLabelInput(true)}>
                         <h1
-                            className={`text-slate-300${
-                                isBeingDragged ? '/0' : 'first-letter:'
-                            } font-semibold`}
+                            className={styles.label}
                         >
                             {id}
                         </h1>
@@ -121,11 +118,7 @@ export const Container: FC<{
                 id={id}
             >
                 <div
-                    className={`mx-1 ${
-                        isBeingDragged
-                            ? 'overflow-hidden invisible'
-                            : 'overflow-auto'
-                    }`}
+                    className={isBeingDragged ? styles.itemsHidden : styles.itemsOverflow}
                     ref={setNodeRef}
                 >
                     {items.map((item: TaskI) =>
@@ -147,9 +140,7 @@ export const Container: FC<{
                 </div>
             </SortableContext>
             <div
-                className={`pl-2 pr-4 pb-2 pt-4 ${
-                    isBeingDragged && 'invisible'
-                }`}
+                className={`${styles.footer} ${isBeingDragged ? styles.invisible : ''}`}
             >
                 <AddTaskButton
                     listId={id}
@@ -182,7 +173,7 @@ const SortableContainer: FC<{
             ref={setNodeRef}
             style={style}
             {...attributes}
-            className="cursor-default"
+            className={styles.sortableOuter}
         >
             <Container
                 id={id}

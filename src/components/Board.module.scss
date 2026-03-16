@@ -1,0 +1,71 @@
+
+// ---- App shell ----
+.layout {
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: $sidebar-width 1fr;
+    overflow: hidden;
+}
+
+.sidebar {
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-bg-app;
+    border-right: 1px solid $color-border;
+}
+
+.main {
+    max-height: 100vh;
+    display: flex;
+    gap: $gap-4;
+    padding: $gap-8;
+    background-color: $color-bg-app;
+    overflow: auto;
+}
+
+// ---- Loading skeletons ----
+.skeletonColumn {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-2;
+    padding: $gap-1;
+    width: $container-list-width;
+    max-height: 100%;
+    height: fit-content;
+    background-color: $color-bg-card;
+    border-radius: $radius-lg;
+}
+
+.skeletonHeader {
+    display: flex;
+    gap: $gap-2;
+    justify-content: space-between;
+}
+
+// Card-shaped skeleton — mirrors the real task card appearance
+.skeletonCard {
+    border-radius: $radius-lg;
+    box-sizing: content-box;
+    margin-right: $gap-1;
+    box-shadow: $shadow-card-inset;
+    background-color: $color-bg-card-alt;
+}
+
+// Used as Skeleton containerClassName to stack items with a gap
+.skeletonCardStack {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-2;
+}
+
+// Add-list button skeleton at the bottom of each column
+.skeletonAddList {
+    padding: $gap-2 $gap-3;
+    height: min-content;
+    width: 100%;
+    box-shadow: 0 0 0 1px $color-border;
+    background: transparent;
+    border-radius: $radius-lg;
+    font-size: $font-sm;
+}

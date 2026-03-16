@@ -1,0 +1,62 @@
+// Private placeholder — not exported as a CSS Module class
+%container {
+    display: flex;
+    flex-direction: column;
+    padding: $gap-1 $gap-1 $gap-1 $gap-2;
+    width: $container-list-width;
+    max-height: 100%;
+    background-color: $color-bg-card;
+    border-radius: $radius-lg;
+    cursor: pointer;
+}
+
+.containerDragging {
+    @extend %container;
+    padding-right: $gap-1;
+}
+
+.containerIdle {
+    @extend %container;
+}
+
+.header {
+    display: flex;
+    padding: $gap-1 $gap-1 $gap-4;
+    gap: $gap-4;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    color: $color-text-inverse;
+    font-weight: $font-weight-semibold;
+}
+
+// Private placeholder — not exported as a CSS Module class
+%itemsArea {
+    margin: 0;
+}
+
+.itemsOverflow {
+    @extend %itemsArea;
+    overflow: auto;
+}
+
+.itemsHidden {
+    @extend %itemsArea;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.footer {
+    padding: $gap-4 0.375rem $gap-2 0;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+/* ---- Sortable outer wrapper ---- */
+.sortableOuter {
+    cursor: default;
+}

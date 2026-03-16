@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { idiotsAtHeadlessUI } from "../../util/util";
+import styles from "./SingleInput.module.scss";
 
 interface SingleInputProps {
 	initialValue: string;
@@ -34,14 +34,12 @@ const SingleInput = ({ initialValue, handleSubmit }: SingleInputProps) => {
 			<input
 				autoFocus
 				name="name"
-				className="w-full py-1 px-2 border-gray-400 border-2 bg-gray-900 rounded-sm"
+				className={styles.input}
 				value={inputValue}
 				onChange={(e) => {
 					setInputValue(e.target.value);
 				}}
 				onKeyDown={async (e) => {
-					idiotsAtHeadlessUI(e);
-
 					if (e.key === "Enter") {
 						await handleSubmit(inputValue);
 					}

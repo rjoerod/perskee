@@ -1,0 +1,22 @@
+
+.btn {
+    @include btn-base;
+    padding: $gap-2 $gap-3;
+    width: 100%;
+    box-shadow: 0 0 0 1px $color-border;
+    color: $color-text-inverse;
+
+    &:hover:not(:disabled) {
+        background-color: $color-bg-card-alt;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+/* ---- Text sizes ---- */
+.textSm   { font-size: $font-sm; }
+.textBase { font-size: $font-base; }
+.textLg   { font-size: $font-lg; }
+.textXl   { font-size: $font-xl; }

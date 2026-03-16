@@ -8,6 +8,7 @@ import useWindowDimensions from '../../../util/util'
 import Button from '../../buttons/Button'
 import ToastMessage from '../../util/ToastMessage'
 import { db } from '../../../util/db'
+import styles from './MarkdownEditor.module.scss'
 
 interface MarkdownEditorProps {
     modalItem: Task
@@ -54,12 +55,12 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
     return (
         <div>
             <div>
-                <div className="flex justify-between items-end pb-4">
-                    <div className="text-xl font-semibold text-slate-400">
+                <div className={styles.editorHeader}>
+                    <div className={styles.editorTitle}>
                         Description
                     </div>
                     {!showEditor && (
-                        <div className="w-1/6">
+                        <div className={styles.editBtnWrap}>
                             <Button label={'Edit'} onClick={onEditorOpen} />
                         </div>
                     )}
@@ -79,10 +80,10 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
                 ) : (
                     (modalItem?.description ?? '').trim() != '' && (
                         <div
-                            className="ring-1 p-4 rounded-sm ring-slate-500 cursor-pointer"
+                            className={styles.previewWrap}
                             onClick={onEditorOpen}
                         >
-                            <Markdown className="prose prose-invert prose-slate prose-hr:-mt-4 prose-hr:mb-6 prose-ul:mb-8 wrap-break-word">
+                            <Markdown className={styles.markdown}>
                                 {modalItem?.description ?? ''}
                             </Markdown>
                         </div>
@@ -90,7 +91,7 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
                 )}
             </div>
             {showEditor && (
-                <div className="flex justify-between gap-10 pt-4 w-1/2">
+                <div className={styles.actionRow}>
                     <Button
                         label={'Cancel'}
                         onClick={() => setShowEditor(false)}

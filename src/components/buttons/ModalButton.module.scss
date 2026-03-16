@@ -1,0 +1,21 @@
+.wrapper {
+    height: min-content;
+}
+
+.form {
+    padding: $gap-3;
+    height: min-content;
+    background-color: $color-bg-card;
+    border-radius: $radius-lg;
+    font-size: $font-sm;
+}
+
+.input {
+    @include input-base;
+    margin-bottom: $gap-4;
+}
+
+.buttonRow {
+    display: flex;
+    gap: $gap-3;
+}
