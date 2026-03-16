@@ -1,11 +1,6 @@
 
 .overlay {
-    @include overlay;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $gap-4;
-    overflow-y: auto;
+    @include modal-overlay-scrollable;
 }
 
 .panel {

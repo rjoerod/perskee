@@ -28,9 +28,10 @@ $font-weight-semibold: 600;
 $font-weight-black:    900;
 
 // ---- Radii --------------------------------------------------
+$radius-xs:    0.125rem;  // rounded-sm
+$radius-sm:    0.25rem;   // rounded-sm (badges)
 $radius-md:    0.375rem;  // rounded-md (board items)
-$radius-card: 0.5rem;    // rounded-lg
-$radius-badge: 0.125rem;  // rounded-sm
+$radius-lg:    0.5rem;    // rounded-lg
 
 // ---- Color palette ------------------------------------------
 // Raw values only. Ordered by family, then shade (lower = lighter, higher = darker).
@@ -56,7 +57,7 @@ $color-slate-200:     rgb(230, 237, 243);
 $color-slate-300:     rgb(203, 213, 225);
 $color-slate-400:     rgb(148, 163, 184);
 $color-slate-500:     rgb(100, 116, 139);
-$color-slate-600:     rgb(71, 85, 105);
+$color-slate-600:     rgba(69, 85, 108);
 $color-slate-700:     rgb(49, 65, 88);
 $color-slate-800:     rgb(29, 41, 61);
 $color-slate-900:     rgb(15, 23, 43);
@@ -74,7 +75,7 @@ $color-indigo-300:    rgb(165, 180, 252);
 $color-indigo-400:    rgb(129, 140, 248);
 
 // Violet
-$color-violet-300:    rgb(196, 181, 253);
+$color-violet-200:    rgb(221, 214, 255);
 $color-violet-500:    rgb(139, 92, 246);
 $color-violet-700:    rgb(109, 40, 217);
 
@@ -133,7 +134,7 @@ $color-accent:        $color-sky-500;
 $color-accent-light:  $color-sky-300;
 $color-accent-bright: $color-sky-400;
 $color-accent-hover:  $color-violet-500;
-$color-accent-muted:  $color-violet-300;
+$color-accent-muted:  $color-violet-200;
 
 // Epic & board UI
 $color-epic-badge:    $color-sky-600;
@@ -145,6 +146,9 @@ $color-danger:        $color-red-500;
 $color-danger-dark:   $color-red-800;
 $color-success:       $color-green-500;
 $color-success-dark:  $color-green-800;
+
+// Progress bars
+$color-progress-empty: $color-slate-500;
 
 // Highlights & special states
 $color-highlight:     $color-indigo-400;
@@ -190,7 +194,7 @@ $transition-bg: background-color 0.15s ease;
 // Story-point badge (intentionally sub-pixel, kept as px)
 $sp-outer-gap:         7px;
 $sp-inner-font-size:   8px;
-$sp-inner-padding-y:   3px;
+$sp-inner-padding-y:   2px;
 $sp-inner-padding-x:   5px;
 $epic-badge-padding-y: 2px;
 $skeleton-wrap-offset: -6px;

@@ -1,11 +1,6 @@
 
 .overlay {
-    @include overlay;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $gap-4;
-    overflow-y: auto;
+    @include modal-overlay-scrollable;
 }
 
 .panel {
@@ -70,7 +65,7 @@
 }
 
 .radioLabel {
-    padding: $gap-2 $gap-9 $gap-2 $gap-6;
+    padding: $gap-2 $gap-6 $gap-2 $gap-6;
     border-radius: $radius-md;
     cursor: pointer;
     user-select: none;

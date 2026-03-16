@@ -6,10 +6,10 @@
     gap: $gap-2;
     padding: $gap-2 $gap-4;
     background-color: $color-bg-card-hi;
-    color: $color-text-primary;
+    color: $color-text-inverse;
     font-size: $font-sm;
     font-weight: $font-weight-semibold;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
 
     &:hover {
         background-color: $color-bg-card-alt;
@@ -19,7 +19,7 @@
 .content {
     min-width: 7rem;
     background-color: white;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
     box-shadow: $shadow-md;
     padding: 2px;
     z-index: $z-overlay;

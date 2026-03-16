@@ -1,9 +1,6 @@
 
 .overlay {
-    @include overlay;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include modal-overlay;
 }
 
 .panel {

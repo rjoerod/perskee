@@ -34,7 +34,7 @@
     max-height: 100%;
     height: fit-content;
     background-color: $color-bg-card;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
 }
 
 .skeletonHeader {
@@ -45,7 +45,7 @@
 
 // Card-shaped skeleton — mirrors the real task card appearance
 .skeletonCard {
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
     box-sizing: content-box;
     margin-right: $gap-1;
     box-shadow: $shadow-card-inset;
@@ -66,6 +66,6 @@
     width: 100%;
     box-shadow: 0 0 0 1px $color-border;
     background: transparent;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
     font-size: $font-sm;
 }

@@ -10,13 +10,12 @@ $sp-palette: (
 );
 
 .badgeOuter {
+    @include modal-badge;
     display: inline-flex;
     align-items: center;
-    gap: $sp-outer-gap;         // 7px
-    padding: 6px $gap-3 6px $gap-2;  // py-[6px] pl-2 pr-3
-    border-radius: $radius-badge;
+    gap: $sp-outer-gap;
+    padding: 6px $gap-3 6px $gap-2;
     color: $color-badge-text;
-    font-size: $font-xs;
     transition: $transition-bg;
 }
 
@@ -24,7 +23,6 @@ $sp-palette: (
     border-radius: 0.75rem;     // rounded-xl
     padding: 0 $sp-inner-padding-x;
     background: black;
-    font-size: $sp-inner-font-size;
     font-weight: $font-weight-black;
 }
 

@@ -18,7 +18,7 @@
     padding: $gap-2 $gap-10 $gap-2 $gap-3;
     background: $color-bg-input;
     border: 1px solid $color-border;
-    border-radius: $radius-badge;
+    border-radius: $radius-xs;
     color: $color-text-primary;
     font-size: $font-sm;
     font-family: inherit;
@@ -52,7 +52,7 @@
     overflow-y: auto;
     background: $color-bg-modal;
     border: 1px solid $color-border;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
     box-shadow: $shadow-md;
     list-style: none;
     padding: $gap-1 0;

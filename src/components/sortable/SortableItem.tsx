@@ -105,7 +105,7 @@ const TaskBadges: FC<{
     return (
         <>
             {item.epic && <div className={epicClassName}>{item.epic.name}</div>}
-            <StoryPointsBadge points={item.story_points} />
+            <StoryPointsBadge points={Number(item.story_points)} />
         </>
     )
 }

@@ -57,6 +57,15 @@ const ModalButton = ({
                         name="name"
                         className={styles.input}
                         placeholder={placeholder}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault()
+                                const form = e.currentTarget.form
+                                if (form) {
+                                    form.requestSubmit()
+                                }
+                            }
+                        }}
                     />
                     <div className={styles.buttonRow}>
                         <Button type="submit" label={confirmLabel} />

@@ -4,10 +4,10 @@
 
 @mixin input-base {
     width: 100%;
-    padding: $gap-1 $gap-2;
+    padding: 0.375rem $gap-2;
     border: $border-input;
     background-color: $color-bg-input;
-    border-radius: $radius-badge;
+    border-radius: $radius-md;
     color: $color-text-primary;
     font-size: $font-sm;
     font-family: inherit;
@@ -22,7 +22,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -34,7 +34,7 @@
 @mixin card {
     display: flex;
     flex-direction: column;
-    border-radius: $radius-card;
+    border-radius: $radius-lg;
     background-color: $color-bg-card;
 }
 
@@ -44,8 +44,15 @@
     gap: $gap-1;
     font-size: $font-xs;
     padding: $gap-0-5 $gap-2;
-    border-radius: $radius-badge;
+    border-radius: $radius-sm;
     color: $color-text-primary;
+}
+
+@mixin modal-badge {
+    padding: 6px $gap-3;
+    border-radius: $radius-lg;
+    color: $color-text-primary;
+    font-size: $font-base;
 }
 
 @mixin overlay {
@@ -55,9 +62,23 @@
     z-index: $z-overlay;
 }
 
+@mixin modal-overlay {
+    @include overlay;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin modal-overlay-scrollable {
+    @include overlay;
+    display: flex;
+    padding: $gap-4;
+    overflow-y: auto;
+}
+
 @mixin modal-panel {
     @include card;
     color: $color-text-primary;
-    background-color: $color-bg-modal;
     padding: $gap-8;
+    margin: auto;
 }

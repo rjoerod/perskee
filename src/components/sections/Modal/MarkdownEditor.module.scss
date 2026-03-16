@@ -19,7 +19,7 @@
 .previewWrap {
     box-shadow: 0 0 0 1px $color-ring;  // ring-1
     padding: $gap-4;
-    border-radius: $radius-badge;
+    border-radius: $radius-xs;
     cursor: pointer;
 }
 
@@ -76,10 +76,9 @@
         margin-bottom: 0.5em;
     }
 
-    // Horizontal rule — prose-hr:-mt-4 prose-hr:mb-6
+    // Horizontal rule
     hr {
         border-color: $color-border-subtle;
-        margin-top: -1rem;
         margin-bottom: 1.5rem;
     }
 
@@ -93,7 +92,7 @@
     }
     pre {
         background-color: $color-bg-card;
-        border-radius: $radius-card;
+        border-radius: $radius-lg;
         padding: $gap-4;
         overflow-x: auto;
         line-height: 1.7;

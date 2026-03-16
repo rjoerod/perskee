@@ -1,11 +1,8 @@
 
 /* Badge showing an assigned epic */
 .epicSet {
+    @include modal-badge;
     background-color: $color-epic-badge;
-    padding: 6px $gap-3;
-    border-radius: $radius-badge;
-    color: $color-text-primary;
-    font-size: $font-xs;
     cursor: pointer;
     transition: $transition-bg;
 
@@ -14,14 +11,11 @@
 
 /* Badge shown when no epic is assigned */
 .epicEmpty {
+    @include modal-badge;
     background-color: transparent;
-    box-shadow: 0 0 0 1px $color-border;    // ring-1 ring-slate-700
-    padding: 6px $gap-3;
-    border-radius: $radius-badge;
-    color: $color-text-primary;
-    font-size: $font-xs;
+    box-shadow: 0 0 0 1px $color-border;
     cursor: pointer;
     transition: $transition-bg;
 
-    &:hover { background-color: $color-bg-card-alt; }  // hover:bg-slate-700
+    &:hover { background-color: $color-bg-card-alt; }
 }
