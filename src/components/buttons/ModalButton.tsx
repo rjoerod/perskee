@@ -58,6 +58,7 @@ const ModalButton = ({
                         className={styles.input}
                         placeholder={placeholder}
                         onKeyDown={(e) => {
+                            e.stopPropagation()
                             if (e.key === 'Enter') {
                                 e.preventDefault()
                                 const form = e.currentTarget.form

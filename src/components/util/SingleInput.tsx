@@ -40,6 +40,7 @@ const SingleInput = ({ initialValue, handleSubmit }: SingleInputProps) => {
 					setInputValue(e.target.value);
 				}}
 				onKeyDown={async (e) => {
+					e.stopPropagation()
 					if (e.key === "Enter") {
 						await handleSubmit(inputValue);
 					}
