@@ -73,6 +73,7 @@ $color-sky-900:       rgb(12, 74, 110);
 // Indigo
 $color-indigo-300:    rgb(165, 180, 252);
 $color-indigo-400:    rgb(129, 140, 248);
+$color-indigo-500:    rgb(99, 102, 241);
 
 // Violet
 $color-violet-200:    rgb(221, 214, 255);
@@ -153,6 +154,7 @@ $color-progress-empty: $color-slate-500;
 // Highlights & special states
 $color-highlight:     $color-indigo-400;
 $color-highlight-hover: $color-indigo-300;
+$color-highlight-dim: $color-indigo-500;
 $color-epic:          $color-violet-700;
 
 // Story point scale
@@ -209,5 +211,5 @@ $dropdown-max-height:  15rem;    // max-h-60
 // Layout
 $sidebar-width:         320px;
 $container-list-width:  18rem;
-$filters-outer-height:  calc(100vh - 27rem); // Filters section height
-$filters-list-height:   calc(100vh - 34rem); // Filters scrollable list height
+$filters-outer-height:  calc(100vh - 30rem); // Filters section height
+$filters-list-height:   calc(100vh - 36rem); // Filters scrollable list height

@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Task, TaskI } from '../../util/types'
 import { route } from '../../util/queryRouting'
 import { db } from '../../util/db'
-import { IS_HIGHLIGHTED_TASK_COLUMN, TASK_EPIC } from '../../util/properties'
+import { IS_HIGHLIGHTED_TASK_COLUMN, LAST_CHANGED_COLUMN, TASK_EPIC } from '../../util/properties'
 import { useLiveQuery } from 'dexie-react-hooks'
 import ToastMessage from '../util/ToastMessage'
 import styles from './SortableItem.module.scss'
@@ -141,6 +141,7 @@ export const Item: FC<{
         try {
             await db.tasks.update(Number(item.id), {
                 [IS_HIGHLIGHTED_TASK_COLUMN]: !item.is_highlighted_task,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
         } catch (e) {
             ToastMessage('Failed to update highlight task')

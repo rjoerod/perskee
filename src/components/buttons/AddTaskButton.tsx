@@ -6,6 +6,7 @@ import {
     STORY_POINT_COLUMN,
     TASK_EPIC,
     SORTED_ORDER_COLUMN,
+    LAST_CHANGED_COLUMN,
 } from '../../util/properties'
 import ToastMessage from '../util/ToastMessage'
 import ModalButton from './ModalButton'
@@ -63,6 +64,7 @@ const AddTaskButton = ({ boardId, listId, listData }: AddTaskButtonProps) => {
                 [IS_EPIC_COLUMN]: boardId == 2 ? 1 : 0,
                 [STORY_POINT_COLUMN]: 0,
                 [DESCRIPTION_COLUMN]: '',
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
         } catch (e) {
             console.error(e)

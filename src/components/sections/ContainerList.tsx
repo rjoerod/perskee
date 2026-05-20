@@ -32,7 +32,7 @@ import { Item } from '../sortable/SortableItem'
 import AddListButton from '../buttons/AddListButton'
 import styles from './ContainerList.module.scss'
 import ToastMessage from '../util/ToastMessage'
-import { TASK_LIST, SORTED_ORDER_COLUMN } from '../../util/properties'
+import { TASK_LIST, SORTED_ORDER_COLUMN, LAST_CHANGED_COLUMN } from '../../util/properties'
 import { Task, List, TaskI } from '../../util/types'
 import { db } from '../../util/db'
 
@@ -525,6 +525,7 @@ function ContainerList({
                     return db.tasks.update(Number(id), {
                         [TASK_LIST]: Number(data?.list?.id),
                         [SORTED_ORDER_COLUMN]: idx + 1,
+                        [LAST_CHANGED_COLUMN]: new Date().toISOString(),
                     })
                 })
             ).then(() => {})

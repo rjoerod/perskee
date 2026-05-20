@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Task } from '../../../util/types'
-import { STORY_POINT_COLUMN } from '../../../util/properties'
+import { LAST_CHANGED_COLUMN, STORY_POINT_COLUMN } from '../../../util/properties'
 import SingleInput from '../../util/SingleInput'
 import ToastMessage from '../../util/ToastMessage'
 import { db } from '../../../util/db'
@@ -32,6 +32,7 @@ const StoryPointsBadge = ({ modalItem }: StoryPointsBadgeProps) => {
         try {
             await db.tasks.update(Number(modalItem.id), {
                 [STORY_POINT_COLUMN]: value,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
         } catch (e) {
             ToastMessage('Failed to delete list')

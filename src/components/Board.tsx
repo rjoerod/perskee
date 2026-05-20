@@ -13,10 +13,11 @@ import { useSearchParams } from 'react-router-dom'
 import { Task, List, TaskI } from '../util/types'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../util/db'
-import { LIST_BOARD } from '../util/properties'
+import { IS_ARCHIVED_COLUMN, LAST_CHANGED_COLUMN, LIST_BOARD } from '../util/properties'
 import DropZone from './util/DropZone'
 import TaskFilters from './sections/TaskFilters'
 import TaskFiltersModal from './util/TaskFiltersModal'
+import ArchiveSettingsModal from './util/ArchiveSettingsModal'
 import styles from './Board.module.scss'
 
 const checkEpicFilter = (epicIds: number[], taskEpicId: number) => {
@@ -41,6 +42,11 @@ const checkHighlightedFilter = (task: Task, highlighted: number) => {
     if (!highlighted) return true
 
     return task.is_highlighted_task
+}
+
+const checkArchivedFilter = (task: Task, showArchived: number) => {
+    if (showArchived) return true
+    return !task.is_archived
 }
 
 const getQueryNum = (param: string | string[] | undefined | null) => {
@@ -79,6 +85,8 @@ function useBoard(id: UniqueIdentifier) {
 
 const Board = () => {
     const [filtersModalIsOpen, setFilterModalIsOpen] = useState(false)
+    const [archiveSettingsModalIsOpen, setArchiveSettingsModalIsOpen] =
+        useState(false)
 
     const [deleteItem, setDeleteItem] = useState<TaskI | null>(null)
     const [searchParams] = useSearchParams()
@@ -89,6 +97,7 @@ const Board = () => {
     const title = searchParams?.get('title') ?? ''
     const description = searchParams?.get('description') ?? ''
     const highlightedTask = Number(searchParams?.get('highlighted')) ?? 0
+    const showArchived = Number(searchParams?.get('show_archived')) ?? 0
 
     const epicFilterIds = getQueryArray(epic_ids)
     const currentBoardId = getQueryNum(board_id) ?? 1
@@ -100,6 +109,53 @@ const Board = () => {
         document.body.onmousedown = (e) => {
             if (e.button === 1) return false
         }
+    }, [])
+
+    useEffect(() => {
+        const runAutoArchive = async () => {
+            const settings = await db.settings.get(1)
+            if (!settings?.auto_archive_enabled) return
+
+            const { archive_after_value, archive_after_unit } = settings
+            const cutoff = new Date()
+            switch (archive_after_unit) {
+                case 'days':
+                    cutoff.setDate(cutoff.getDate() - archive_after_value)
+                    break
+                case 'weeks':
+                    cutoff.setDate(cutoff.getDate() - archive_after_value * 7)
+                    break
+                case 'months':
+                    cutoff.setMonth(cutoff.getMonth() - archive_after_value)
+                    break
+                case 'years':
+                    cutoff.setFullYear(
+                        cutoff.getFullYear() - archive_after_value
+                    )
+                    break
+            }
+            const cutoffIso = cutoff.toISOString()
+
+            const toArchive = await db.tasks
+                .filter(
+                    (task) =>
+                        !task.is_epic &&
+                        !task.is_archived &&
+                        !!task.last_changed &&
+                        task.last_changed < cutoffIso
+                )
+                .toArray()
+
+            await Promise.all(
+                toArchive.map((task) =>
+                    db.tasks.update(Number(task.id), {
+                        [IS_ARCHIVED_COLUMN]: 1,
+                    })
+                )
+            )
+        }
+
+        runAutoArchive()
     }, [])
 
     const listItems = data?.list?.map((myList: List) => {
@@ -120,7 +176,8 @@ const Board = () => {
                         currentBoardId == 2) &&
                     checkTitleFilter(task, title) &&
                     checkDescriptionFilter(task, description) &&
-                    checkHighlightedFilter(task, highlightedTask)
+                    checkHighlightedFilter(task, highlightedTask) &&
+                    checkArchivedFilter(task, showArchived)
                 ) {
                     return task
                 }
@@ -159,6 +216,24 @@ const Board = () => {
         }
     }
 
+    const onArchiveItem = async () => {
+        if (!deleteItem) {
+            ToastMessage('Failed to find task')
+            return
+        }
+
+        try {
+            await db.tasks.update(Number(deleteItem.id), {
+                [IS_ARCHIVED_COLUMN]: 1,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
+            })
+        } catch (e) {
+            ToastMessage('Failed to archive task')
+        } finally {
+            setDeleteItem(null)
+        }
+    }
+
     return (
         <>
             <div className={styles.layout}>
@@ -167,7 +242,12 @@ const Board = () => {
                     {currentBoardId == 1 && (
                         <Filters epicFilterIds={epicFilterIds} />
                     )}
-                    <TaskFilters openModal={() => setFilterModalIsOpen(true)} />
+                    <TaskFilters
+                        openModal={() => setFilterModalIsOpen(true)}
+                        openArchiveModal={() =>
+                            setArchiveSettingsModalIsOpen(true)
+                        }
+                    />
                     <DropZone />
                 </div>
                 <div className={styles.main}>
@@ -189,12 +269,20 @@ const Board = () => {
                                 onCancel={() => {
                                     setDeleteItem(null)
                                 }}
+                                onArchive={onArchiveItem}
+                                confirmLabel="Delete"
                                 onConfirm={onConfirmDelete}
                             />
                             <TaskFiltersModal
                                 open={filtersModalIsOpen}
                                 onClose={() => setFilterModalIsOpen(false)}
                             ></TaskFiltersModal>
+                            <ArchiveSettingsModal
+                                open={archiveSettingsModalIsOpen}
+                                onClose={() =>
+                                    setArchiveSettingsModalIsOpen(false)
+                                }
+                            />
                         </>
                     ) : (
                         <>

@@ -66,13 +66,22 @@ export interface TaskI {
     name: string
     epic_id: number
     epic?: Task
-    is_epic: number
+    is_epic: number | boolean
     story_points: number
     description: string
     is_highlighted?: boolean
     is_highlighted_task?: boolean
+    is_archived?: number | boolean
+    last_changed?: string
     list_name?: string
     task_count?: number
+}
+
+export interface Settings {
+    id?: number
+    auto_archive_enabled: number
+    archive_after_value: number
+    archive_after_unit: 'days' | 'weeks' | 'months' | 'years'
 }
 
 export class Task implements TaskI {
@@ -82,11 +91,13 @@ export class Task implements TaskI {
     name: string
     epic_id: number
     epic?: Task
-    is_epic: number
+    is_epic: number | boolean
     story_points: number
     description: string
     is_highlighted?: boolean
     is_highlighted_task?: boolean
+    is_archived?: number | boolean
+    last_changed?: string
     list_name?: string
     task_count?: number // if epic, the number tasks on epic
 
@@ -94,7 +105,7 @@ export class Task implements TaskI {
         list_id: number,
         epic_id: number,
         sorted_order: number,
-        is_epic: number,
+        is_epic: number | boolean,
         story_points: number,
         description: string,
         name: string,
