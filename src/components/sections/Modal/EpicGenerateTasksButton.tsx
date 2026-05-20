@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
     DESCRIPTION_COLUMN,
     IS_EPIC_COLUMN,
+    LAST_CHANGED_COLUMN,
     LIST_BOARD,
     NAME_COLUMN,
     SORTED_ORDER_COLUMN,
@@ -117,6 +118,7 @@ const EpicGenerateTasksButton = ({
                     [SORTED_ORDER_COLUMN]: maxOrder + 1 + idx,
                     [IS_EPIC_COLUMN]: 0,
                     [STORY_POINT_COLUMN]: 0,
+                    [LAST_CHANGED_COLUMN]: new Date().toISOString(),
                 }
             })
             await db.tasks.bulkAdd(finalTasks)

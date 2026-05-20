@@ -8,7 +8,7 @@ import MarkdownEditor from './MarkdownEditor'
 import EpicTaskList from './EpicTaskList'
 import EpicGenerateTasksButton from './EpicGenerateTasksButton'
 import { useSearchParams } from 'react-router-dom'
-import { IS_HIGHLIGHTED_COLUMN, NAME_COLUMN } from '../../../util/properties'
+import { IS_HIGHLIGHTED_COLUMN, LAST_CHANGED_COLUMN, NAME_COLUMN } from '../../../util/properties'
 import { Task } from '../../../util/types'
 import Button from '../../buttons/Button'
 import { route } from '../../../util/queryRouting'
@@ -48,6 +48,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
         try {
             await db.tasks.update(Number(modalItem.id), {
                 [NAME_COLUMN]: value,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
         } catch (e) {
             ToastMessage('Failed to update name')
@@ -65,6 +66,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
         try {
             await db.tasks.update(Number(modalItem.id), {
                 [IS_HIGHLIGHTED_COLUMN]: value,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
         } catch (e) {
             ToastMessage('Failed to update highlight flag')
@@ -79,7 +81,7 @@ function TaskCardModal({ modalItem }: TaskCardModalProps) {
         <Dialog.Root open={!!modalItem} onOpenChange={(o) => !o && onClose()}>
             <Dialog.Portal>
                 <Dialog.Overlay className={styles.overlay}>
-                    <Dialog.Content className={styles.panel}>
+                    <Dialog.Content className={styles.panel} aria-describedby={undefined}>
                         <Dialog.Title className={styles.title}>
                             {showLabelInput ? (
                                 <SingleInput

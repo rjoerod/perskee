@@ -71,8 +71,17 @@ export interface TaskI {
     description: string
     is_highlighted?: boolean
     is_highlighted_task?: boolean
+    is_archived?: number | boolean
+    last_changed?: string
     list_name?: string
     task_count?: number
+}
+
+export interface Settings {
+    id?: number
+    auto_archive_enabled: number
+    archive_after_value: number
+    archive_after_unit: 'days' | 'weeks' | 'months' | 'years'
 }
 
 export class Task implements TaskI {
@@ -87,6 +96,8 @@ export class Task implements TaskI {
     description: string
     is_highlighted?: boolean
     is_highlighted_task?: boolean
+    is_archived?: number | boolean
+    last_changed?: string
     list_name?: string
     task_count?: number // if epic, the number tasks on epic
 

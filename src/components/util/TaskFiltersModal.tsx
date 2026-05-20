@@ -146,6 +146,58 @@ const HighlightedTaskFilter = () => {
     )
 }
 
+const ShowArchivedFilter = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const showArchivedParam = Number(searchParams?.get('show_archived') ?? 0)
+    const [showArchived, setShowArchived] = useState(showArchivedParam)
+
+    const updateShowArchivedFilter = (val: number) => {
+        setShowArchived(val)
+        route(setSearchParams, 'show_archived', val)
+    }
+
+    return (
+        <div className={styles.highlightSection}>
+            <div className={styles.highlightTitle}>Show Archived Cards</div>
+            <div className={styles.filterContent}>
+                <div className={styles.radioGroup}>
+                    <label
+                        className={styles.radioLabel}
+                        data-active={String(showArchived === 0)}
+                        onChange={() => updateShowArchivedFilter(0)}
+                    >
+                        <b>OFF</b>
+                        <input
+                            className={styles.radioInput}
+                            type="radio"
+                            name="show_archived"
+                            value={showArchived}
+                            checked={showArchived === 0}
+                            readOnly
+                        />
+                    </label>
+                    <label
+                        className={styles.radioLabel}
+                        data-active={String(showArchived === 1)}
+                        onChange={() => updateShowArchivedFilter(1)}
+                    >
+                        <b>ON</b>
+                        <input
+                            className={styles.radioInput}
+                            type="radio"
+                            name="show_archived"
+                            value={showArchived}
+                            checked={showArchived === 1}
+                            readOnly
+                        />
+                    </label>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 interface TaskFiltersModalProps {
     open: boolean
     onClose: () => void
@@ -156,13 +208,14 @@ const TaskFiltersModal = ({ open, onClose }: TaskFiltersModalProps) => {
         <Dialog.Root open={open} onOpenChange={(o) => !o && onClose()}>
             <Dialog.Portal>
                 <Dialog.Overlay className={styles.overlay}>
-                    <Dialog.Content className={styles.panel}>
+                    <Dialog.Content className={styles.panel} aria-describedby={undefined}>
                         <Dialog.Title className={styles.title}>
                             Task Filters
                         </Dialog.Title>
                         <TitleFilter />
                         <DescriptionFilter />
                         <HighlightedTaskFilter />
+                        <ShowArchivedFilter />
                     </Dialog.Content>
                 </Dialog.Overlay>
             </Dialog.Portal>

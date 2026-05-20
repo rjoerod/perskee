@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import Markdown from 'react-markdown'
 import { Task } from '../../../util/types'
-import { DESCRIPTION_COLUMN } from '../../../util/properties'
+import { DESCRIPTION_COLUMN, LAST_CHANGED_COLUMN } from '../../../util/properties'
 import useWindowDimensions from '../../../util/util'
 import Button from '../../buttons/Button'
 import ToastMessage from '../../util/ToastMessage'
@@ -31,6 +31,7 @@ const MarkdownEditor = ({ modalItem }: MarkdownEditorProps) => {
         try {
             await db.tasks.update(Number(modalItem.id), {
                 [DESCRIPTION_COLUMN]: value,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
         } catch (e) {
             ToastMessage('Failed to delete list')

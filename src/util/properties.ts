@@ -20,6 +20,11 @@ export const STORY_POINT_COLUMN = 'story_points'
 export const DESCRIPTION_COLUMN = 'description'
 export const IS_HIGHLIGHTED_COLUMN = 'is_highlighted'
 export const IS_HIGHLIGHTED_TASK_COLUMN = 'is_highlighted_task'
+export const IS_ARCHIVED_COLUMN = 'is_archived'
+export const LAST_CHANGED_COLUMN = 'last_changed'
+
+// Settings
+export const SETTINGS_TABLE = 'settings'
 
 // Checklist
 export const CHECKLIST_TABLE = 'checklists'

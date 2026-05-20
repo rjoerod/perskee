@@ -1,5 +1,5 @@
 import ToastMessage from '../../util/ToastMessage'
-import { TASK_EPIC } from '../../../util/properties'
+import { LAST_CHANGED_COLUMN, TASK_EPIC } from '../../../util/properties'
 import { Task } from '../../../util/types'
 import { useEpics } from '../../../util/util'
 import { db } from '../../../util/db'
@@ -32,6 +32,7 @@ const EpicBadge = ({ modalItem }: EpicBadgeProps) => {
         try {
             await db.tasks.update(Number(modalItem.id), {
                 [TASK_EPIC]: newEpic,
+                [LAST_CHANGED_COLUMN]: new Date().toISOString(),
             })
 
             if (searchParams.get('epic_id')) {
