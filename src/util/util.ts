@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { List, Task } from './types'
 import { useState, useEffect } from 'react'
 import { db } from './db'
-import { IS_EPIC_COLUMN, NAME_COLUMN } from './properties'
+import { NAME_COLUMN } from './properties'
 
 export function findListFromName(id: string, listData: List[] | undefined) {
     if (!listData) {
@@ -24,8 +24,7 @@ export function useEpics(filtered = true): { tasks: Task[] } {
     const tasks = useLiveQuery(async () => {
         if (filtered) {
             const tasks = (await db.tasks
-                .where(IS_EPIC_COLUMN)
-                .equals(1)
+                .filter((task) => !!task.is_epic)
                 .toArray()) as Task[]
             return Promise.all(
                 tasks.map((task) => {
@@ -34,7 +33,7 @@ export function useEpics(filtered = true): { tasks: Task[] } {
             )
         }
 
-        const tasks = await db.tasks.where(IS_EPIC_COLUMN).equals(1).toArray()
+        const tasks = await db.tasks.filter((task) => !!task.is_epic).toArray()
         return tasks.sort((a, b) => {
             return a[NAME_COLUMN] < b[NAME_COLUMN] ? -1 : 1
         })
