@@ -17,7 +17,9 @@ const Filters = ({
 
     const getItemClass = (task: Task) => {
         if (epicFilterIds?.includes(Number(task.id))) return styles.filterItemActive
+        if (task.is_highlighted && (task.task_count ?? 0) === 0) return styles.filterItemHighlightedNoTasks
         if (task.is_highlighted) return styles.filterItemHighlighted
+        if ((task.task_count ?? 0) === 0) return styles.filterItemNoTasks
         return styles.filterItem
     }
 

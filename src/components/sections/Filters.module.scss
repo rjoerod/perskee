@@ -62,3 +62,23 @@
         color: $color-highlight-hover;
     }
 }
+
+// Epic has is_highlighted flag set but no tasks in progress
+.filterItemHighlightedNoTasks {
+    @extend %filterItemBase;
+    color: $color-highlight-dim;
+
+    &:hover {
+        color: $color-highlight;
+    }
+}
+
+// Epic has no tasks in progress
+.filterItemNoTasks {
+    @extend %filterItemBase;
+    color: $color-ring;
+
+    &:hover {
+        color: $color-text-dimmer;
+    }
+}
