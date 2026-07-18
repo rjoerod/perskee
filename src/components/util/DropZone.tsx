@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { db } from '../../util/db'
 import ConfirmationModal from './ConfirmationModal'
-import ToastMessage from './ToastMessage'
+import ToastMessage, { ToastInfo } from './ToastMessage'
 import styles from './DropZone.module.scss'
 
 function DropZone() {
@@ -29,7 +29,7 @@ function DropZone() {
             // Import the new data
             await db.import(pendingFile, { overwriteValues: true })
             
-            ToastMessage('Import successful')
+            ToastInfo('Import successful')
             console.log('Import complete')
         } catch (error) {
             console.error('Import failed:', error)
