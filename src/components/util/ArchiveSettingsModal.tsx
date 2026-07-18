@@ -12,14 +12,14 @@ const DEFAULT_SETTINGS: Settings = {
 
 const useArchiveSettings = () => {
     return useLiveQuery(async () => {
-        const settings = await db.settings.get(1)
+        const settings = await db.settings.toCollection().first()
         return settings ?? DEFAULT_SETTINGS
     }, [])
 }
 
 const saveSettings = async (patch: Partial<Settings>) => {
-    const existing = await db.settings.get(1)
-    const merged = { ...DEFAULT_SETTINGS, ...existing, ...patch, id: 1 }
+    const existing = await db.settings.toCollection().first()
+    const merged = { ...DEFAULT_SETTINGS, ...existing, ...patch }
     await db.settings.put(merged)
 }
 

@@ -13,7 +13,13 @@ import { useSearchParams } from 'react-router-dom'
 import { Task, List, TaskI } from '../util/types'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { db } from '../util/db'
-import { IS_ARCHIVED_COLUMN, LAST_CHANGED_COLUMN, LIST_BOARD } from '../util/properties'
+import {
+    IS_ARCHIVED_COLUMN,
+    LAST_CHANGED_COLUMN,
+    LIST_BOARD,
+    NAME_COLUMN,
+    TASK_LIST,
+} from '../util/properties'
 import DropZone from './util/DropZone'
 import TaskFilters from './sections/TaskFilters'
 import TaskFiltersModal from './util/TaskFiltersModal'
@@ -113,11 +119,28 @@ const Board = () => {
 
     useEffect(() => {
         const runAutoArchive = async () => {
-            const settings = await db.settings.get(1)
+            const now = new Date()
+            const assumedLastChanged = new Date(now)
+            assumedLastChanged.setMonth(assumedLastChanged.getMonth() - 2)
+            const assumedLastChangedIso = assumedLastChanged.toISOString()
+
+            const tasksWithoutLastChanged = await db.tasks
+                .filter((task) => !task[LAST_CHANGED_COLUMN])
+                .toArray()
+
+            await Promise.all(
+                tasksWithoutLastChanged.map((task) =>
+                    db.tasks.update(Number(task.id), {
+                        [LAST_CHANGED_COLUMN]: assumedLastChangedIso,
+                    })
+                )
+            )
+
+            const settings = await db.settings.toCollection().first()
             if (!settings?.auto_archive_enabled) return
 
             const { archive_after_value, archive_after_unit } = settings
-            const cutoff = new Date()
+            const cutoff = new Date(now)
             switch (archive_after_unit) {
                 case 'days':
                     cutoff.setDate(cutoff.getDate() - archive_after_value)
@@ -135,14 +158,21 @@ const Board = () => {
                     break
             }
             const cutoffIso = cutoff.toISOString()
+            const doneListIds = new Set(
+                (await db.lists
+                    .filter((list) => list[NAME_COLUMN] === 'Done')
+                    .toArray())
+                    .map((list) => Number(list.id))
+            )
 
             const toArchive = await db.tasks
                 .filter(
                     (task) =>
                         !task.is_epic &&
                         !task.is_archived &&
-                        !!task.last_changed &&
-                        task.last_changed < cutoffIso
+                        doneListIds.has(task[TASK_LIST]) &&
+                        (task[LAST_CHANGED_COLUMN] ?? assumedLastChangedIso) <=
+                            cutoffIso
                 )
                 .toArray()
 
