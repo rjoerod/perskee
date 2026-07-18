@@ -80,6 +80,7 @@ const updateTaskOrder = async (
             {
                 list: List | undefined
                 tasksIds: (string | number | undefined)[]
+                lastChangedTaskIds: (string | number | undefined)[]
             }[]
         >
     >
@@ -155,9 +156,16 @@ const updateTaskOrder = async (
             currentIdx++
         }
 
+        // Filter out tasks that were re-ordered in the "Done" list, as they don't need to be updated
+        const lastChangedTaskIds = taskIds.filter((id) => {
+            const task = allItems.find((task) => task.id == id)
+            return list?.name !== 'Done' || task?.list_id != list.id
+        })
+
         return {
             list: list,
             tasksIds: taskIds,
+            lastChangedTaskIds: lastChangedTaskIds,
         }
     })
 
@@ -190,6 +198,7 @@ function ContainerList({
         {
             list: List | undefined
             tasksIds: (string | number | undefined)[]
+            lastChangedTaskIds: (string | number | undefined)[]
         }[]
     >([])
 
@@ -525,7 +534,9 @@ function ContainerList({
                     return db.tasks.update(Number(id), {
                         [TASK_LIST]: Number(data?.list?.id),
                         [SORTED_ORDER_COLUMN]: idx + 1,
-                        [LAST_CHANGED_COLUMN]: new Date().toISOString(),
+                        ...(data.lastChangedTaskIds.includes(id) && {
+                            [LAST_CHANGED_COLUMN]: new Date().toISOString(),
+                        }),
                     })
                 })
             ).then(() => {})
